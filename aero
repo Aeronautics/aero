@@ -1,11 +1,21 @@
 #!/bin/bash
 
-function usage {
+function register_providers {
+    for provider in $(ls providers/*.sh); do
+        source provider
+        # if $provider_some_function_to_detect_presence
+        # $provider_register ?
+    done
+}
 
+function usage {
+    # TODO
+    echo "Usage"
 }
 
 function search {
-
+    # TODO
+    echo "Search" $@
 }
 
 case "$1" in
