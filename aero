@@ -2,11 +2,14 @@
 
 function register_providers {
     for provider in $(ls providers/*.sh); do
-        provider_name = $(basename provider.sh)
-        echo $provider
+        provider_name=$(basename $provider .sh)
         source $provider
-        # if $provider_some_function_to_detect_presence
-        # $provider_name_register ?
+        if [ "$provider_registered" -eq 1 ]; then
+            echo $provider_name registered
+            # HOW TO REGISTER?
+        else
+            echo $provider_name not found
+        fi
     done
 }
 
@@ -25,6 +28,10 @@ case "$1" in
         shift
         search $@
         ;;
+    register-providers )
+        shift
+        register_providers
+    ;;
     * )
         usage
         ;;
