@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function usage {
+
+}
+
+function search {
+
+}
+
+case "$1" in
+    search )
+        shift
+        search $@
+        ;;
+    * )
+        usage
+        ;;
+esac
