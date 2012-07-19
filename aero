@@ -2,9 +2,11 @@
 
 function register_providers {
     for provider in $(ls providers/*.sh); do
-        source provider
+        provider_name = $(basename provider.sh)
+        echo $provider
+        source $provider
         # if $provider_some_function_to_detect_presence
-        # $provider_register ?
+        # $provider_name_register ?
     done
 }
 
