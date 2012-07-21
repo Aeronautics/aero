@@ -1,14 +1,14 @@
 #!/bin/bash
 
-function register_providers {
-    for provider in $(ls providers/*.sh); do
-        provider_name=$(basename $provider .sh)
-        source $provider
-        if [ "$provider_registered" -eq 1 ]; then
-            echo $provider_name registered
+function register_adapters {
+    for adapter in $(ls adapters/*.sh); do
+        adapter_name=$(basename $adapter .sh)
+        source $adapter
+        if [ "$adapter_registered" -eq 1 ]; then
+            echo $adapter_name registered
             # HOW TO REGISTER?
         else
-            echo $provider_name not found
+            echo $adapter_name not found
         fi
     done
 }
@@ -28,9 +28,9 @@ case "$1" in
         shift
         search $@
         ;;
-    register-providers )
+    register-adapters )
         shift
-        register_providers
+        register_adapters
     ;;
     * )
         usage
