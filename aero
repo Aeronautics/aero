@@ -1,50 +1,5 @@
-#!/bin/bash
-function register_adapters {
-    i=0
-    for adapter in $(ls adapters/*.sh); do
-        adapter_name=$(basename $adapter .sh)
-        source $adapter
-        if [ "$adapter_registered" -eq 1 ]; then
-            echo $adapter_name registered
-            ADAPTERS[$(( i++ ))]=$adapter_name
-        fi
-        unset adapter_registered
-    done
-}
+#!/usr/bin/env python
+import os
+import sys
 
-function usage {
-    # TODO
-    echo "Usage"
-}
-
-function search {
-    if [ "${#ADAPTERS[@]}" -eq 0 ]; then
-        echo "There is not adapter registered."
-        exit 1
-    fi
-
-    i=0
-    while true; do
-        eval "${ADAPTERS[$i]}_search $1"
-        (( i++ ))
-        if [ $i -ge "${#ADAPTERS[@]}" ]; then
-            break
-        fi
-    done
-}
-
-case "$1" in
-    search )
-        shift
-        register_adapters
-        search $@
-        ;;
-    register-adapters )
-        shift
-        register_adapters
-        echo "${#ADAPTERS[@]} adpater(s) registered"
-    ;;
-    * )
-        usage
-        ;;
-esac
+from .adapters import AVAILABLE_ADAPTERS

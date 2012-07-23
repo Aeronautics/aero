@@ -1,0 +1,3 @@
+__all__ = ['AVAILABLE_ADAPTERS']
+
+AVAILABLE_ADAPTERS = []
