@@ -1,16 +1,14 @@
 #!/bin/bash
-
 function register_adapters {
+    i=0
     for adapter in $(ls adapters/*.sh); do
         adapter_name=$(basename $adapter .sh)
         source $adapter
         if [ "$adapter_registered" -eq 1 ]; then
             echo $adapter_name registered
-            # HOW TO REGISTER?
-        else
-            echo $adapter_name not found
+            ADAPTERS[$(( i++ ))]=$adapter_name
         fi
-        uset adapter_registered
+        unset adapter_registered
     done
 }
 
@@ -32,6 +30,7 @@ case "$1" in
     register-adapters )
         shift
         register_adapters
+        echo "${#ADAPTERS[@]} adpater(s) registered"
     ;;
     * )
         usage
