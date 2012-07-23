@@ -18,13 +18,25 @@ function usage {
 }
 
 function search {
-    # TODO
-    echo "Search" $@
+    if [ "${#ADAPTERS[@]}" -eq 0 ]; then
+        echo "There is not adapter registered."
+        exit 1
+    fi
+
+    i=0
+    while true; do
+        eval "${ADAPTERS[$i]}_search $1"
+        (( i++ ))
+        if [ $i -ge "${#ADAPTERS[@]}" ]; then
+            break
+        fi
+    done
 }
 
 case "$1" in
     search )
         shift
+        register_adapters
         search $@
         ;;
     register-adapters )
