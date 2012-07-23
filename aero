@@ -10,6 +10,7 @@ function register_adapters {
         else
             echo $adapter_name not found
         fi
+        uset adapter_registered
     done
 }
 
