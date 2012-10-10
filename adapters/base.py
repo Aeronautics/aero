@@ -1,5 +1,7 @@
+from abc import abstractmethod
 import os
 import subprocess
+
 
 
 class BaseAdapter(object):
@@ -15,16 +17,19 @@ class BaseAdapter(object):
 
         return process
 
-
+    @abstractmethod
     def search(self, query):
         raise NotImplementedError
 
+    @abstractmethod
     def install(self, package):
         raise NotImplementedError
 
+    @abstractmethod
     def update(self):
         raise NotImplementedError
 
+    @abstractmethod
     def upgrade(self, query=None):
         raise NotImplementedError
 
