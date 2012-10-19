@@ -19,31 +19,29 @@ class CommandProcessor():
             dptr = type(adapter).__name__
             if dptr not in data.disabled:
                 if not mngr or mngr == dptr.lower():
-                    sys.stdout.write('Doing an aero %s of package: %r using %s ' % (self.cmd(), pkg, type(adapter).__name__))
+                    sys.stdout.write('Doing an aero {} of package: {} using {} '.format(self.cmd(), pkg, type(adapter).__name__))
                     self.call(adapter, pkg)
 
     def call(self, adapter, args):
         try:
             return getattr(adapter, self.cmd())(args)
-        except AttributeError:
-            return '%s has no implementation for command: %s' % (adapter.__class__.__name__, self.cmd())
-
-#    def doing(self,  ):
+        except AttributeError as e:
+            print e
+            return '{} has no implementation for command: {}'.format(adapter.__class__.__name__, self.cmd())
 
 class SearchCommand(CommandProcessor):
     def do(self, pkg, data, mngr=None):
         res = self.cache.seen(pkg)
-        # print '\nCommand Parser ns:%r val:%r opt:%r mngr:%s, pkg:%s cmd:%s\n' % (data, values, option_string, mngr, pkg, cmd)
         if data.invalidate or res == False:
             res = {}
             for adapter in AVAILABLE_ADAPTERS:
                 dptr = type(adapter).__name__
                 if dptr not in data.disabled:
                     if not mngr or mngr == dptr.lower():
-                        sys.stdout.write('Doing an aero %s of package: %r using %s ' % (self.cmd(), pkg, type(adapter).__name__))
+                        sys.stdout.write('Doing an aero {} of package: {} using {} '.format(self.cmd(), pkg, type(adapter).__name__))
                         aero = self.call(adapter, pkg)
-                        print 'Found (%d) options' % (len(aero))
                         res.update(aero)
+                        print 'Found ({}) options'.format(len(aero))
 
 
         if res:
@@ -102,7 +100,6 @@ class InstallCommand(CommandProcessor):
 class InfoCommand(CommandProcessor):
     def do(self, pkg, data, mngr=None):
         res = self.cache.seen(pkg)
-        # print '\nCommand Parser ns:%r val:%r opt:%r mngr:%s, pkg:%s cmd:%s\n' % (data, values, option_string, mngr, pkg, cmd)
         if data.invalidate or res == False:
             res = []
             for adapter in AVAILABLE_ADAPTERS:
