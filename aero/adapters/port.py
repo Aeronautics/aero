@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from string import strip
+
 __author__ = 'nickl-'
 from base import BaseAdapter
 from subprocess import Popen
@@ -24,4 +26,6 @@ class Port(BaseAdapter):
         return {}
 
     def info(self, query):
-        return self._execute_command(self.adapter_command, ['info', query])[0]
+        result = self._execute_command(self.adapter_command, ['info', query])[0]
+        result = result.replace('{} '.format(query), 'Version: ')
+        return [map(strip, line.split(': ', 1)) for line in result.splitlines()]
