@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from abc import abstractmethod
 import os
 import subprocess
@@ -7,15 +8,22 @@ import subprocess
 class BaseAdapter(object):
     adapter_command = 'base'
 
-    def _execute_command(self, command, args=None):
+    def _to_command(self, command, args=None, add_path=True):
+        if add_path:
+            command = os.path.join(self.path, command)
         command = [command]
         if args:
             assert isinstance(args, list)
             command += args
+        return command
 
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    def _execute_command(self, command, args=None, add_path=True):
+        return subprocess.Popen(self._to_command(command, args, add_path),
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
 
-        return process
+    def _execute_shell(self, command, args=None, add_path=True):
+        command = subprocess.list2cmdline(self._to_command(command, args, add_path))
+        return subprocess.Popen(command, shell=True).wait()
 
     @abstractmethod
     def search(self, query):
@@ -39,5 +47,4 @@ class BaseAdapter(object):
             if os.path.exists(os.path.join(path, self.adapter_command)):
                 self.path = path
                 return True
-
         return False

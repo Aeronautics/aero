@@ -1,9 +1,11 @@
-Read config from file:
-  It is also possible to load aero configuration from a file.
+Configuration argument:
 
-  @filename             Append key, value (where appropriate) to a
-                        file one argument per line. Specify the file
-                        name prefixed weth @.
+  It is possible to load aero configuration from an input file.
+
+  @filename             Append "key, value" (where applicable) to a file one
+                        argument, value pair per line. To tell aero which
+                        file to use for configuration specify the path and
+                        file name prefixed with an "@".
 
                                    __/\__
                                   `==/\==´
@@ -15,17 +17,3 @@ __       _/_/|´´  |     /__|___|___( >< )___|___|__\     |  ``|\_\_       __
 |                                                                          |
 |                    Brought to you by the Respect team.                   |
 |__________________________________________________________________________|
-
-
-
-
-
-
-
-
-
-
-
-
-
-

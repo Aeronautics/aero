@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 
 from .apt import Apt
 from .brew import Brew

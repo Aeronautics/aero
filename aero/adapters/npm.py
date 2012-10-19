@@ -1,13 +1,14 @@
+# -*- coding: utf-8 -*-
 __author__ = 'nickl-'
 from base import BaseAdapter
 from subprocess import Popen
 from subprocess import PIPE
 from string import strip
-class Pip(BaseAdapter):
-    adapter_command = 'pip'
+class Npm(BaseAdapter):
+    adapter_command = 'npm'
 
     def search(self, query):
-        response = Popen(self.adapter_command + ' search ' + query, shell=True, stdout=PIPE).communicate()[0]
+        response = Popen(self.adapter_command + ' search -q ' + query, shell=True, stdout=PIPE).communicate()[0]
         lst = list(self.__parse_search(line) for line in response.splitlines() if ' - ' in line)
         if lst:
             return dict(lst)

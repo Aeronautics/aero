@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 __author__ = 'nickl-'
 from base import BaseAdapter
 from subprocess import Popen
@@ -7,7 +8,7 @@ class Port(BaseAdapter):
     adapter_command = 'port'
 
     def search(self, query):
-        response = Popen(self.adapter_command + ' search ' + query, shell=True, stdout=PIPE).communicate()[0]
+        response = self._execute_command(self.adapter_command, ['search', query])[0]
         lst = list(line for line in response.splitlines() if line)
         if lst:
             return dict(map(self.__parse_search, zip(*[iter(lst)]*2)))
@@ -19,5 +20,8 @@ class Port(BaseAdapter):
 
     def install(self, query):
         print '\n';
-        Popen(self.adapter_command + ' install ' + query, shell=True).wait()
+        self._execute_shell(self.adapter_command, ['install', query])
         return {}
+
+    def info(self, query):
+        return self._execute_command(self.adapter_command, ['info', query])[0]
