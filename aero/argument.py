@@ -162,13 +162,16 @@ class ArgumentDelegate(argparse.ArgumentParser):
     def format_help(self):
         with open(AERO_PATH+"assets/title.ascii","r") as file:
             content = ''.join(file.readlines()).replace('{{version}}', self.version)
+            file.close()
         from random import choice
         aerotip = choice(('aero1', 'aero2', 'aero3', 'aero4','aero5', 'aero6', 'aero7', 'aero8'))
         with open(AERO_PATH+"assets/"+aerotip+".ascii","r") as file:
             aerotip = ''.join(file.readlines())
+            file.close()
         commhead = ''
         with open(AERO_PATH+"assets/command.ascii","r") as file:
             commhead = ''.join(file.readlines())
+            file.close()
 
         content += super(self.__class__, self).format_help()\
                         .replace('usage:','\n')\
