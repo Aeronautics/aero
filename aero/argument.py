@@ -166,11 +166,16 @@ class ArgumentDelegate(argparse.ArgumentParser):
         aerotip = choice(('aero1', 'aero2', 'aero3', 'aero4','aero5', 'aero6', 'aero7', 'aero8'))
         with open(AERO_PATH+"assets/"+aerotip+".ascii","r") as file:
             aerotip = ''.join(file.readlines())
+        commhead = ''
+        with open(AERO_PATH+"assets/command.ascii","r") as file:
+            commhead = ''.join(file.readlines())
 
         content += super(self.__class__, self).format_help()\
                         .replace('usage:','\n')\
                         .replace('r:] pack','r:]pack')\
                         .replace('{{aerotip}}', aerotip)
+                        .replace('{{aerotip}}', aerotip)\
+                        .replace('Command arguments:', ''.join([commhead, '\n', 'Command arguments:']))
         content = re.sub(r'##(.+)\n\s*(.+)##',r'\n\n    \1 \2\n', content)
         return  content
 
