@@ -32,3 +32,21 @@ class Npm(BaseAdapter):
         print '\n'
         Popen(self.adapter_command + ' install ' + query, shell=True).wait()
         return {}
+
+    def info(self, query):
+        response = self._execute_command(self.adapter_command, ['view', query])[0]
+        try:
+            import json
+            r = json.loads(sub("'", '"', sub('\s(\w+):', r' "\1":', response.strip())))
+            response = []
+            for k in sorted(r):
+                if isinstance(r[k], dict):
+                    r[k] = '\n'.join([': '.join(list(l)) for l in r[k].items()])
+                elif isinstance(r[k], list):
+                    r[k] = ', '.join(r[k])
+                if r[k]:
+                    response.append((k,str(r[k])))
+            return response
+        except ValueError:
+            return 'No info available'
+
