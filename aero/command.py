@@ -46,53 +46,27 @@ class SearchCommand(CommandProcessor):
 
         if res:
             res = sorted(self.cache.seen(pkg, res).items())
-#            pager = sys.stdout
-#            use_pager = len(res) > 30 #TODO find real screen height
-            from prettytable import PrettyTable, FRAME
-            t = PrettyTable()
-            t.add_column("PACKAGE NAME", [r[0] for r in res], 'r')
-            t.add_column("DESCRIPTION", [r[1] for r in res], 'l')
-            t.max_width = 79
-            t.border = False
-            t.header = True
-            t.hrules = FRAME
-            t.padding_width = 0
-            t.left_padding_width = 1
-            t.right_padding_width = 1
-#            t.vertical_char = ":"
-            t.junction_char = ':'
-#            print t.rowcount
-            if t.rowcount > 30:
-                from subprocess import Popen
+            pager = sys.stdout
+            use_pager = len(res) > 30 #TODO find real screen height
+            if use_pager:
                 pager = open('/tmp/aero.out', 'w')
-                pager.write(str(t))
+            pager.write("\n{:>48}   {:<52}\n".format("PACKAGE NAME", "DESCRIPTION"))
+            pager.write("{:>48}   {:<52}\n".format("_"*40, "_"*50))
+            for k,v in res:
+                for line in v.splitlines():
+                    if k: k += ' :'
+                    if len(line) > 50:
+                        for wrap in textwrap.wrap(line, 50):
+                            pager.write("{:>50} {:<50}\n".format(k, wrap))
+                            k = ''
+                    else:
+                        pager.write("{:>50} {:<50}\n".format(k, line))
+                    k = ''
+            pager.write('\n')
+            if use_pager:
+                from subprocess import Popen
                 pager.close()
                 Popen(data.pager+' /tmp/aero.out', shell=True).wait()
-            else:
-                print t
-
-#            t.
-            #pager.write("\n\n%50s   %-50s\n" % ("PACKAGE NAME", "DESCRIPTION"))
-#            for k,v in sorted(self.cache.seen(pkg, res).items()):
-#                t.add_row([k,v])
-#                for wrap in textwrap.wrap(v, 50):#p.sub('',v)
-#                    pager.write("%50s : %-50s\n" % (k, wrap))
-#                    k = ''
-#            if use_pager:
-#                from subprocess import Popen
-#                pager = open('/tmp/aero.out', 'w')
-#                pager.write(t)
-#                pager.close()
-#                Popen(data.pager+' /tmp/aero.out', shell=True).wait()
-#            else:
-#            print t.get_string(max_width = 79,
-#                border = False,
-#                theader = True,
-#                junction_char = ':',
-#                padding_width = 0,
-#                left_padding_width = 0,
-#                right_padding_width = 0,
-#            )
 
 class InstallCommand(CommandProcessor):
     pass
@@ -106,15 +80,30 @@ class InfoCommand(CommandProcessor):
                 dptr = type(adapter).__name__
                 if dptr not in data.disabled:
                     if not mngr or mngr == dptr.lower():
-                        print 'Doing an aero %s of package: %r using %s \n' % (self.cmd(), pkg, type(adapter).__name__)
-                        lines = self.call(adapter, pkg)
-                        try:
-                            lines = lines.splitlines()
-                        except AttributeError:
-                            pass
-                        for longline in lines:
-                            if longline:
-                                for line in textwrap.wrap(longline, 70):
-                                    print "%30s %-70s" % ('', line)
-                            else:
-                                print
+                        print 'Doing an aero {} of package: {} using {} \n'.format(self.cmd(), pkg, type(adapter).__name__)
+                        res = self.cache.seen(pkg, self.call(adapter, pkg))
+
+        if 'has no implementation' in res:
+            print res
+            return
+        k = ''
+        if isinstance(res, str):
+            res = res.splitlines()
+        print "\n{:>48}   {:<52}".format('', 'INFORMATION: '+pkg)
+        print "{:>48}   {:<52}".format("_"*40, "_"*50)
+        for line in res:
+            if isinstance(line, tuple) or isinstance(line, list):
+                if len(line) >= 2:
+                    k = line[0]+' :'
+                    line = line[1]
+                else:
+                    line = line[0]
+            if line:
+                for l in line.splitlines():
+                    if len(l) > 50:
+                        for wrap in textwrap.wrap(l, 50):
+                            print "{:>50} {:50}".format(k, wrap)
+                            k = ''
+                    else:
+                        print "{:>50} {:50}".format(k, l)
+            k = ''
