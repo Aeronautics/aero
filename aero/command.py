@@ -40,8 +40,8 @@ class SearchCommand(CommandProcessor):
                     if not mngr or mngr == dptr.lower():
                         sys.stdout.write('Doing an aero {} of package: {} using {} '.format(self.cmd(), pkg, type(adapter).__name__))
                         aero = self.call(adapter, pkg)
-                        res.update(aero)
                         print 'Found ({}) options'.format(len(aero))
+                        if aero: res.update(aero)
 
 
         if res:
