@@ -8,14 +8,12 @@ from . import command
 from . import argument
 from . import prettytable
 
-
-
 import warnings, os
 warnings.resetwarnings()
 from argument import ArgumentDelegate
 from adapters import AVAILABLE_ADAPTERS
 
-def autocomplete(commands, argp):
+def autocomplete(commands, argp): #TODO complete packages found
     if 'AERO_AUTO_COMPLETE' not in os.environ:
         return
     else:
