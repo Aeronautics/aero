@@ -25,5 +25,5 @@ class Brew(BaseAdapter):
 
     def install(self, query):
         print '\n'
-        self._execute_command(self.adapter_command, ['search', query])
+        self._execute_shell(self.adapter_command, ['install', query])
         return {}
