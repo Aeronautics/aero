@@ -14,15 +14,10 @@ setup(
 	license      = __license__,
 	url          = __url__,
 	download_url = __download_url__,
-#	description = "Software discovery and installation through colaborative package management.",
-#	py_modules = "",
 	packages     = ['aero', 'aero.adapters'],
     package_data ={'aero': ['assets/*.ascii']},
     description  = [descr for descr in open('README.txt').read().splitlines() if descr.strip() and '===' not in descr][1],
-#    data_files=[('aero', 'assets/ascii-planes assets/crash.ascii assets/descrip.ascii assets/epilog.ascii assets/title.ascii'.split())],
     long_description=open('README.txt').read(),
-#	install_requires = "",
 	scripts      = ["aero/aero"],
-#    entry_points={'console_scripts':['aero = aero:main'] },
 
 )

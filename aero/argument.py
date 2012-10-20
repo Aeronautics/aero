@@ -19,7 +19,6 @@ class ArgumentDelegate(argparse.ArgumentParser):
         def _get_help_string(self, action):
             action.help = textwrap.fill(re.sub('\n| +', ' ', action.help), 54).replace('Choose one', 'Choose one')
             help = super(self.__class__, self)._get_help_string(action)
-#            print re.match('{{Choose.*$', help)
             return help.replace('(default: %(default)s)', '\n\ndefault: %(default)s\n\n')
 
         def _format_action_invocation(self, action):
