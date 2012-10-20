@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Extensible Monitoring Platform (EMP)
-    By: Alexander Dean <dstar@csh.rit.edu>
+Package manager recycler, aero
 
-For support please visit Alexander's blog or even the
-EMP project page: http://code.dstar4138.com/view?pid=2
+For support please visit Aeronautics on github.
+Project page: https://github.com/Aeronautics/aero
 """
 import sys
 from distutils import version
