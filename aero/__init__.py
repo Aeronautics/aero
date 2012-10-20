@@ -5,7 +5,6 @@ from aero.__version__ import __version_info__
 from . import cache
 from . import command
 from . import argument
-from . import prettytable
 
 import warnings, os
 warnings.resetwarnings()
