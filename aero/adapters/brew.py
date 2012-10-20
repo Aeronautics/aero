@@ -2,7 +2,6 @@
 __author__='nickl-'
 from aero.__version__ import __version__
 from .base import BaseAdapter
-import textwrap
 
 class Brew(BaseAdapter):
     adapter_command = 'brew'

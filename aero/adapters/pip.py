@@ -3,8 +3,6 @@ __author__ = 'nickl-'
 from aero.__version__ import __version__
 
 from base import BaseAdapter
-from subprocess import Popen
-from subprocess import PIPE
 from string import strip
 class Pip(BaseAdapter):
     adapter_command = 'pip'
