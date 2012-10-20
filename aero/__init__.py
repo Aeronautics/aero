@@ -2,7 +2,6 @@
 __author__ = 'nickl-'
 from __version__ import __version__, __version_info__
 
-from . import aero
 from . import cache
 from . import command
 from . import argument
