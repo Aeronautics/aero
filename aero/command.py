@@ -25,9 +25,9 @@ class CommandProcessor():
     def call(self, adapter, args):
         try:
             return getattr(adapter, self.cmd())(args)
-        except AttributeError as e:
-            print e
-            return '{} has no implementation for command: {}'.format(adapter.__class__.__name__, self.cmd())
+        except AttributeError:# as e: # Trust me you're going to want to use that e when duck duck misses
+#            print e
+            return 'Aborted: {} has no implementation for command: {}'.format(adapter.__class__.__name__, self.cmd())
 
 class SearchCommand(CommandProcessor):
     def do(self, pkg, data, mngr=None):
@@ -83,12 +83,10 @@ class InfoCommand(CommandProcessor):
                         print 'Doing an aero {} of package: {} using {} \n'.format(self.cmd(), pkg, type(adapter).__name__)
                         res = self.cache.seen(pkg, self.call(adapter, pkg))
 
-        if 'has no implementation' in res:
+        if 'Aborted:' in res:
             print res
             return
         k = ''
-        if isinstance(res, str):
-            res = res.splitlines()
         print "\n{:>48}   {:<52}".format('', 'INFORMATION: '+pkg)
         print "{:>48}   {:<52}".format("_"*40, "_"*50)
         for line in res:
@@ -106,4 +104,4 @@ class InfoCommand(CommandProcessor):
                             k = ''
                     else:
                         print "{:>50} {:50}".format(k, l)
-            k = ''
+                        k = ''
