@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __version__ import __version__
+from aero.__version__ import __version__
 
 from .apt import Apt
 from .brew import Brew

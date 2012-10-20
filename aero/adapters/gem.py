@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
-from __version__ import __version__
+from aero.__version__ import __version__
 from re import sub
 from base import BaseAdapter
 import yaml
