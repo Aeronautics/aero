@@ -45,7 +45,33 @@ Installation
 
 Ideally it would be installable you would imagine and some lengths have been taken to wrap it as a package and provide the setup.py stubs et al but alas at the time of this writing this does not succeed as yet.
 
-Running the aero.py executable from the root packge via a simlink in your path does seem to work for now, watch this space as these frontiers are covered.
+Success! We can install and it appears dependencies are also being discovered correctly, the question now is does it work for you too.
+
+Clone the repo from github or fork it first and then clone your copy if you want to help out with pull requests. Then just run the setup.py with install:
+
+    $ ./setup.py install
+
+Don't forget to enable autocompletion support, aero will generate the appropriate script to add to you .profile for either bash or zsh support.
+
+For bash
+
+```
+    $ aero --completion bash >> ~/.profile
+```
+
+For zsh
+
+```
+    $ aero --completion zsh >> ~/.profile
+```
+
+Alternatively you can use eval on the script to have the shell activated on execution:
+
+```
+    $ eval "$(aero -c bash)"
+```
+
+Running the aero.py executable from the root package folder also works and may be simlinked in your path if you need another approach while we iron out the kinks.
 
 Running aero:
 ------------
