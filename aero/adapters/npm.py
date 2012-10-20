@@ -12,6 +12,7 @@ class Npm(BaseAdapter):
 
     def search(self, query):
         response = Popen(self.adapter_command + ' search -q ' + query, shell=True, stdout=PIPE).communicate()[0]
+        response = self._execute_command(self.adapter_command, ['search', '-q', query])[0]
         lst = list(self.__parse_search(line) for line in response.splitlines() if 'npm http' not in line and not bool(match('^NAME\s+DESCRIPTION\s+AUTHOR\s+DATE\s+KEYWORDS', line)))
         if lst:
             return dict([(k,v) for k,v in lst if k != 0])
