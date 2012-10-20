@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
+from __version__ import __version__
 
 class CacheProvider():
     data = {}
