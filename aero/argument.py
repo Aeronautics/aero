@@ -21,7 +21,6 @@ class ArgumentDelegate(argparse.ArgumentParser):
 #            print re.match('{{Choose.*$', help)
             return help.replace('(default: %(default)s)', '\n\ndefault: %(default)s\n\n')
 
-
         def _format_action_invocation(self, action):
             if not action.option_strings:
                 return self._metavar_formatter(action, action.dest)(1)[0]
@@ -29,26 +28,13 @@ class ArgumentDelegate(argparse.ArgumentParser):
             if action.nargs > 1: args_string = "{}\n".format(args_string)
             return '{} {}'.format(', '.join(action.option_strings), args_string)
 
-#        def __init__(self, prog, indent_increment=2, max_help_position=24, width=None):
-        #            super(self.__class__, self).__init__(prog, indent_increment, max_help_position, width)
-        #            self._current_indent = 20
-        #            self._level = 10
-        #        def add_usage(self, usage, actions, groups, prefix=None):
-        #            print self.outer.version
-        #        text = 'Version: %(version)s'  % dict(self._root_section.items) # dict(prog=self._prog version)
-        #        self._add_item(self._format_text, [text])
-        #            super(self.__class__, self).add_usage(usage, actions, groups, prefix)
         def _fill_text(self, text, width, indent):
             return super(self.__class__, self)._fill_text(textwrap.dedent(text), width, indent)
 
 
 
 
-    def __init__(
-            self,
-            prog='',
-            version='',
-            ):
+    def __init__(self, prog='', version=''):
 
         with open(AERO_PATH+"assets/descrip.ascii","r") as file:
             content = ''.join(file.readlines())
@@ -74,6 +60,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
                 version=self.version,
                 help="Show program's version number and exit",
             )
+
         self.add_argument(default_prefix+'p', default_prefix*2+'pager',
             help='''The pager to use for long paged displays. The default
                 is based on the environment variable $PAGER, if it is
@@ -81,6 +68,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
                  and finally "cat" are tried, in this order.''',
                 default=self.discover_pager(),
             )
+
         choices = list(type(x).__name__ for x in AVAILABLE_ADAPTERS)+['Colour']
 
         self.add_argument(default_prefix+'d', default_prefix*2+'disable',
@@ -176,7 +164,6 @@ class ArgumentDelegate(argparse.ArgumentParser):
         content += super(self.__class__, self).format_help()\
                         .replace('usage:','\n')\
                         .replace('r:] pack','r:]pack')\
-                        .replace('{{aerotip}}', aerotip)
                         .replace('{{aerotip}}', aerotip)\
                         .replace('Command arguments:', ''.join([commhead, '\n', 'Command arguments:']))
         content = re.sub(r'##(.+)\n\s*(.+)##',r'\n\n    \1 \2\n', content)
@@ -233,7 +220,6 @@ class CommandParser(argparse._SubParsersAction):
     def __call__(self, parser, data, values, option_string=None):
         super(self.__class__, self).__call__(parser, data, values, option_string)
 
-
         cmd = values[0]
         if ':' in values[1]:
             mngr = values[1].partition(':')
@@ -242,8 +228,8 @@ class CommandParser(argparse._SubParsersAction):
         else:
             mngr = None
             pkg = values[1]
-#        print('\nCommand Parser ns:%r val:%r opt:%r mngr:%s, pkg:%s cmd:%s\n' % (data, values, option_string, mngr, pkg, cmd))
-#        print cmd.capitalize()+'Command'
+
         getattr(globals()[cmd.capitalize()+'Command'](data), 'do')(pkg, data, mngr)
+        print
 
 
