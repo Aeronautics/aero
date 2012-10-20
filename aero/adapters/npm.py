@@ -3,15 +3,13 @@ __author__ = 'nickl-'
 from aero.__version__ import __version__
 
 from base import BaseAdapter
-from subprocess import Popen
-from subprocess import PIPE
 from string import strip
 from re import match, sub
+
 class Npm(BaseAdapter):
     adapter_command = 'npm'
 
     def search(self, query):
-        response = Popen(self.adapter_command + ' search -q ' + query, shell=True, stdout=PIPE).communicate()[0]
         response = self._execute_command(self.adapter_command, ['search', '-q', query])[0]
         lst = list(self.__parse_search(line) for line in response.splitlines() if 'npm http' not in line and not bool(match('^NAME\s+DESCRIPTION\s+AUTHOR\s+DATE\s+KEYWORDS', line)))
         if lst:
@@ -33,7 +31,7 @@ class Npm(BaseAdapter):
 
     def install(self, query):
         print '\n'
-        Popen(self.adapter_command + ' install ' + query, shell=True).wait()
+        self._execute_shell(self.adapter_command, ['install', query])
         return {}
 
     def info(self, query):
