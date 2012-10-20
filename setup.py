@@ -18,6 +18,7 @@ setup(
     package_data ={'aero': ['assets/*.ascii']},
     description  = [descr for descr in open('README.txt').read().splitlines() if descr.strip() and '===' not in descr][1],
     long_description=open('README.txt').read(),
+	install_requires = ["argparse","Beaker","PyYAML"],
 	scripts      = ["aero/aero"],
 
 )
