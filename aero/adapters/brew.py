@@ -18,7 +18,6 @@ class Brew(BaseAdapter):
     def info(self, query):
         response = self._execute_command(self.adapter_command, ['info', query])[0]
         if 'Error:' not in response:
-            return '\n'.join([line for line in response.splitlines() if 'homebrew' not in line])
             response = response.replace(query+': ', 'version: ')
             return [line.split(': ', 1) for line in response.splitlines() if 'homebrew' not in line]
         return 'No info available'
