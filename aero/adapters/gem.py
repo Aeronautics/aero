@@ -5,31 +5,44 @@ from re import sub
 from base import BaseAdapter
 import yaml
 
+
 class Version(yaml.YAMLObject, dict):
+
     yaml_tag = '!ruby/object:Gem::Version'
-    def __setstate__(self,state):
+
+    def __setstate__(self, state):
         self['version'] = state['version']
 
+
 class Requirement(yaml.YAMLObject, dict):
+
     yaml_tag = '!ruby/object:Gem::Requirement'
-    def __setstate__(self,state):
+
+    def __setstate__(self, state):
         r = state['requirements'].pop()
         self['requirement'] = '{} {}'.format(r.pop(0), r.pop(0)['version'])
 
+
 class Dependency(yaml.YAMLObject, dict):
+
     yaml_tag = '!ruby/object:Gem::Dependency'
-    def __setstate__(self,state):
+
+    def __setstate__(self, state):
         for require in [r for r in state.keys() if 'require' in r]:
-            try :
+            try:
                 self['requirement'] = state[require]['requirement']
                 break
-            except KeyError: continue
+            except KeyError:
+                continue
         self['name'] = state['name']
         self['type'] = state['type']
 
+
 class GemSpec(yaml.YAMLObject, dict):
+
     yaml_tag = '!ruby/object:Gem::Specification'
-    def __setstate__(self,state):
+
+    def __setstate__(self, state):
         import datetime
         for k, v in [st for st in state.items() if st[1]]:
             if isinstance(v, list):
@@ -57,6 +70,7 @@ class GemSpec(yaml.YAMLObject, dict):
 
 
 class Gem(BaseAdapter):
+
     adapter_command = 'gem'
 
     def search(self, query):
@@ -64,30 +78,34 @@ class Gem(BaseAdapter):
         rlines = sub('\*\*\*.*\*\*\*\s+', '', response).splitlines()
         lst = {}
         for key, val in [line.split(' ', 1) for line in rlines if line and not line.startswith('  ')]:
-            i = rlines.index(key+' '+val) + 1
-            key = self.adapter_command+':'+key
-            try: lst[key] += '\n\n'
-            except KeyError: lst[key] = ''
-            val = ['version: '+val]
-            while (i < len(rlines) and rlines[i].startswith(' ')):
+            i = rlines.index(key + ' ' + val) + 1
+            key = self.adapter_command + ':' + key
+            try:
+                lst[key] += '\n\n'
+            except KeyError:
+                lst[key] = ''
+            val = ['version: ' + val]
+            while i < len(rlines) and rlines[i].startswith(' '):
                 val += [rlines[i].strip()]
                 i += 1
             lst[key] += '\n'.join(val)
         return lst
 
     def install(self, query):
-        print '\n'
+        print
         self._execute_shell(self.adapter_command, ['install', query]).wait()
         return {}
 
     def info(self, query):
         try:
-            response = self._execute_command(self.adapter_command, ['specification', '-qb', '--yaml', query])[0]
+            response = self._execute_command(
+                self.adapter_command, ['specification', '-qb', '--yaml', query]
+            )[0]
 #            f = open('/Users/inspirex/code/respect/aero/scratch/rubyforge.yaml', 'r')
 #            response = ''.join(f.readlines())
 #            f.close()
             result = yaml.load(sub(r'!binary', r'!!binary', response))
             return sorted(result.items())
 
-        except BaseException :
+        except BaseException:
             return 'Aborted: No info available for a gem called {}'.format(query)

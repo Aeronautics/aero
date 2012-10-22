@@ -2,8 +2,11 @@
 __author__ = 'nickl-'
 from __version__ import __version__
 
+
 class CacheProvider():
+
     data = {}
+
     def seen(self, key, val=False):
         try:
             for k, v in key.items():
@@ -25,11 +28,14 @@ class CacheProvider():
             del self.data[key]
         elif isinstance(key, bool):
             self.data = {}
-        elif expires == None:
-            return False # check if key is valid
+        elif expires is None:
+            return False  # check if key is valid
+
 
 class BeakerCacheProvider():
+
     cache = None
+
     def seen(self, key, val=False):
         try:
             for k, v in key.items():
@@ -38,7 +44,7 @@ class BeakerCacheProvider():
         except AttributeError:
             pass
 
-        if val or not isinstance(val,bool):
+        if val or not isinstance(val, bool):
             self.cache.put(key, val)
 
         try:
@@ -51,27 +57,30 @@ class BeakerCacheProvider():
             self.cache.remove_value(key)
         elif isinstance(key, bool):
             self.cache.clear()
-        elif expires == None:
-            return False # check if key is valid
+        elif expires is None:
+            return False  # check if key is valid
+
 
 class CacheProviderFactory():
-    def whichProvider (self):
-        try: import beaker
-        except: pass
 
-        if (beaker):
-            from beaker.cache import CacheManager
-            from beaker.util import parse_cache_config_options
-
-            cache_opts = {
-                'cache.type': 'file',
-                'cache.data_dir': '/tmp/cache/data',
-                'cache.lock_dir': '/tmp/cache/lock'
-            }
-
-            cache = CacheManager(**parse_cache_config_options(cache_opts))
-            BeakerCacheProvider.cache =  cache.get_cache('aero.cache', type='file', expire=604800)
-
-            return BeakerCacheProvider()
-        else:
+    def whichProvider(self):
+        try:
+            import beaker
+        except BaseException:
             return CacheProvider()
+
+        if not beaker:
+            return CacheProvider()
+
+        from beaker.cache import CacheManager
+        from beaker.util import parse_cache_config_options
+
+        cache_opts = {
+            'cache.type': 'file',
+            'cache.data_dir': '/tmp/cache/data',
+            'cache.lock_dir': '/tmp/cache/lock'
+        }
+
+        cache = CacheManager(**parse_cache_config_options(cache_opts))
+        BeakerCacheProvider.cache = cache.get_cache('aero.cache', type='file', expire=604800)
+        return BeakerCacheProvider()

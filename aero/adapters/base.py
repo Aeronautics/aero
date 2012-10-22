@@ -5,8 +5,8 @@ import os
 import subprocess
 
 
-
 class BaseAdapter(object):
+
     adapter_command = 'base'
 
     def _to_command(self, command, args=None, add_path=True):
@@ -20,7 +20,7 @@ class BaseAdapter(object):
 
     def _execute_command(self, command, args=None, add_path=True):
         return subprocess.Popen(self._to_command(command, args, add_path),
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
 
     def _execute_shell(self, command, args=None, add_path=True):
         command = subprocess.list2cmdline(self._to_command(command, args, add_path))

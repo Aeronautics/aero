@@ -6,31 +6,43 @@ from base import BaseAdapter
 from string import strip
 from re import match, sub
 
+
 class Npm(BaseAdapter):
+
     adapter_command = 'npm'
 
     def search(self, query):
-        response = self._execute_command(self.adapter_command, ['search', '-q', query])[0]
-        lst = list(self.__parse_search(line) for line in response.splitlines() if 'npm http' not in line and not bool(match('^NAME\s+DESCRIPTION\s+AUTHOR\s+DATE\s+KEYWORDS', line)))
+        response = self._execute_command(
+            self.adapter_command, ['search', '-q', query]
+        )[0]
+        lst = list(
+            self.__parse_search(line) for line in response.splitlines()
+            if 'npm http' not in line and not bool(match(
+                '^NAME\s+DESCRIPTION\s+AUTHOR\s+DATE\s+KEYWORDS', line
+            ))
+        )
         if lst:
-            return dict([(k,v) for k,v in lst if k != 0])
+            return dict([(k, v) for k, v in lst if k != 0])
         return {}
 
     def __parse_search(self, result):
-        r = match('^([\w-]*)\s+(\w.*)=(.+)\s+(\d\d\d\d[\d\-\: ]*)\s+(\w.*)$', result)
+        r = match(
+            '^([A-Za-z0-9\-]*)\s+(\w.*)=(.+)\s+(\d\d\d\d[\d\-: ]*)\s+(\w.*)$',
+            result
+        )
         if r and len(r.groups()) == 5:
             r = map(strip, list(r.groups()))
-            pkg = ''.join([self.adapter_command,':', r.pop(0)])
+            pkg = ''.join([self.adapter_command, ':', r.pop(0)])
             r[1] = ' '.join(('Author:', r[1], r[2]))
             r[2] = r[0]
             r[3] = 'Tags: ' + ', '.join(r[3].split(' '))
             del r[0]
             desc = '\n'.join(r)
-            return (pkg, desc)
-        return (0,0)
+            return pkg, desc
+        return 0, 0
 
     def install(self, query):
-        print '\n'
+        print
         self._execute_shell(self.adapter_command, ['install', query])
         return {}
 
@@ -46,8 +58,7 @@ class Npm(BaseAdapter):
                 elif isinstance(r[k], list):
                     r[k] = ', '.join(r[k])
                 if r[k]:
-                    response.append((k,str(r[k])))
+                    response.append((k, str(r[k])))
             return response
         except ValueError:
             return 'No info available'
-

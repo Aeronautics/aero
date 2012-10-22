@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#noinspection PyPackageRequirements
+import aero
 from aero.__version__ import __version__
 
 from .apt import Apt
