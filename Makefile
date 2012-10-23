@@ -1,5 +1,5 @@
 clean:
-	find -iname '*.pyc' -o '*.pyo' -delete
+	find -iname '*.pyc' -o -iname '*.pyo' -delete
 bootstrap:
 	@which virtualenv || echo 'Install virtualenv at least, so we can start.'
 	test -d .venv || virtualenv .venv
