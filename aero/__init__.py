@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
-from aero.__version__ import __version_info__
-
-from . import cache
-from . import command
-from . import argument
 
 import warnings
 import os
 warnings.resetwarnings()
-from argument import ArgumentDelegate
-from adapters import AVAILABLE_ADAPTERS
+
+from .__version__ import __version_info__
+from . import cache, command
+from .argument import ArgumentDelegate
+from .adapters import AVAILABLE_ADAPTERS
 
 
 def autocomplete(commands, argp):  # TODO complete packages found
