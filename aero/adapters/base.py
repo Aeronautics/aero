@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-from aero.__version__ import __version__
-from abc import abstractmethod
 import os
 import subprocess
 
+from abc import abstractmethod
+
+from aero.__version__ import __version__
+from . import MAdapterRegistration
+
 
 class BaseAdapter(object):
-
+    __metaclass__ = MAdapterRegistration
     adapter_command = 'base'
 
     def _to_command(self, command, args=None, add_path=True):
