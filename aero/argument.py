@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
-import textwrap
-
 __author__ = 'nickl-'
 from __version__ import __version__
 
-from adapters import AVAILABLE_ADAPTERS
 import os
-import argparse
 import re
 import sys
 import subprocess
-from command import SearchCommand, InstallCommand, InfoCommand
+from random import choice
+
+import argparse
+import textwrap
+
+from .command import SearchCommand, InstallCommand, InfoCommand
+from .adapters import AVAILABLE_ADAPTERS
+
 
 AERO_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -41,6 +44,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
             content = ''.join(file.readlines())
         with open(os.path.join(AERO_PATH, "assets", "epilog.ascii"), "r") as file:
             epilog = ''.join(file.readlines())
+
         super(self.__class__, self).__init__(
             description=content,
             formatter_class=self.UsageFormatter,
@@ -159,7 +163,6 @@ class ArgumentDelegate(argparse.ArgumentParser):
         with open(os.path.join(AERO_PATH,  "assets", "title.ascii"), "r") as file:
             content = ''.join(file.readlines()).replace('{{version}}', self.version)
 
-        from random import choice
         aerotip = choice(('aero1', 'aero2', 'aero3', 'aero4', 'aero5', 'aero6', 'aero7', 'aero8'))
         with open(os.path.join(AERO_PATH, "assets/", aerotip + ".ascii"), "r") as file:
             aerotip = ''.join(file.readlines())
