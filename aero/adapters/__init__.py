@@ -5,6 +5,9 @@ from aero.__version__ import __version__
 
 
 class MAdapterRegistration(type):
+    """
+    Registers an adapter which uses this metaclass.
+    """
     adapters = {}
 
     def __new__(meta, name, bases, attrs):
@@ -18,6 +21,7 @@ class MAdapterRegistration(type):
 
         return cls
 
+# Importing so it will be registered
 from .apt import Apt
 from .brew import Brew
 from .port import Port

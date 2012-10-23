@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
+__all__ = ('Port', )
+
+from string import strip
 
 from aero.__version__ import __version__
-from base import BaseAdapter
-from string import strip
+from .base import BaseAdapter
 
 
 class Port(BaseAdapter):
-
+    """
+    Macports adapter.
+    """
     adapter_command = 'port'
 
     def search(self, query):

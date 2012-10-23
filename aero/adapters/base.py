@@ -9,6 +9,9 @@ from . import MAdapterRegistration
 
 
 class BaseAdapter(object):
+    """
+    Base adapter.
+    """
     __metaclass__ = MAdapterRegistration
     adapter_command = 'base'
 

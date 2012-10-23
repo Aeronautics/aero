@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
-from aero.__version__ import __version__
+__all__ = ('Npm', )
 
-from base import BaseAdapter
 from string import strip
 from re import match, sub
 
+from aero.__version__ import __version__
+from .base import BaseAdapter
+
 
 class Npm(BaseAdapter):
-
+    """
+    Node package manager adapter.
+    """
     adapter_command = 'npm'
 
     def search(self, query):

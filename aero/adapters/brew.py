@@ -5,7 +5,9 @@ from .base import BaseAdapter
 
 
 class Brew(BaseAdapter):
-
+    """
+    Homebrew adapter.
+    """
     adapter_command = 'brew'
 
     def search(self, query):

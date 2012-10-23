@@ -4,7 +4,9 @@ from .base import BaseAdapter
 
 
 class Apt(BaseAdapter):
-
+    """
+    apt-get adapter
+    """
     adapter_command = 'apt-get'
     search_command = 'apt-cache'
 

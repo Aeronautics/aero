@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
-from aero.__version__ import __version__
-from base import BaseAdapter
+__all__ = ('Pip', )
+
 from string import strip
+
+from aero.__version__ import __version__
+from .base import BaseAdapter
 
 
 class Pip(BaseAdapter):
-
+    """
+    Pip adapter.
+    """
     adapter_command = 'pip'
 
     def search(self, query):

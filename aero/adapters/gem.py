@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
-from aero.__version__ import __version__
+__all__ = ('Gem', )
+
 from re import sub
-from base import BaseAdapter
 import yaml
+
+from .base import BaseAdapter
+from aero.__version__ import __version__
 
 
 class Version(yaml.YAMLObject, dict):
@@ -70,7 +73,9 @@ class GemSpec(yaml.YAMLObject, dict):
 
 
 class Gem(BaseAdapter):
-
+    """
+    Ruby gems adapter.
+    """
     adapter_command = 'gem'
 
     def search(self, query):
