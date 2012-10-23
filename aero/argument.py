@@ -12,7 +12,7 @@ import sys
 import subprocess
 from command import SearchCommand, InstallCommand, InfoCommand
 
-AERO_PATH = os.path.dirname(os.path.realpath(__file__)) + os.sep
+AERO_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
 class ArgumentDelegate(argparse.ArgumentParser):
@@ -37,9 +37,9 @@ class ArgumentDelegate(argparse.ArgumentParser):
 
     def __init__(self, prog='', version=''):
 
-        with open(AERO_PATH + "assets/descrip.ascii", "r") as file:
+        with open(os.path.join(AERO_PATH, "assets", "descrip.ascii"), "r") as file:
             content = ''.join(file.readlines())
-        with open(AERO_PATH + "assets/epilog.ascii", "r") as file:
+        with open(os.path.join(AERO_PATH, "assets", "epilog.ascii"), "r") as file:
             epilog = ''.join(file.readlines())
         super(self.__class__, self).__init__(
             description=content,
@@ -156,16 +156,16 @@ class ArgumentDelegate(argparse.ArgumentParser):
         return self.version + '\n\n' + super(self.__class__, self).format_usage()
 
     def format_help(self):
-        with open(AERO_PATH + "assets/title.ascii", "r") as file:
+        with open(os.path.join(AERO_PATH,  "assets", "title.ascii"), "r") as file:
             content = ''.join(file.readlines()).replace('{{version}}', self.version)
             file.close()
         from random import choice
         aerotip = choice(('aero1', 'aero2', 'aero3', 'aero4', 'aero5', 'aero6', 'aero7', 'aero8'))
-        with open(AERO_PATH + "assets/" + aerotip + ".ascii", "r") as file:
+        with open(os.path.join(AERO_PATH, "assets/", aerotip + ".ascii"), "r") as file:
             aerotip = ''.join(file.readlines())
             file.close()
 #        commhead = None
-        with open(AERO_PATH + "assets/command.ascii", "r") as file:
+        with open(os.path.join(AERO_PATH, "assets", "command.ascii"), "r") as file:
             commhead = ''.join(file.readlines())
             file.close()
 
