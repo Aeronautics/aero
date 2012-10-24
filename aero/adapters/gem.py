@@ -80,9 +80,9 @@ class Gem(BaseAdapter):
 
     def search(self, query):
         response = self._execute_command(self.adapter_command, ['search', '-qbd', query])[0]
-        rlines = sub('\*\*\*.*\*\*\*\s+', '', response).splitlines()
+        rlines = [r for r in sub('\*\*\*.*\*\*\*\s+|Rubyforge:.*\s+', '', response).splitlines() if r]
         lst = {}
-        for key, val in [line.split(' ', 1) for line in rlines if line and not line.startswith('  ')]:
+        for key, val in [line.split(' ', 1) for line in rlines if not line.startswith('  ')]:
             i = rlines.index(key + ' ' + val) + 1
             key = self.adapter_command + ':' + key
             try:
