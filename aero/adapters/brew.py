@@ -18,10 +18,21 @@ class Brew(BaseAdapter):
                 self.adapter_command + ':' + line,
                 '\n'.join(map(
                     lambda k: k[0] if len(k) < 2 else k[0] + ': ' + k[1],
-                    self.info(line)
+                    self.search_info(line)
                 ))
             ) for line in response.splitlines() if line])
         return {}
+
+    def search_info(self, query):
+        info = self.info(query)
+        return filter(
+            None,
+            [
+                info[0],
+                info[1] if len(info) > 1 else None,
+                info[2] if len(info) > 2 else None,
+            ]
+        )
 
     def info(self, query):
         if '/' in query:
