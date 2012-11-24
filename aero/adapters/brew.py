@@ -24,6 +24,8 @@ class Brew(BaseAdapter):
         return {}
 
     def info(self, query):
+        if '/' in query:
+            self._execute_command(self.adapter_command, ['tap', '/'.join(query.split('/')[:-1])])
         response = self._execute_command(self.adapter_command, ['info', query])[0]
         if 'Error:' not in response:
             response = response.replace(query + ': ', 'version: ')
