@@ -17,6 +17,32 @@ def coroutine(func):
         return cr
     return start
 
+class ProgressTicker():
+
+    ref = None
+    result = {}
+    steps = len(AVAILABLE_ADAPTERS)
+    taken = 0
+
+    def routine(self, routine):
+        self.ref = routine
+
+    def done(self):
+        return int(float(self.taken) / float(self.steps) * 100)
+
+    def send(self, args):
+        if isinstance(args, int):
+            self.taken += args
+        elif isinstance(args[0], str) and args[0] == 'step':
+            self.steps += args[1]
+        else:
+            self.taken += args[0]
+            try:
+                self.result.update(args[1])
+            except ValueError:
+                self.result = args[1]
+        self.ref.send(self.result)
+
 class CommandProcessor():
 
     cache = CacheProviderFactory().whichProvider()
