@@ -77,12 +77,15 @@ class SearchCommand(CommandProcessor):
                         pager.write("{:>50} {:<50}\n".format(k, line))
                     k = ''
             pager.write('\n')
-            if use_pager:
-                from subprocess import Popen
-                pager.close()
-                Popen(data.pager + ' /tmp/aero.out', shell=True).wait()
                 from cStringIO import StringIO
                 pager = StringIO()
+                out = pager.getvalue()
+                out = out.encode('utf')
+                if len(out.splitlines()) > 30:
+                    from subprocess import Popen, PIPE
+                    Popen(self.data.pager, shell=True, stdin=PIPE).communicate(input=out)
+                else:
+                    print out
 
 
 class InstallCommand(CommandProcessor):
