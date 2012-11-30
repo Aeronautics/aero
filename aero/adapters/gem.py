@@ -41,6 +41,13 @@ class Gem(BaseAdapter):
 
         import yaml
 
+        class Timestamp(yaml.YAMLObject):
+
+            yaml_tag = u'!timestamp'
+
+            def __init__(self, at):
+                pass #self.at = at
+
         class Version(yaml.YAMLObject, dict):
 
             yaml_tag = '!ruby/object:Gem::Version'
