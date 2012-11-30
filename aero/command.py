@@ -5,7 +5,7 @@ __author__ = 'nickl-'
 import sys
 import textwrap
 
-from .__version__ import __version__
+from .__version__ import __version_info__
 
 from .cache import CacheProviderFactory
 from .adapters import AVAILABLE_ADAPTERS
