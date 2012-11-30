@@ -19,6 +19,7 @@ AERO_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
 class ArgumentDelegate(argparse.ArgumentParser):
+
     pager = None
 
     class UsageFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
@@ -201,6 +202,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
 
 
 class CompletionResponse(argparse.Action):
+
     def __call__(self, parser, namespace, values, option_string=None):
         completion_script = {
             'bash': """
@@ -227,6 +229,7 @@ compctl -K _aero_completion aero
 
 
 class CommandParser(argparse._SubParsersAction):
+
     def __call__(self, parser, data, values, option_string=None):
         super(self.__class__, self).__call__(parser, data, values, option_string)
 
