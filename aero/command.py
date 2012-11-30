@@ -98,14 +98,35 @@ class CommandProcessor():
                         self.out.send('Found ({}) options [CACHED]\n'.format(len(res)))
                     self.ticker.send((5, res))
 
-    def call(self, adapter, args):
-        try:
-            return getattr(adapter, self.cmd())(args)
-        except AttributeError:  # as e: # Trust me you're going to want to use that e when duck duck misses
-            # print e
-            return 'Aborted: {} has no implementation for command: {}'.format(
-                adapter.__class__.__name__, self.cmd()
-            )
+    @coroutine
+    def call(self, target):
+        while True:
+            adapter_name = ''
+            payload = (yield)
+            adapter_name = payload[0][0]
+            adapter = payload[0][1]
+            package = payload[1]
+            try:
+                adapter.passthruArgs(self.data.passthru)
+                aero = getattr(adapter, self.cmd())(package)
+                if self.cmd() == 'search':
+                    self.out.send('Found ({}) options\n'.format(len(aero)))
+                else:
+                    self.out.send('\n')
+                target.send((1,
+                    self.seen(
+                        self.cmd(),
+                        adapter_name,
+                        package,
+                        aero
+                    ))
+                )
+            except Exception as e:
+                target.send((1,
+                    ['Aborted: {} has no implementation for command: {}\nWith message: {}\n'.format(
+                        adapter_name, self.cmd(), e
+                    )]
+                ))
 
 
 class SearchCommand(CommandProcessor):
