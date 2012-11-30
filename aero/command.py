@@ -50,6 +50,10 @@ class CommandProcessor():
     def __init__(self, data):
         if data.invalidate:
             self.cache.invalidate(True)
+    @coroutine
+    def res(self):
+        while True:
+            result = (yield)
 
     def cmd(self):
         return self.__class__.__name__.replace('Command', '').lower()
