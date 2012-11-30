@@ -66,6 +66,14 @@ class CommandProcessor():
                 pkg = package
             adapters.send((pkg, mngr))
     @coroutine
+    def write(self):
+        from cStringIO import StringIO
+        out = StringIO()
+        while True:
+            text = (yield)
+            out.write(text)
+            print out.getvalue()
+    @coroutine
     def each(self, target):
         while True:
             args = (yield)
