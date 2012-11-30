@@ -99,6 +99,20 @@ class CommandProcessor():
                     self.ticker.send((5, res))
 
     @coroutine
+    def progress(self, target):
+        from progbar import ProgBar
+        bar = ProgBar('Progress: ', 30)
+        bar.start()
+        while True:
+            result = (yield)
+            self.out.send('')
+            bar.percent = self.ticker.done()
+            if self.ticker.done() == 100:
+                bar.join()
+                self.out.send('')
+                target.send(result)
+
+    @coroutine
     def call(self, target):
         while True:
             adapter_name = ''
