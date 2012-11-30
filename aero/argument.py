@@ -97,6 +97,14 @@ class ArgumentDelegate(argparse.ArgumentParser):
         )
 
         self.add_argument(
+            default_prefix + '--', default_prefix * 2 + 'pass-through',
+            dest='passthru',
+            help='''Passthru arguments to be added as argumennts to the
+                package manager's command execution. Enclose the arguments
+                in quotes to distinguish them from others.''',
+        )
+
+        self.add_argument(
             default_prefix + 'c', default_prefix * 2 + 'completion',
             action=CompletionResponse,
             help='''Command outo completion is supported for both bash and zsh.
