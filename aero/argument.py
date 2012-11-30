@@ -232,15 +232,4 @@ class CommandParser(argparse._SubParsersAction):
 
     def __call__(self, parser, data, values, option_string=None):
         super(self.__class__, self).__call__(parser, data, values, option_string)
-
-        cmd = values[0]
-        if ':' in values[1]:
-            mngr = values[1].partition(':')
-            pkg = mngr[2]
-            mngr = mngr[0]
-        else:
-            mngr = None
-            pkg = values[1]
-
-        getattr(globals()[cmd.capitalize() + 'Command'](data), 'do')(pkg, data, mngr)
-        print
+        globals()[values[0].capitalize() + 'Command'](data)
