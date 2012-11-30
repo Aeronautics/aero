@@ -234,10 +234,25 @@ class SearchCommand(CommandProcessor):
 
 class InstallCommand(CommandProcessor):
 
-    pass
+    def wiring(self):
+        self.out = self.write()
+        self.ticker.routine(self.progress(None))
+        return self.each(self.call(self.res()))
 
+    def seen(self, command, adapter, package, result=False):
+        return result
 
+    @coroutine
+    def write(self):
+        import sys
+        out = sys.stdout
+        while True:
+            text = (yield)
+            out.write(text)
 
+    @coroutine
+    def progress(self, responder):
+        while True: (yield)
 
 
 class InfoCommand(CommandProcessor):
