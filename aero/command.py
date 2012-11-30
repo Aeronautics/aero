@@ -110,20 +110,6 @@ class CommandProcessor():
 
 class SearchCommand(CommandProcessor):
 
-    def do(self, pkg, data, mngr=None):
-        res = self.cache.seen(pkg)
-        if data.invalidate or res is False:
-            res = {}
-            for adapter in AVAILABLE_ADAPTERS:
-                if dptr not in data.disabled:
-                    if not mngr or mngr == dptr.lower():
-                        sys.stdout.write('Doing an aero {} of package: {} using {} '.format(
-                            self.cmd(), pkg, type(adapter).__name__)
-                        )
-                        aero = self.call(adapter, pkg)
-                        print 'Found ({}) options'.format(len(aero))
-                        if aero:
-                            res.update(aero)
 
         if res:
             res = sorted(self.cache.seen(pkg, res).items())
@@ -164,17 +150,6 @@ class InstallCommand(CommandProcessor):
 
 class InfoCommand(CommandProcessor):
 
-    def do(self, pkg, data, mngr=None):
-        res = self.cache.seen(pkg)
-        if data.invalidate or res is False:
-            res = []
-            for adapter in AVAILABLE_ADAPTERS:
-                if dptr not in data.disabled:
-                    if not mngr or mngr == dptr.lower():
-                        print 'Doing an aero {} of package: {} using {} \n'.format(
-                            self.cmd(), pkg, type(adapter).__name__
-                        )
-                        res = self.cache.seen(pkg, self.call(adapter, pkg))
 
         if 'Aborted:' in res:
             print res
