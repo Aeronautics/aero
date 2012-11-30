@@ -212,28 +212,34 @@ class InstallCommand(CommandProcessor):
     pass
 
 
+
+
+
 class InfoCommand(CommandProcessor):
 
-
-        if 'Aborted:' in res:
-            print res
-            return
-        k = ''
-        print "\n{:>48}   {:<52}".format('', 'INFORMATION: ' + pkg)
-        print "{:>48}   {:<52}".format("_" * 40, "_" * 50)
-        for line in res:
-            if isinstance(line, tuple) or isinstance(line, list):
-                if len(line) >= 2:
-                    k = line[0] + ' :'
-                    line = line[1]
-                else:
-                    line = line[0]
-            if line:
-                for l in line.splitlines():
-                    if len(l) > 50:
-                        for wrap in textwrap.wrap(l, 50):
-                            print "{:>50} {:50}".format(k, wrap)
-                            k = ''
+    @coroutine
+    def res(self):
+        while True:
+            res = (yield)
+            if 'Aborted:' in res:
+                print res
+                continue
+            key = ''
+            print "\n{:>48}   {:<52}".format('', 'INFORMATION: ') # + self.package)
+            print "{:>48}   {:<52}".format("_" * 40, "_" * 50)
+            for line in res:
+                if isinstance(line, tuple) or isinstance(line, list):
+                    if len(line) >= 2:
+                        key = line[0] + ' :'
+                        line = line[1]
                     else:
-                        print "{:>50} {:50}".format(k, l)
-                        k = ''
+                        line = line[0]
+                if line:
+                    for l in line.splitlines():
+                        if len(l) > 50:
+                            for wrap in textwrap.wrap(l, 50):
+                                print "{:>50} {:50}".format(key, wrap)
+                                key = ''
+                        else:
+                            print "{:>50} {:50}".format(key, l)
+                            key = ''
