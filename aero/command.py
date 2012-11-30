@@ -62,10 +62,7 @@ class SearchCommand(CommandProcessor):
 
         if res:
             res = sorted(self.cache.seen(pkg, res).items())
-            pager = sys.stdout
             use_pager = len(res) > 30  # TODO find real screen height
-            if use_pager:
-                pager = open('/tmp/aero.out', 'w')
             pager.write("\n{:>48}   {:<52}\n".format("PACKAGE NAME", "DESCRIPTION"))
             pager.write("{:>48}   {:<52}\n".format("_" * 40, "_" * 50))
             for k, v in res:
@@ -84,6 +81,8 @@ class SearchCommand(CommandProcessor):
                 from subprocess import Popen
                 pager.close()
                 Popen(data.pager + ' /tmp/aero.out', shell=True).wait()
+                from cStringIO import StringIO
+                pager = StringIO()
 
 
 class InstallCommand(CommandProcessor):
