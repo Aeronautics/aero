@@ -144,18 +144,20 @@ class ArgumentDelegate(argparse.ArgumentParser):
             title="Command arguments", action=CommandParser,
             description='''
                 The aero commands are based on the typical package manager
-                commands followed by the package name to perform the task on.
+                commands followed by the package name(s) to perform the task on.
+                At least one command is required but several packages can be
+                processed simultaneously.
                 Use "aero cammand --help" to get further details for specific
                 commands.''',
             help='''Optionally provide the specific manager to use prepended to
-                the package name with a colon ":" or alternatively aero will
+                the package name(s) with a colon ":" or alternatively aero will
                 execute the command against all enabled package managers.
                 ##choose one of the following valid aero commands:##''',
         )
         procs = {}
         for k in cmds.keys():
             procs[k] = commargs.add_parser(k, help=cmds[k][0])
-            procs[k].add_argument('package', help=cmds[k][1])
+            procs[k].add_argument('packages', help=cmds[k][1], nargs='+')
 
     def format_usage(self):
         return self.version + '\n\n' + super(self.__class__, self).format_usage()
