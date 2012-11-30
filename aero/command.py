@@ -157,26 +157,43 @@ class CommandProcessor():
 
 class SearchCommand(CommandProcessor):
 
-
-        if res:
-            res = sorted(self.cache.seen(pkg, res).items())
-            use_pager = len(res) > 30  # TODO find real screen height
-            pager.write("\n{:>48}   {:<52}\n".format("PACKAGE NAME", "DESCRIPTION"))
-            pager.write("{:>48}   {:<52}\n".format("_" * 40, "_" * 50))
-            for k, v in res:
-                for line in v.splitlines():
-                    if k:
-                        k += ' :'
-                    if len(line) > 50:
-                        for wrap in textwrap.wrap(line, 50):
-                            pager.write("{:>50} {:<50}\n".format(k, wrap))
-                            k = ''
-                    else:
-                        pager.write("{:>50} {:<50}\n".format(k, line))
-                    k = ''
-            pager.write('\n')
+    @coroutine
+    def res(self):
+        while True:
+            res = (yield)
+            if res:
+                res = sorted(res.items())
                 from cStringIO import StringIO
                 pager = StringIO()
+                pager.write(u"\n{:>48}   {:<52}\n".format("PACKAGE NAME", "DESCRIPTION"))
+                pager.write(u"{:>48}   {:<52}\n".format("_" * 40, "_" * 50))
+                for key, value in res:
+                    try:
+                        value = value.decode('utf-8')
+                        if value.startswith(u'\ufeff'):
+                            value = value[len(u'\ufeff'):]
+                    except UnicodeDecodeError:
+                        value = value.decode('latin1')
+                    try:
+                        key = key.decode('utf-8')
+                        if key.startswith(u'\ufeff'):
+                            key = key[len(u'\ufeff'):]
+                    except UnicodeDecodeError:
+                        key = key.decode('latin1')
+
+                    key = key.encode('utf')
+                    for line in value.splitlines():
+                        line = line.encode('utf')
+                        if key:
+                            key += ' :'
+                        if len(line) > 50:
+                            for wrap in textwrap.wrap(line, 50):
+                                pager.write("{:>50} {:<50}\n".format(key, wrap))
+                                key = ''
+                        else:
+                            pager.write("{:>50} {:<50}\n".format(key, line))
+                        key = ''
+                pager.write('\n')
                 from pygments import highlight
                 from pygments.lexers import CppLexer
                 from pygments.formatters import Terminal256Formatter
