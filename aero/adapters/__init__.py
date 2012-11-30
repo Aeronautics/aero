@@ -31,4 +31,4 @@ from .gem import Gem
 
 __all__ = ['AVAILABLE_ADAPTERS']
 
-AVAILABLE_ADAPTERS = [adapter for (adapter_name, adapter) in MAdapterRegistration.adapters.items() if adapter.is_present]
+AVAILABLE_ADAPTERS = [(adapter_name, adapter) for (adapter_name, adapter) in MAdapterRegistration.adapters.items() if adapter.is_present]

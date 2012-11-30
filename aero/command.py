@@ -23,7 +23,6 @@ class CommandProcessor():
 
     def do(self, pkg, data, mngr=None):
         for adapter in AVAILABLE_ADAPTERS:
-            dptr = type(adapter).__name__
             if dptr not in data.disabled:
                 if not mngr or mngr == dptr.lower():
                     sys.stdout.write(
@@ -50,7 +49,6 @@ class SearchCommand(CommandProcessor):
         if data.invalidate or res is False:
             res = {}
             for adapter in AVAILABLE_ADAPTERS:
-                dptr = type(adapter).__name__
                 if dptr not in data.disabled:
                     if not mngr or mngr == dptr.lower():
                         sys.stdout.write('Doing an aero {} of package: {} using {} '.format(
@@ -99,7 +97,6 @@ class InfoCommand(CommandProcessor):
         if data.invalidate or res is False:
             res = []
             for adapter in AVAILABLE_ADAPTERS:
-                dptr = type(adapter).__name__
                 if dptr not in data.disabled:
                     if not mngr or mngr == dptr.lower():
                         print 'Doing an aero {} of package: {} using {} \n'.format(
