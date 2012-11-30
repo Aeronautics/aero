@@ -79,7 +79,11 @@ class SearchCommand(CommandProcessor):
             pager.write('\n')
                 from cStringIO import StringIO
                 pager = StringIO()
+                from pygments import highlight
+                from pygments.lexers import CppLexer
+                from pygments.formatters import Terminal256Formatter
                 out = pager.getvalue()
+                out = highlight(out, CppLexer(), Terminal256Formatter())
                 out = out.encode('utf')
                 if len(out.splitlines()) > 30:
                     from subprocess import Popen, PIPE
