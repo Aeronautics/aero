@@ -46,10 +46,21 @@ class ProgressTicker():
 class CommandProcessor():
 
     cache = CacheProviderFactory().whichProvider()
+    data = None
+    out = None
+    ticker = ProgressTicker()
+    clear = '\x1b[2J\x1b[0;0H'
 
     def __init__(self, data):
-        if data.invalidate:
+        self.data = data
+        if self.data.invalidate:
             self.cache.invalidate(True)
+        next = self.wiring()
+        self.out.send(
+            self.clear +
+            'aero v{}.{}.{} {} {}\n\n'.format(*__version_info__)
+        )
+        self.do(data.packages, next)
     @coroutine
     def res(self):
         while True:
