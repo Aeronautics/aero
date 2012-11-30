@@ -61,6 +61,13 @@ class CommandProcessor():
             'aero v{}.{}.{} {} {}\n\n'.format(*__version_info__)
         )
         self.do(data.packages, next)
+
+    # wire coroutines
+    def wiring(self):
+        self.out = self.write()
+        self.ticker.routine(self.progress(self.res()))
+        return self.each(self.call(self.ticker))
+
     @coroutine
     def res(self):
         while True:
@@ -80,6 +87,7 @@ class CommandProcessor():
                 mngr = None
                 pkg = package
             adapters.send((pkg, mngr))
+
     @coroutine
     def write(self):
         from cStringIO import StringIO
