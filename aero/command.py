@@ -10,6 +10,12 @@ from .__version__ import __version__
 from .cache import CacheProviderFactory
 from .adapters import AVAILABLE_ADAPTERS
 
+def coroutine(func):
+    def start(*args,**kwargs):
+        cr = func(*args,**kwargs)
+        cr.next()
+        return cr
+    return start
 
 class CommandProcessor():
 
