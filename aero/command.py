@@ -54,11 +54,17 @@ class CommandProcessor():
     def cmd(self):
         return self.__class__.__name__.replace('Command', '').lower()
 
-    def do(self, pkg, data, mngr=None):
-        for adapter in AVAILABLE_ADAPTERS:
-            if dptr not in data.disabled:
-                if not mngr or mngr == dptr.lower():
-                    sys.stdout.write(
+    def do(self, packages, adapters):
+        self.ticker.steps = len(packages) * len(AVAILABLE_ADAPTERS)
+        for package in packages:
+            if ':' in package:
+                mngr = package.partition(':')
+                pkg = mngr[2]
+                mngr = mngr[0]
+            else:
+                mngr = None
+                pkg = package
+            adapters.send((pkg, mngr))
                         'Doing an aero {} of package: {} using {} '.format(
                             self.cmd(), pkg, type(adapter).__name__
                         )
