@@ -26,6 +26,14 @@ class Pip(BaseAdapter):
         return {}
 
     def install(self, query):
-        print '\n'
-        self._execute_shell(self.adapter_command, ['install', query])
+        print '\n' # --download-cache <DIR>
+        self._execute_shell(self.adapter_command, [
+            'install',
+            '--force-reinstall',
+            '--timeout', '30',
+            '--egg',
+            '--log', '~/.aero/log/pip.log',
+            '--download-cache', '~/.aero/cache/pip',
+            query
+        ])
         return {}
