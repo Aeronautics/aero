@@ -77,6 +77,11 @@ class CommandProcessor():
             text = (yield)
             out.write(text)
             print out.getvalue()
+
+    def seen(self, command, adapter, package, result=False):
+        cache_key = command + "+" + adapter + ":" + package
+        return self.cache.seen(cache_key, result)
+
     @coroutine
     def each(self, target):
         while True:
@@ -205,6 +210,7 @@ class SearchCommand(CommandProcessor):
                     Popen(self.data.pager, shell=True, stdin=PIPE).communicate(input=out)
                 else:
                     print out
+
 
 
 class InstallCommand(CommandProcessor):
