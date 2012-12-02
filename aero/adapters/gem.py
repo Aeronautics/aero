@@ -37,7 +37,6 @@ class Gem(BaseAdapter):
         return lst
 
     def install(self, query):
-        print
         self._execute_shell(self.adapter_command, ['install', query]).wait()
         return {}
 

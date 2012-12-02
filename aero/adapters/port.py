@@ -33,7 +33,6 @@ class Port(BaseAdapter):
         ]
 
     def install(self, query):
-        print
         self._execute_shell(
             self.adapter_command, ['install', query]
         )

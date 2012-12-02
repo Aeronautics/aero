@@ -44,6 +44,5 @@ class Brew(BaseAdapter):
         return [['No info available']]
 
     def install(self, query):
-        print
         self._execute_shell(self.adapter_command, ['install', query])
         return {}

@@ -46,7 +46,6 @@ class Npm(BaseAdapter):
         return 0, 0
 
     def install(self, query):
-        print
         self._execute_shell(self.adapter_command, ['install', query])
         return {}
 

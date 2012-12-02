@@ -264,7 +264,7 @@ class InstallCommand(CommandProcessor):
     def wiring(self):
         self.out = self.write()
         self.ticker.routine(self.progress(None))
-        return self.each(self.call(self.res()))
+        return self.each(self.spacing(self.call(self.res())))
 
     def seen(self, command, adapter, package, result=False):
         return result
@@ -276,6 +276,13 @@ class InstallCommand(CommandProcessor):
         while True:
             text = (yield)
             out.write(text)
+
+    @coroutine
+    def spacing(self, target):
+        while True:
+            payload = (yield)
+            print '\n'
+            target.send(payload)
 
     @coroutine
     def progress(self, responder):

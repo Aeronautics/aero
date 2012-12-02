@@ -30,7 +30,6 @@ class Pip(BaseAdapter):
         return {}
 
     def install(self, query):
-        print '\n' # --download-cache <DIR>
         self._execute_shell(self.adapter_command, [
             'install',
             '--force-reinstall',

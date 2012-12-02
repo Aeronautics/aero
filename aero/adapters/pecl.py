@@ -12,7 +12,6 @@ class Pecl(BaseAdapter):
     adapter_command = 'pecl'
 
     def search(self, query):
-        print query
         response = self._execute_command(self.adapter_command, ['-q', 'search', query])[0]
         if 'MATCHED PACKAGES' in response:
             from re import match
@@ -42,6 +41,5 @@ class Pecl(BaseAdapter):
         return [['No info available']]
 
     def install(self, query):
-        print '\n'
         self._execute_shell(self.adapter_command, ['install', query])
         return {}
