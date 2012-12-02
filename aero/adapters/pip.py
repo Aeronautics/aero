@@ -18,11 +18,15 @@ class Pip(BaseAdapter):
         response = self._execute_command(
             self.adapter_command, ['search', query]
         )[0]
-        lst = [map(
-            strip, (self.adapter_command + ':' + line).split(' - ', 1)
-        ) for line in response.splitlines() if ' - ' in line]
+        lst = {}
+        from re import match
+        for key, line in [map(
+            strip, (self.adapter_command + ':' + l).split(' - ', 1)
+        ) for l in response.splitlines() if ' - ' in l]:
+            parts = match('(.*)[ <\\(]?(http.*?)?[ >\\)]?(.*)', line).groups()
+            lst[key] = parts[0] + ' ' + parts[2] + ('\n' + parts[1] if parts[1] else '')
         if lst:
-            return dict(lst)
+            return lst
         return {}
 
     def install(self, query):
