@@ -30,6 +30,10 @@ class ProgressTicker():
     def done(self):
         return int(float(self.taken) / float(self.steps) * 100)
 
+    def terminate(self):
+        self.taken = self.steps
+        self.ref.send('terminate')
+
     def send(self, args):
         if isinstance(args, int):
             self.taken += args
@@ -66,8 +70,16 @@ class CommandProcessor():
         )
 
     def execute(self):
-        next = self.wiring()
-        self.do(self.data.packages, next)
+        try:
+            next = self.wiring()
+            self.do(self.data.packages, next)
+        except BaseException as e:
+            self.out.send(
+                '\n\n[{}{}] Terminating...\n'.format(
+                    type(e).__name__,
+                    ': ' + e.message if e.message else ''
+                ))
+            self.ticker.terminate()
 
     # wire coroutines
     def wiring(self):
@@ -146,9 +158,12 @@ class CommandProcessor():
             self.out.send('')
             bar.percent = self.ticker.done()
             if self.ticker.done() == 100:
+                if bar.isAlive():
+                    bar.stop()
                 bar.join()
                 self.out.send('')
-                target.send(result)
+                if not isinstance(result, str): # terminate
+                    target.send(result)
 
     @coroutine
     def call(self, target):
