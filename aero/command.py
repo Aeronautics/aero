@@ -114,7 +114,7 @@ class CommandProcessor():
             for adapter in AVAILABLE_ADAPTERS:
                 adapter_name = adapter[0]
                 if adapter_name not in self.data.disabled:
-                    if not manager or manager == adapter_name.lower():
+                    if not manager or manager == adapter_name:
                         self.out.send(
                             'Doing an aero {} of package: {} using {} '.format(
                                 self.cmd(), package, adapter_name

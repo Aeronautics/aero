@@ -1,5 +1,5 @@
--d,Brew
--d,Port
--d,Brew
--d,Npm
--d,Pip
+-d,brew
+-d,port
+-d,brew
+-d,npm
+-d,pip
