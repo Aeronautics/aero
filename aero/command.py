@@ -299,7 +299,7 @@ class InfoCommand(CommandProcessor):
             for line in res:
                 if isinstance(line, tuple) or isinstance(line, list):
                     if len(line) >= 2:
-                        key = line[0] + ': : ' if line[0] else ' : '
+                        key = line[0] + ': : ' if line[0] else '   '
                         line = line[1]
                     else:
                         line = line[0]
