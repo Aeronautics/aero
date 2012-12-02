@@ -28,6 +28,7 @@ from .port import Port
 from .pip import Pip
 from .npm import Npm
 from .gem import Gem
+from .pear import Pear
 
 __all__ = ['AVAILABLE_ADAPTERS']
 
