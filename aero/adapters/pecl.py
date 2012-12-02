@@ -18,7 +18,7 @@ class Pecl(BaseAdapter):
             from re import match
             from string import strip
             return dict([(
-                (self.adapter_command+':{0}|Version:{1}\nhttp://pear.php.net/{0}\n{2}').format(
+                (self.adapter_command+':{0}|Version:{1}\nhttp://pecl.php.net/{0}\n{2}').format(
                     *map(strip, match('(.* (?=\d))(.*\) +)(.*$)',line).groups())
                 ).split('|'))
                          for line in response.splitlines()
