@@ -20,7 +20,7 @@ def coroutine(func):
 class ProgressTicker():
 
     ref = None
-    result = {}
+    result = None
     steps = len(AVAILABLE_ADAPTERS)
     taken = 0
 
@@ -37,10 +37,14 @@ class ProgressTicker():
             self.steps += args[1]
         else:
             self.taken += args[0]
-            try:
+            if isinstance(args[1], dict):
+                if not self.result:
+                    self.result = {}
                 self.result.update(args[1])
-            except ValueError:
-                self.result = args[1]
+            elif isinstance(args[1], list):
+                if not self.result:
+                    self.result = []
+                self.result.extend(args[1])
         self.ref.send(self.result)
 
 class CommandProcessor():
