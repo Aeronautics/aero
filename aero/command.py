@@ -300,12 +300,14 @@ class InfoCommand(CommandProcessor):
                 print res
                 continue
             key = ''
-            print "\n{:>48}   {:<52}".format('', 'INFORMATION: ') # + self.package)
-            print "{:>48}   {:<52}".format("_" * 40, "_" * 50)
+            from cStringIO import StringIO
+            pager = StringIO()
+            pager.write("\n{:>48}   {:<52}\n".format('', 'INFORMATION: '))
+            pager.write("{:>47}    {:<52}\n".format("_" * 40, "_" * 50))
             for line in res:
                 if isinstance(line, tuple) or isinstance(line, list):
                     if len(line) >= 2:
-                        key = line[0] + ' :'
+                        key = line[0] + ': : ' if line[0] else ' : '
                         line = line[1]
                     else:
                         line = line[0]
@@ -313,8 +315,13 @@ class InfoCommand(CommandProcessor):
                     for l in line.splitlines():
                         if len(l) > 50:
                             for wrap in textwrap.wrap(l, 50):
-                                print "{:>50} {:50}".format(key, wrap)
+                                pager.write("{:>50} {:50}\n".format(key, wrap))
                                 key = ''
                         else:
-                            print "{:>50} {:50}".format(key, l)
+                            pager.write("{:>50} {:50}\n".format(key, l))
                             key = ''
+            from pygments import highlight
+            from pygments.lexers import CppLexer
+            from pygments.formatters import Terminal256Formatter
+            print highlight(pager.getvalue(), CppLexer(), Terminal256Formatter())
+
