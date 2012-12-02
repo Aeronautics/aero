@@ -266,7 +266,6 @@ class SearchCommand(CommandProcessor):
                     print out
 
 
-
 class InstallCommand(CommandProcessor):
 
     def wiring(self):
