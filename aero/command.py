@@ -182,6 +182,37 @@ class CommandProcessor():
                     )]
                 ))
 
+class DebugCommandProcessor(CommandProcessor):
+
+    def seen(self, command, adapter, package, result=False):
+        if not isinstance(result, bool):
+            print '\n{:=^100}'.format('')
+            print '{:=^100}'.format(' '+command+' '+adapter+' '+package+' ')
+            print '{:=^100}'.format('')
+            print 'Result type: ', type(result).__name__
+            itr = result
+            if isinstance(result, dict):
+                itr = result.items()
+            for r in itr:
+                print '{} | {:^5} | {}'.format(type(r).__name__, len(r), r)
+            print '\n'
+        return result
+
+    @coroutine
+    def write(self):
+        import sys
+        out = sys.stdout
+        while True:
+            text = (yield)
+            out.write(text)
+
+    @coroutine
+    def progress(self, target):
+        while True:
+            result = (yield)
+            if self.ticker.done() == 100:
+                target.send(result)
+
 
 class SearchCommand(CommandProcessor):
 
