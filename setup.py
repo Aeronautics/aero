@@ -16,6 +16,6 @@ setup(
         if descr.strip() and '===' not in descr
     ][1],
     long_description=open('README.txt').read(),
-    install_requires=["aero", "beaker", "PyYAML", "pygments"],
+    install_requires=["aero", "beaker", "PyYAML", "pygments", "progbar"],
     scripts=["aero/aero"],
 )
