@@ -12,10 +12,8 @@ class Gem(BaseAdapter):
     """
     Ruby gems adapter.
     """
-    adapter_command = 'gem'
-
     def search(self, query):
-        response = self._execute_command(self.adapter_command, ['search', '-qbd', query])[0]
+        response = self.command(['search', '-qbd', query])[0]
         from re import match
         lst = {}
         desc = False
@@ -23,21 +21,21 @@ class Gem(BaseAdapter):
         for line in [l for l in response.splitlines() if not match('\*\*\*',l)]:
             if not desc and match('(.*)\((.*)\)', line):
                 key, val = match('(.*)\((.*)\)', line).groups()
-                lst[self.adapter_command + ':' + key] = 'Version: ' + val + '\n'
+                lst[self.package_name(key)] = 'Version: ' + val + '\n'
                 desc = True
             elif desc and not blank and not line:
                 blank = True
             elif desc and 'Homepage:' in line:
-                lst[self.adapter_command + ':' + key] += line.replace('Homepage: ', '').strip() + '\n'
+                lst[self.package_name(key)] += line.replace('Homepage: ', '').strip() + '\n'
             elif desc and blank and line:
-                lst[self.adapter_command + ':' + key] += line.strip() + ' '
+                lst[self.package_name(key)] += line.strip() + ' '
             elif desc and blank and not line:
                 desc = False
                 blank = False
         return lst
 
     def install(self, query):
-        self._execute_shell(self.adapter_command, ['install', query]).wait()
+        self.shell(['install', query]).wait()
         return {}
 
     def info(self, query):
@@ -114,9 +112,7 @@ class Gem(BaseAdapter):
                     self.update([(k, v)])
 
         try:
-            response = self._execute_command(
-                self.adapter_command, ['specification', '-qb', '--yaml', query]
-            )[0]
+            response = self.command(['specification', '-qb', '--yaml', query])[0]
             if 'ERROR:' in response:
                 return [response]
 #            f = open('/Users/inspirex/code/respect/aero/scratch/rubyforge.yaml', 'r')

@@ -13,8 +13,10 @@ class BaseAdapter(object):
     Base adapter.
     """
     __metaclass__ = MAdapterRegistration
-    adapter_command = 'base'
     passthru = []
+
+    def adapter_command(self):
+        return self.__class__.__name__.lower()
 
     def _to_command(self, command, args=None, add_path=True):
         if add_path:
@@ -27,13 +29,24 @@ class BaseAdapter(object):
 
     def _execute_command(self, command, args=[], add_path=True):
         args += self.passthru
-        return subprocess.Popen(self._to_command(command, args, add_path),
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+        return subprocess.Popen(
+            self._to_command(command, args, add_path),
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        ).communicate()
+
+    def command(self, args=[], add_path=True):
+        return self._execute_command(self.adapter_command(), args, add_path)
 
     def _execute_shell(self, command, args=[], add_path=True):
         args += self.passthru
         command = subprocess.list2cmdline(self._to_command(command, args, add_path))
         return subprocess.Popen(command, shell=True).wait()
+
+    def shell(self, args=[], add_path=True):
+        self._execute_shell(self.adapter_command(), args, add_path)
+
+    def package_name(self, package):
+        return self.adapter_command()+':'+package
 
     def passthruArgs(self, args):
         self.passthru = [] if not isinstance(args, str) else args.split(' ')
@@ -57,7 +70,7 @@ class BaseAdapter(object):
     @property
     def is_present(self):
         for path in os.environ['PATH'].split(':'):
-            if os.path.exists(os.path.join(path, self.adapter_command)):
+            if os.path.exists(os.path.join(path, self.adapter_command())):
                 self.path = path
                 return True
         return False

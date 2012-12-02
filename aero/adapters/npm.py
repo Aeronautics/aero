@@ -13,12 +13,8 @@ class Npm(BaseAdapter):
     """
     Node package manager adapter.
     """
-    adapter_command = 'npm'
-
     def search(self, query):
-        response = self._execute_command(
-            self.adapter_command, ['search', '-q', query]
-        )[0]
+        response = self.command(['search', '-q', query])[0]
         lst = list(
             self.__parse_search(line) for line in response.splitlines()
             if 'npm http' not in line and not bool(match(
@@ -36,7 +32,7 @@ class Npm(BaseAdapter):
         )
         if r and len(r.groups()) == 5:
             r = map(strip, list(r.groups()))
-            pkg = ''.join([self.adapter_command, ':', r.pop(0)])
+            pkg = ''.join([self.package_name(r.pop(0))])
             r[1] = ' '.join(('Author:', r[1], r[2]))
             r[2] = r[0]
             r[3] = 'Tags: ' + ', '.join(r[3].split(' '))
@@ -46,11 +42,11 @@ class Npm(BaseAdapter):
         return 0, 0
 
     def install(self, query):
-        self._execute_shell(self.adapter_command, ['install', query])
+        self.shell(['install', query])
         return {}
 
     def info(self, query):
-        response = self._execute_command(self.adapter_command, ['view', query])[0]
+        response = self.command(['view', query])[0]
         try:
             import json
             r = json.loads(sub("'", '"', sub('\s(\w+):', r' "\1":', response.strip())))

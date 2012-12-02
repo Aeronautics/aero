@@ -9,26 +9,24 @@ class Pecl(BaseAdapter):
     """
     Pecl adapter.
     """
-    adapter_command = 'pecl'
-
     def search(self, query):
-        response = self._execute_command(self.adapter_command, ['-q', 'search', query])[0]
+        response = self.command(['-q', 'search', query])[0]
         if 'MATCHED PACKAGES' in response:
             from re import match
             from string import strip
-            return dict([(
-                (self.adapter_command+':{0}|Version:{1}\nhttp://pecl.php.net/{0}\n{2}').format(
-                    *map(strip, match('(.* (?=\d))(.*\) +)(.*$)',line).groups())
-                ).split('|'))
+            return dict([
+                self.package_name('{0}|Version:{1}\nhttp://pecl.php.net/{0}\n{2}'.format(
+                    *map(strip, match('(.* (?=\d))(.*\) +)(.*$)', line).groups())
+                )).split('|')
                          for line in response.splitlines()
                          if line
                             and 'STABLE/(LATEST)' not in line
-                            and match('(.* (?=\d))(.*\) +)(.*$)',line)
+                            and match('(.* (?=\d))(.*\) +)(.*$)', line)
             ])
         return {}
 
     def info(self, query):
-        response = self._execute_command(self.adapter_command, ['remote-info', query])[0]
+        response = self.command(['remote-info', query])[0]
         if 'Unknown package' not in response:
             from re import match
             from string import strip
@@ -41,5 +39,5 @@ class Pecl(BaseAdapter):
         return [['No info available']]
 
     def install(self, query):
-        self._execute_shell(self.adapter_command, ['install', query])
+        self.shell(['install', query])
         return {}

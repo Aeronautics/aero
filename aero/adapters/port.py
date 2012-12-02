@@ -12,12 +12,8 @@ class Port(BaseAdapter):
     """
     Macports adapter.
     """
-    adapter_command = 'port'
-
     def search(self, query):
-        response = self._execute_command(
-            self.adapter_command, ['search', query]
-        )[0]
+        response = self._execute_command(['search', query])[0]
         lst = list(line for line in response.splitlines() if line)
         if lst:
             return dict(map(
@@ -28,20 +24,16 @@ class Port(BaseAdapter):
     def __parse_search(self, result):
         key = result[0].split(' ', 1)
         return [
-            self.adapter_command + ':' + key.pop(0),
+            self.package_name(key.pop(0)),
             key.pop() + ' ' + result[1]
         ]
 
     def install(self, query):
-        self._execute_shell(
-            self.adapter_command, ['install', query]
-        )
+        self.shell(['install', query])
         return {}
 
     def info(self, query):
-        result = self._execute_command(
-            self.adapter_command, ['info', query]
-        )[0]
+        result = self.command(['info', query])[0]
         result = result.replace('{} '.format(query), 'Version: ')
         return [map(
             strip, line.split(': ', 1)

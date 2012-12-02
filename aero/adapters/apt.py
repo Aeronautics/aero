@@ -7,8 +7,10 @@ class Apt(BaseAdapter):
     """
     apt-get adapter
     """
-    adapter_command = 'apt-get'
     search_command = 'apt-cache'
+
+    def adapter_command(self):
+        return 'apt-get'
 
     def search(self, query):
         process = self._execute_command(self.search_command, ['search', query])
