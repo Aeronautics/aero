@@ -76,7 +76,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
             default=self.discover_pager(),
         )
 
-        choices = list(type(x).__name__ for x in AVAILABLE_ADAPTERS) + ['Colour']
+        choices = list(x for x, y in AVAILABLE_ADAPTERS)
 
         self.add_argument(
             default_prefix + 'd', default_prefix * 2 + 'disable',
