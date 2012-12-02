@@ -76,8 +76,7 @@ class CommandProcessor():
 
     @coroutine
     def res(self):
-        while True:
-            result = (yield)
+        while True: (yield)
 
     def cmd(self):
         return self.__class__.__name__.replace('Command', '').lower()
