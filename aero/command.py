@@ -60,12 +60,14 @@ class CommandProcessor():
         self.out = self.write()
         if self.data.invalidate:
             self.cache.invalidate(True)
-        next = self.wiring()
         self.out.send(
             self.clear +
             'aero v{}.{}.{} {} {}\n\n'.format(*__version_info__)
         )
-        self.do(data.packages, next)
+
+    def execute(self):
+        next = self.wiring()
+        self.do(self.data.packages, next)
 
     # wire coroutines
     def wiring(self):

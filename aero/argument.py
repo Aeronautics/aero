@@ -242,4 +242,4 @@ class CommandParser(argparse._SubParsersAction):
 
     def __call__(self, parser, data, values, option_string=None):
         super(self.__class__, self).__call__(parser, data, values, option_string)
-        globals()[values[0].capitalize() + 'Command'](data)
+        globals()[values[0].capitalize() + 'Command'](data).execute()
