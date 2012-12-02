@@ -57,6 +57,7 @@ class CommandProcessor():
 
     def __init__(self, data):
         self.data = data
+        self.out = self.write()
         if self.data.invalidate:
             self.cache.invalidate(True)
         next = self.wiring()
@@ -68,7 +69,6 @@ class CommandProcessor():
 
     # wire coroutines
     def wiring(self):
-        self.out = self.write()
         self.ticker.routine(self.progress(self.res()))
         return self.each(self.call(self.ticker))
 
