@@ -116,8 +116,12 @@ class CommandProcessor():
                 adapter_name = adapter[0]
                 if adapter_name not in self.data.disabled:
                     if not manager or manager == adapter_name:
+                        length = '{}'.format(reduce(
+                            lambda x, y: max(x, y),
+                            map(lambda x: len(x[0]), AVAILABLE_ADAPTERS)
+                        ))
                         self.out.send(
-                            'Doing an aero {} of package: {} using {} '.format(
+                            ('Doing an aero {} of package: {} using {:<' + length + '} ').format(
                                 self.cmd(), package, adapter_name
                             )
                         )
@@ -125,7 +129,7 @@ class CommandProcessor():
                         if self.data.invalidate or res is False:
                             target.send((adapter, package))
                         else:
-                            self.out.send('Found ({}) options [CACHED]\n'.format(len(res)))
+                            self.out.send('Found {:>4} options [CACHED]\n'.format(len(res)))
                             self.ticker.send((1, res))
                     else:
                         self.ticker.send(1)
@@ -158,7 +162,7 @@ class CommandProcessor():
                 adapter.passthruArgs(self.data.passthru)
                 aero = getattr(adapter, self.cmd())(package)
                 if self.cmd() == 'search':
-                    self.out.send('Found ({}) options\n'.format(len(aero)))
+                    self.out.send('Found {:>4} options\n'.format(len(aero)))
                 else:
                     self.out.send('\n')
                 target.send((1,
