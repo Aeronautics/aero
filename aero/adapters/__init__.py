@@ -29,6 +29,7 @@ from .pip import Pip
 from .npm import Npm
 from .gem import Gem
 from .pear import Pear
+from .pecl import Pecl
 
 __all__ = ['AVAILABLE_ADAPTERS']
 
