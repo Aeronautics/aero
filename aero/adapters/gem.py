@@ -2,7 +2,7 @@
 __author__ = 'nickl-'
 __all__ = ('Gem', )
 
-from re import sub
+
 
 from .base import BaseAdapter
 from aero.__version__ import __version__
@@ -16,20 +16,24 @@ class Gem(BaseAdapter):
 
     def search(self, query):
         response = self._execute_command(self.adapter_command, ['search', '-qbd', query])[0]
-        rlines = [r for r in sub('\*\*\*.*\*\*\*\s+|Rubyforge:.*\s+', '', response).splitlines() if r]
+        from re import match
         lst = {}
-        for key, val in [line.split(' ', 1) for line in rlines if not line.startswith('  ')]:
-            i = rlines.index(key + ' ' + val) + 1
-            key = self.adapter_command + ':' + key
-            try:
-                lst[key] += '\n\n'
-            except KeyError:
-                lst[key] = ''
-            val = ['version: ' + val]
-            while i < len(rlines) and rlines[i].startswith(' '):
-                val += [rlines[i].strip()]
-                i += 1
-            lst[key] += '\n'.join(val)
+        desc = False
+        blank = False
+        for line in [l for l in response.splitlines() if not match('\*\*\*',l)]:
+            if not desc and match('(.*)\((.*)\)', line):
+                key, val = match('(.*)\((.*)\)', line).groups()
+                lst[self.adapter_command + ':' + key] = 'Version: ' + val + '\n'
+                desc = True
+            elif desc and not blank and not line:
+                blank = True
+            elif desc and 'Homepage:' in line:
+                lst[self.adapter_command + ':' + key] += line.replace('Homepage: ', '').strip() + '\n'
+            elif desc and blank and line:
+                lst[self.adapter_command + ':' + key] += line.strip() + ' '
+            elif desc and blank and not line:
+                desc = False
+                blank = False
         return lst
 
     def install(self, query):
