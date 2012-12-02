@@ -113,30 +113,23 @@ class CommandProcessor():
             manager = args[1]
             for adapter in AVAILABLE_ADAPTERS:
                 adapter_name = adapter[0]
-                if not manager or manager == adapter_name.lower():
-                    self.out.send(
-                        'Doing an aero {} of package: {} using {} '.format(
-                            self.cmd(), package, adapter_name
-                        )
-                    )
-                res = self.seen(self.cmd(), adapter_name, package)
-                self.ticker.send(('step', 4))
-                if self.data.invalidate or res is False:
-                    if adapter_name not in self.data.disabled:
-                        if not manager or manager == adapter_name.lower():
-                            self.ticker.send(1)
-                            target.send((adapter, package))
-                            self.ticker.send(1)
-                        else:
-                            self.ticker.send(3)
-                        self.ticker.send(1)
-                    else:
-                        self.ticker.send(4)
-                    self.ticker.send(1)
-                else:
+                if adapter_name not in self.data.disabled:
                     if not manager or manager == adapter_name.lower():
-                        self.out.send('Found ({}) options [CACHED]\n'.format(len(res)))
-                    self.ticker.send((5, res))
+                        self.out.send(
+                            'Doing an aero {} of package: {} using {} '.format(
+                                self.cmd(), package, adapter_name
+                            )
+                        )
+                        res = self.seen(self.cmd(), adapter_name, package)
+                        if self.data.invalidate or res is False:
+                            target.send((adapter, package))
+                        else:
+                            self.out.send('Found ({}) options [CACHED]\n'.format(len(res)))
+                            self.ticker.send((1, res))
+                    else:
+                        self.ticker.send(1)
+                else:
+                    self.ticker.send(1)
 
     @coroutine
     def progress(self, target):
