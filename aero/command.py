@@ -288,8 +288,8 @@ class InfoCommand(CommandProcessor):
     def res(self):
         while True:
             res = (yield)
-            if 'Aborted:' in res:
-                print res
+            if 'Aborted:' in res[0]:
+                print res[0]
                 continue
             key = ''
             from cStringIO import StringIO
