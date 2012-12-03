@@ -226,6 +226,10 @@ class DebugCommandProcessor(CommandProcessor):
             if self.ticker.done() == 100:
                 target.send(result)
 
+    def execute(self):
+        next = self.wiring()
+        self.do(self.data.packages, next)
+
 
 class SearchCommand(CommandProcessor):
 
