@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import division
 __author__ = 'nickl-'
 
 import sys
@@ -28,7 +28,7 @@ class ProgressTicker():
         self.ref = routine
 
     def done(self):
-        return int(float(self.taken) / float(self.steps) * 100)
+        return (self.taken * 100) // self.steps
 
     def terminate(self):
         self.taken = self.steps
