@@ -51,7 +51,7 @@ class Gem(BaseAdapter):
 
         class Version(yaml.YAMLObject, dict):
 
-            yaml_tag = '!ruby/object:Gem::Version'
+            yaml_tag = u'!ruby/object:Gem::Version'
 
             def __setstate__(self, state):
                 self['version'] = state['version']
@@ -59,7 +59,7 @@ class Gem(BaseAdapter):
 
         class Requirement(yaml.YAMLObject, dict):
 
-            yaml_tag = '!ruby/object:Gem::Requirement'
+            yaml_tag = u'!ruby/object:Gem::Requirement'
 
             def __setstate__(self, state):
                 r = state['requirements'].pop()
@@ -68,7 +68,7 @@ class Gem(BaseAdapter):
 
         class Dependency(yaml.YAMLObject, dict):
 
-            yaml_tag = '!ruby/object:Gem::Dependency'
+            yaml_tag = u'!ruby/object:Gem::Dependency'
 
             def __setstate__(self, state):
                 for require in [r for r in state.keys() if 'require' in r]:
@@ -83,7 +83,7 @@ class Gem(BaseAdapter):
 
         class GemSpec(yaml.YAMLObject, dict):
 
-            yaml_tag = '!ruby/object:Gem::Specification'
+            yaml_tag = u'!ruby/object:Gem::Specification'
 
             def __setstate__(self, state):
                 import datetime
