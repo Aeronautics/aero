@@ -111,7 +111,7 @@ class CommandProcessor():
         out = StringIO()
         while True:
             text = (yield)
-            out.write(text)
+            out.write(str(text))
             print out.getvalue()
 
     def seen(self, command, adapter, package, result=False):
@@ -214,7 +214,7 @@ class DebugCommandProcessor(CommandProcessor):
         out = sys.stdout
         while True:
             text = (yield)
-            out.write(text)
+            out.write(str(text))
 
     @coroutine
     def progress(self, target):
