@@ -128,10 +128,7 @@ class CommandProcessor():
                 adapter_name = adapter[0]
                 if adapter_name not in self.data.disabled:
                     if not manager or manager == adapter_name:
-                        length = '{}'.format(reduce(
-                            lambda x, y: max(x, y),
-                            map(lambda x: len(x[0]), AVAILABLE_ADAPTERS)
-                        ))
+                        length = str(max([len(a[0]) for a in AVAILABLE_ADAPTERS]))
                         self.out.send(
                             ('Doing an aero {} of package: {} using {:<' + length + '} ').format(
                                 self.cmd(), package, adapter_name
