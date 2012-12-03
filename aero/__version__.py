@@ -24,7 +24,7 @@ class V(v):
         map(int, [a for a in args if a != args[3]])
         map(int, [a for a in kwargs.values() if a != kwargs['releaselevel']])
 
-__version_info__ = V(0, 0, 1, 'alpha', 0)
+__version_info__ = V(0, 0, 1, 'alpha', 1)
 __version__ = '{}.{}.{}{:1.1}{}'.format(*tuple(__version_info__))
 __build__ = __version_info__.serial
 __authors__ = ('Nick Lombard - nickl-', 'Jayson Reis')
