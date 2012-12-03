@@ -235,6 +235,9 @@ class SearchCommand(CommandProcessor):
         while True:
             res = (yield)
             if res:
+                if isinstance(res, list):
+                    print '\n' + res[0]
+                    continue
                 res = sorted(res.items())
                 from cStringIO import StringIO
                 pager = StringIO()
