@@ -30,6 +30,7 @@ from .npm import Npm
 from .gem import Gem
 from .pear import Pear
 from .pecl import Pecl
+from .pyrus import Pyrus
 
 __all__ = ['AVAILABLE_ADAPTERS']
 
