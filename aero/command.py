@@ -77,7 +77,7 @@ class CommandProcessor():
             self.out.send(
                 '\n\n[{}{}] Terminating...\n'.format(
                     type(e).__name__,
-                    ': {}'.format(e) if len('{}'.format(e)) else ''
+                    ': {}'.format(e) if len(str(e)) else ''
                 ))
             self.ticker.terminate()
 
