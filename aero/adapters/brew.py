@@ -14,23 +14,16 @@ class Brew(BaseAdapter):
         if 'No formula found' not in response and 'Error:' not in response:
             return dict([(
                 self.package_name(line),
-                '\n'.join(map(
-                    lambda k: k[0] if len(k) < 2 else k[0] + ': ' + k[1],
-                    self.search_info(line)
-                ))
+                self.search_info(self.package_name(line))
             ) for line in response.splitlines() if line])
         return {}
 
     def search_info(self, query):
-        info = self.info(query)
-        return filter(
-            None,
-            [
-                info[0],
-                info[1] if len(info) > 1 else None,
-                info[2] if len(info) > 2 else None,
-            ]
-        )
+        response = self._execute_command('aero', ['info', query], False)[0]
+        from re import split
+        lines = response.splitlines()
+        idx = lines.index('       ________________________________________    __________________________________________________  ')
+        return '\n'.join([''.join(split('\x1b.*?m', l)).replace(' : ', '').strip() for l in response.splitlines()[idx+1:idx+4]])
 
     def info(self, query):
         if '/' in query:
