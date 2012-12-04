@@ -60,6 +60,10 @@ class BaseAdapter(object):
         raise NotImplementedError
 
     @abstractmethod
+    def info(self, package):
+        raise NotImplementedError
+
+    @abstractmethod
     def update(self):
         raise NotImplementedError
 
