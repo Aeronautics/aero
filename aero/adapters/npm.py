@@ -32,13 +32,8 @@ class Npm(BaseAdapter):
         )
         if r and len(r.groups()) == 5:
             r = map(strip, list(r.groups()))
-            pkg = ''.join([self.package_name(r.pop(0))])
-            r[1] = ' '.join(('Author:', r[1], r[2]))
-            r[2] = r[0]
-            r[3] = 'Tags: ' + ', '.join(r[3].split(' '))
-            del r[0]
-            desc = '\n'.join(r)
-            return pkg, desc
+            pkg = self.package_name(r.pop(0))
+            return pkg, r[2] + '\n' + r[0]
         return 0, 0
 
     def install(self, query):
