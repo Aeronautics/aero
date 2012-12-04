@@ -11,7 +11,10 @@ class Pyrus(BaseAdapter):
     """
     def search(self, query):
         response = self.command(['search', query])[0]
-        if 'No formula found' not in response and 'Error:' not in response:
+        if 'No formula found' not in response \
+            and 'Error:' not in response\
+            and 'No info available' not in response\
+            and 'No results found' not in response:
             return dict([
                 self.search_info(self.package_name(line))
                 for line in response.splitlines()[4:-2] if line and 'pearhub.org' not in line
