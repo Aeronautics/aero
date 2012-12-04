@@ -42,13 +42,12 @@ class Gem(BaseAdapter):
 
         import yaml
 
-        class Timestamp(yaml.YAMLObject):
+        class Timestamp(yaml.YAMLObject, dict):
 
             yaml_tag = u'!timestamp'
-            at = u''
 
             def __setstate__(self, state):
-                self.at = state['at'][:state['at'].index(' ')]
+                self['at'] = state['at'][:state['at'].index(' ')]
 
         class Version(yaml.YAMLObject, dict):
 
@@ -101,14 +100,13 @@ class Gem(BaseAdapter):
                         else:
                             v = ', '.join(v)
                     if isinstance(v, Timestamp):
-                        v = v.at
+                        v = v['at']
                     if isinstance(v, Version):
                         v = v['version']
                     if isinstance(v, Requirement):
                         v = v['requirement']
                     if not isinstance(v, str):
                         v = str(v)
-
                     self.update([(k, v)])
 
         response = self.command(['specification', '-qb', '--yaml', query])[0]
