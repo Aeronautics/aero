@@ -185,10 +185,10 @@ class CommandProcessor():
                         aero
                     ))
                 )
-            except Exception as e:
+            except NotImplementedError:
                 target.send((1,
-                    ['Aborted: {} has no implementation for command: {}\nWith message: {}\n'.format(
-                        adapter_name, self.cmd(), e
+                    ['Aborted: {} has no implementation for command: {}\n'.format(
+                        adapter_name, self.cmd()
                     )]
                 ))
 
