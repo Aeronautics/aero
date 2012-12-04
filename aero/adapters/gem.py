@@ -111,15 +111,15 @@ class Gem(BaseAdapter):
 
                     self.update([(k, v)])
 
-        try:
-            response = self.command(['specification', '-qb', '--yaml', query])[0]
-            if 'ERROR:' in response:
-                return [response]
+        response = self.command(['specification', '-qb', '--yaml', query])[0]
+        if 'ERROR:' in response:
+            return ['Aboted: {}\n'.format(response)]
 #            f = open('/Users/inspirex/code/respect/aero/scratch/rubyforge.yaml', 'r')
 #            response = ''.join(f.readlines())
 #            f.close()
-            result = yaml.load(sub(r'!binary', r'!!binary', response))
+        from re import sub
+        result = yaml.load(sub(r'!binary', r'!!binary', response))
+        try:
             return sorted(result.items())
-
-        except BaseException as b:
-            return [['Aborted: No info available for a gem called {}\nWith message: {}\n'.format(query, b)]]
+        except AttributeError:
+            return ['Aborted: No info available for a gem called: {}\n'.format(query)]
