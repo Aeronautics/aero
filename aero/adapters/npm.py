@@ -27,7 +27,7 @@ class Npm(BaseAdapter):
 
     def __parse_search(self, result):
         r = match(
-            '^([A-Za-z0-9\-]*)\s+(\w.*)=(.+)\s+(\d\d\d\d[\d\-: ]*)\s+(\w.*)$',
+            '^([A-Za-z0-9\-]*)\s+(\w.*)=(.+)\s+(\d\d\d\d[\d\-: ]*)\s*?(\w?.*?)$',
             result
         )
         if r and len(r.groups()) == 5:
