@@ -87,7 +87,6 @@ class Gem(BaseAdapter):
             yaml_tag = u'!ruby/object:Gem::Specification'
 
             def __setstate__(self, state):
-                import datetime
                 for k, v in [st for st in state.items() if st[1]]:
                     if isinstance(v, list):
                         if k == 'dependencies':
