@@ -114,9 +114,6 @@ class Gem(BaseAdapter):
         response = self.command(['specification', '-qb', '--yaml', query])[0]
         if 'ERROR:' in response:
             return ['Aboted: {}\n'.format(response)]
-#            f = open('/Users/inspirex/code/respect/aero/scratch/rubyforge.yaml', 'r')
-#            response = ''.join(f.readlines())
-#            f.close()
         from re import sub
         result = yaml.load(sub(r'!binary', r'!!binary', response))
         try:
