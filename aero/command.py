@@ -32,7 +32,10 @@ class ProgressTicker():
 
     def terminate(self):
         self.taken = self.steps
-        self.ref.send('terminate')
+        try:
+            self.ref.send('terminate')
+        except StopIteration:
+            pass
 
     def send(self, args):
         if isinstance(args, int):
