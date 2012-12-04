@@ -325,7 +325,13 @@ class InfoCommand(CommandProcessor):
             key = ''
             from cStringIO import StringIO
             pager = StringIO()
-            pager.write("\n{:>48}   {:<52}\n".format('', 'INFORMATION: '))
+            pager.write("\n{:>48}   {:<52}\n".format(
+                '',
+                'INFORMATION: ' + ', '.join(map(
+                    lambda x: x if ':' not in x else x.split(':')[1],
+                    self.data.packages
+                ))
+            ))
             pager.write("{:>47}    {:<52}\n".format("_" * 40, "_" * 50))
             for line in res:
                 if isinstance(line, tuple) or isinstance(line, list):
