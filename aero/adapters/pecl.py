@@ -39,5 +39,5 @@ class Pecl(BaseAdapter):
         return [['No info available']]
 
     def install(self, query):
-        self.shell(['install', query])
+        self.shell('install', query)
         return {}

@@ -37,7 +37,7 @@ class Npm(BaseAdapter):
         return 0, 0
 
     def install(self, query):
-        self.shell(['install', query])
+        self.shell('install', query)
         return {}
 
     def info(self, query):
