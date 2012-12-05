@@ -7,9 +7,14 @@ from aero.__version__ import __version__, __title__, __authors__, __email__, __l
 from setuptools import setup
 
 setup(
-    name=__title__, author=__authors__, author_email=__email__,
-    version=__version__, license=__license__, url=__url__,
-    download_url=__download_url__, packages=['aero', 'aero.adapters'],
+    name=__title__,
+    author=__authors__,
+    author_email=__email__,
+    version=__version__,
+    license=__license__,
+    url=__url__,
+    download_url=__download_url__,
+    packages=['aero', 'aero.adapters'],
     package_data={'aero': ['assets/*.ascii']},
     description=[
         descr for descr in open('README.txt').read().splitlines()
