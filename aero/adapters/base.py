@@ -28,13 +28,13 @@ class BaseAdapter(object):
         return command
 
     def _execute_command(self, command, args=[], add_path=True):
-        args += self.passthru
         return subprocess.Popen(
             self._to_command(command, args, add_path),
             stdout=subprocess.PIPE, stderr=subprocess.PIPE
         ).communicate()
 
-    def command(self, args=[], add_path=True):
+    def command(self, pm_command, query, args=[], add_path=True):
+        args = pm_command.split(' ') + self.passthru + args + query.split(' ')
         return self._execute_command(self.adapter_command(), args, add_path)
 
     def _execute_shell(self, command, args=[], add_path=True):
