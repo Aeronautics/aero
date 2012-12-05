@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
-__all__ = ('Pip', )
 
 from string import strip
 
