@@ -27,7 +27,7 @@ class Brew(BaseAdapter):
 
     def info(self, query):
         if '/' in query:
-            self.command(['tap', '/'.join(query.split('/')[:-1])])
+            self.command_no_passthru('tap', '/'.join(query.split('/')[:-1]))
         response = self.command('info', query)[0]
         if 'Error:' not in response:
             response = response.replace(query + ': ', 'version: ')
