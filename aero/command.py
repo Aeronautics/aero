@@ -262,6 +262,7 @@ class SearchCommand(CommandProcessor):
                 from pygments.lexers import CppLexer
                 from pygments.formatters import Terminal256Formatter
                 out = pager.getvalue()
+                pager.close()
                 out = highlight(out, CppLexer(), Terminal256Formatter())
                 out = out.encode('utf')
                 if len(out.splitlines()) > 30:
@@ -340,5 +341,7 @@ class InfoCommand(CommandProcessor):
             from pygments import highlight
             from pygments.lexers import CppLexer
             from pygments.formatters import Terminal256Formatter
-            print highlight(pager.getvalue(), CppLexer(), Terminal256Formatter())
+            out = pager.getvalue()
+            pager.close()
+            print highlight(out, CppLexer(), Terminal256Formatter())
 
