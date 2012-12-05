@@ -77,7 +77,8 @@ bash:
 	echo I am bash
 
 clean:
-	!find . -iname '*.pyc' -o -iname '*.pyo' -delete
+	!find . -iname '*.pyc' -delete
+	!find . -iname '*.pyo' -delete
 
 pypack: .module-exists
 	c = !test -f setup.py || echo 'all clear'
