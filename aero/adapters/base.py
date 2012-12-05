@@ -38,11 +38,11 @@ class BaseAdapter(object):
         return self._execute_command(self.adapter_command(), args, add_path)
 
     def _execute_shell(self, command, args=[], add_path=True):
-        args += self.passthru
         command = subprocess.list2cmdline(self._to_command(command, args, add_path))
         return subprocess.Popen(command, shell=True).wait()
 
-    def shell(self, args=[], add_path=True):
+    def shell(self, pm_command, query, args=[], add_path=True):
+        args = pm_command.split(' ') + self.passthru + args + query.split(' ')
         self._execute_shell(self.adapter_command(), args, add_path)
 
     def package_name(self, package):
