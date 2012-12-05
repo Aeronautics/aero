@@ -17,8 +17,8 @@ setup(
     packages=['aero', 'aero.adapters'],
     package_data={'aero': ['assets/*.ascii']},
     description=[
-        descr for descr in open('README.txt').read().splitlines()
-        if descr.strip() and '===' not in descr
+        descr.strip() for descr in open('README.txt').read().splitlines()[:6]
+        if descr and '===' not in descr
     ][1],
     long_description=open('README.txt').read(),
     install_requires=["beaker", "PyYAML", "pygments", "progbar"],
