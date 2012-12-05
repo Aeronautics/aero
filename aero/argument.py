@@ -131,14 +131,13 @@ class ArgumentDelegate(argparse.ArgumentParser):
                 pagers = [pager] + pagers
             for pager in pagers:
                 p = subprocess.Popen(
-                    ["type", pager],
+                    ["which", pager],
                     stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE).communicate()[0]
-                if 'not found' not in p:
-                    r = re.match('^[^/]*([/\w]*)', p).groups()[0]
-                    if r:
-                        ArgumentDelegate.pager = r
-                        break
+                    stderr=subprocess.PIPE)
+
+                if p.wait() == 0:
+                    ArgumentDelegate.pager = p.stdout.read().strip()
+
 
         return ArgumentDelegate.pager
 
