@@ -10,7 +10,7 @@ class Brew(BaseAdapter):
     Homebrew adapter.
     """
     def search(self, query):
-        response = self.command(['search', query])[0]
+        response = self.command('search', query)[0]
         if 'No formula found' not in response and 'Error:' not in response:
             return dict([(
                 self.package_name(line),
@@ -28,7 +28,7 @@ class Brew(BaseAdapter):
     def info(self, query):
         if '/' in query:
             self.command(['tap', '/'.join(query.split('/')[:-1])])
-        response = self.command(['info', query])[0]
+        response = self.command('info', query)[0]
         if 'Error:' not in response:
             response = response.replace(query + ': ', 'version: ')
             return [line.split(': ', 1) for line in response.splitlines() if 'homebrew' not in line]

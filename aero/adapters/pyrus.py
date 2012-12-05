@@ -10,7 +10,7 @@ class Pyrus(BaseAdapter):
     Homebrew adapter.
     """
     def search(self, query):
-        response = self.command(['search', query])[0]
+        response = self.command('search', query)[0]
         if 'No formula found' not in response \
             and 'Error:' not in response\
             and 'No info available' not in response\
@@ -36,10 +36,10 @@ class Pyrus(BaseAdapter):
         return (query, 'No info available')
 
     def info(self, query):
-        response = self.command(['info', query])[0]
+        response = self.command('info', query)[0]
         if 'unknown channel' in response:
             self.command(['channel-discover', query.split('/')[0]])
-            response = self.command(['info', query])[0]
+        response = self.command('info', query)[0]
         if 'does not exist' not in response and 'No results found' not in response:
             response = response.replace(
                 'Package type: ', ''

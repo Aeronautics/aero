@@ -13,7 +13,7 @@ class Gem(BaseAdapter):
     Ruby gems adapter.
     """
     def search(self, query):
-        response = self.command(['search', '-qbd', query])[0]
+        response = self.command('search -qbd', query)[0]
         from re import match
         lst = {}
         desc = False
@@ -109,7 +109,7 @@ class Gem(BaseAdapter):
                         v = str(v)
                     self.update([(k, v)])
 
-        response = self.command(['specification', '-qb', '--yaml', query])[0]
+        response = self.command('specification -qb --yaml', query)[0]
         if 'ERROR:' in response:
             return ['Aboted: {}\n'.format(response)]
         from re import sub

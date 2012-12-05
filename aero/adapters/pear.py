@@ -10,7 +10,7 @@ class Pear(BaseAdapter):
     Pear adapter.
     """
     def search(self, query):
-        response = self.command(['-q', 'search', query])[0]
+        response = self.command('-q search', query)[0]
         if 'MATCHED PACKAGES' in response:
             from re import match
             from string import strip
@@ -26,7 +26,7 @@ class Pear(BaseAdapter):
         return {}
 
     def info(self, query):
-        response = self.command(['remote-info', query])[0]
+        response = self.command('remote-info', query)[0]
         if 'Unknown package' not in response:
             from re import match
             from string import strip

@@ -13,7 +13,7 @@ class Port(BaseAdapter):
     Macports adapter.
     """
     def search(self, query):
-        response = self._execute_command(['search', query])[0]
+        response = self._execute_command('search', query)[0]
         lst = list(line for line in response.splitlines() if line)
         if lst:
             return dict(map(
@@ -33,7 +33,7 @@ class Port(BaseAdapter):
         return {}
 
     def info(self, query):
-        result = self.command(['info', query])[0]
+        result = self.command('info', query)[0]
         result = result.replace('{} '.format(query), 'Version: ')
         return [map(
             strip, line.split(': ', 1)

@@ -14,7 +14,7 @@ class Npm(BaseAdapter):
     Node package manager adapter.
     """
     def search(self, query):
-        response = self.command(['search', '-q', query])[0]
+        response = self.command('search -q', query)[0]
         lst = list(
             self.__parse_search(line) for line in response.splitlines()
             if 'npm http' not in line and not bool(match(
@@ -41,7 +41,7 @@ class Npm(BaseAdapter):
         return {}
 
     def info(self, query):
-        response = self.command(['view', query])[0]
+        response = self.command('view', query)[0]
         try:
             import json
             r = json.loads(sub("'", '"', sub('\s(\w+):', r' "\1":', response.strip())))
