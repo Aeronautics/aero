@@ -33,7 +33,7 @@ class Npm(BaseAdapter):
         if r and len(r.groups()) == 5:
             r = map(strip, list(r.groups()))
             pkg = self.package_name(r.pop(0))
-            return pkg, r[2] + '\n' + r[0]
+            return pkg, r[2] + u'\n' + r[0]
         return 0, 0
 
     def install(self, query):
@@ -48,11 +48,11 @@ class Npm(BaseAdapter):
             response = []
             for k in sorted(r):
                 if isinstance(r[k], dict):
-                    r[k] = '\n'.join([': '.join(list(l)) for l in r[k].items()])
+                    r[k] = u'\n'.join([u': '.join(list(l)) for l in r[k].items()])
                 elif isinstance(r[k], list):
-                    r[k] = ', '.join(r[k])
+                    r[k] = u', '.join(r[k])
                 if r[k]:
                     response.append((k, str(r[k])))
             return response
         except ValueError:
-            return 'No info available'
+            return [u'Aborted: No info available']

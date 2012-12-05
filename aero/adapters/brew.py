@@ -22,8 +22,8 @@ class Brew(BaseAdapter):
         response = self._execute_command('aero', ['info', query], False)[0]
         from re import split
         lines = response.splitlines()
-        idx = lines.index('       ________________________________________    __________________________________________________  ')
-        return '\n'.join([''.join(split('\x1b.*?m', l)).replace(' : ', '').strip() for l in response.splitlines()[idx+1:idx+4]])
+        idx = lines.index(u'       ________________________________________    __________________________________________________  ')
+        return u'\n'.join([u''.join(split(u'\x1b.*?m', l)).replace(u' : ', u'').strip() for l in response.splitlines()[idx+1:idx+4]])
 
     def info(self, query):
         if '/' in query:
@@ -31,7 +31,7 @@ class Brew(BaseAdapter):
         response = self.command('info', query)[0]
         if 'Error:' not in response:
             response = response.replace(query + ': ', 'version: ')
-            return [line.split(': ', 1) for line in response.splitlines() if 'homebrew' not in line]
+            return [line.split(u': ', 1) for line in response.splitlines() if 'homebrew' not in line]
         return [['No info available']]
 
     def install(self, query):

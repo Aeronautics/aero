@@ -15,7 +15,7 @@ class Pear(BaseAdapter):
             from re import match
             from string import strip
             return dict([
-                self.package_name('{0}|Version:{1}\nhttp://pear.php.net/{0}\n{2}'.format(
+                self.package_name(u'{0}|Version:{1}\nhttp://pear.php.net/{0}\n{2}'.format(
                     *map(strip, match('(.* (?=\d))(.*\) +)(.*$)',line).groups())
                 )).split('|')
                          for line in response.splitlines()
@@ -36,7 +36,7 @@ class Pear(BaseAdapter):
                        and 'PACKAGE' not in line
                        and '====' not in line
                        and match('(\w*)(.*$)',line)]
-        return [['No info available']]
+        return [u'Aborctd: No info available']
 
     def install(self, query):
         self.shell('install', query)

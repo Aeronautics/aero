@@ -21,14 +21,14 @@ class Gem(BaseAdapter):
         for line in [l for l in response.splitlines() if not match('\*\*\*',l)]:
             if not desc and match('(.*)\((.*)\)', line):
                 key, val = match('(.*)\((.*)\)', line).groups()
-                lst[self.package_name(key)] = 'Version: ' + val + '\n'
+                lst[self.package_name(key)] = u'Version: ' + val + u'\n'
                 desc = True
             elif desc and not blank and not line:
                 blank = True
-            elif desc and 'Homepage:' in line:
-                lst[self.package_name(key)] += line.replace('Homepage: ', '').strip() + '\n'
+            elif desc and u'Homepage:' in line:
+                lst[self.package_name(key)] += line.replace(u'Homepage: ', u'').strip() + u'\n'
             elif desc and blank and line:
-                lst[self.package_name(key)] += line.strip() + ' '
+                lst[self.package_name(key)] += line.strip() + u' '
             elif desc and blank and not line:
                 desc = False
                 blank = False
@@ -63,7 +63,7 @@ class Gem(BaseAdapter):
 
             def __setstate__(self, state):
                 r = state['requirements'].pop()
-                self['requirement'] = '{} {}'.format(r.pop(0), r.pop(0)['version'])
+                self['requirement'] = u'{} {}'.format(r.pop(0), r.pop(0)['version'])
 
 
         class Dependency(yaml.YAMLObject, dict):
@@ -71,7 +71,7 @@ class Gem(BaseAdapter):
             yaml_tag = u'!ruby/object:Gem::Dependency'
 
             def __setstate__(self, state):
-                for require in [r for r in state.keys() if 'require' in r]:
+                for require in [r for r in state.keys() if u'require' in r]:
                     try:
                         self['requirement'] = state[require]['requirement']
                         break
@@ -95,7 +95,7 @@ class Gem(BaseAdapter):
                                 mx = max(len(dep['name']), mx)
                                 s.append((dep['name'], dep['type'], dep['requirement']))
                             mx += 1
-                            s = '\n'.join(['{:{}}{:12} {:12}'.format(t[0], mx, t[1], t[2]) for t in s])
+                            s = u'\n'.join([u'{:{}}{:12} {:12}'.format(t[0], mx, t[1], t[2]) for t in s])
                             v = s
                         else:
                             v = ', '.join(v)
@@ -111,10 +111,10 @@ class Gem(BaseAdapter):
 
         response = self.command('specification -qb --yaml', query)[0]
         if 'ERROR:' in response:
-            return ['Aboted: {}\n'.format(response)]
+            return [u'Aboted: {}\n'.format(response)]
         from re import sub
         result = yaml.load(sub(r'!binary', r'!!binary', response))
         try:
             return sorted(result.items())
         except AttributeError:
-            return ['Aborted: No info available for a gem called: {}\n'.format(query)]
+            return [u'Aborted: No info available for a gem called: {}\n'.format(query)]

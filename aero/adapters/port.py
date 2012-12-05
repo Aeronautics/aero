@@ -25,7 +25,7 @@ class Port(BaseAdapter):
         key = result[0].split(' ', 1)
         return [
             self.package_name(key.pop(0)),
-            key.pop() + ' ' + result[1]
+            key.pop() + u' ' + result[1]
         ]
 
     def install(self, query):
@@ -34,7 +34,7 @@ class Port(BaseAdapter):
 
     def info(self, query):
         result = self.command('info', query)[0]
-        result = result.replace('{} '.format(query), 'Version: ')
+        result = result.replace(u'{} '.format(query), u'Version: ')
         return [map(
-            strip, line.split(': ', 1)
+            strip, line.split(u': ', 1)
         ) for line in result.splitlines()]
