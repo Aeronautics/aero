@@ -20,8 +20,8 @@ setup(
         descr.strip() for descr in open('README.txt').read().splitlines()[:6]
         if descr and '===' not in descr
     ][1],
-    install_requires=["beaker", "PyYAML", "pygments", "progbar"],
     long_description='\n'+open('README.txt').read(),
+    install_requires=["pip", "beaker", "PyYAML", "pygments", "progbar"],
     platforms=['Linux', 'Mac OSX'],
     classifiers=[  # http://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 3 - Alpha',
