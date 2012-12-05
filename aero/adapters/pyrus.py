@@ -26,14 +26,14 @@ class Pyrus(BaseAdapter):
         if 'No info available' not in response:
             from re import split
             info = [
-                ''.join(split('\x1b.*?m', l)).replace('Summary:','').replace(' : ', '').strip()
+                u''.join(split('\x1b.*?m', l)).replace(u'Summary:',u'').replace(u' : ', u'').strip()
                 for l in response.splitlines()
                 if 'Version:' in l or 'Summary:' in l
             ]
             if len(info) >= 1:
-                info.insert(1, 'http://{}'.format(query.replace(self.package_name(''), '')))
-            return (query, '\n'.join(info) if len(info) else 'No info available')
-        return (query, 'No info available')
+                info.insert(1, u'http://{}'.format(query.replace(self.package_name(u''), u'')))
+            return [u'\n'.join(info) if len(info) else u'Aborted: No info available']
+        return [u'Aborted No info available']
 
     def info(self, query):
         response = self.command('info', query)[0]
@@ -57,15 +57,15 @@ class Pyrus(BaseAdapter):
                 elif line.endswith(':'):
                     if len(hold):
                         lst.append(hold)
-                    hold = [line[0:-1], '']
+                    hold = [line[0:-1], u'']
                 elif line.startswith('   ') and len(hold):
-                    hold[1] += line.strip() + ' '
+                    hold[1] += line.strip() + u' '
                 else:
-                    lst.append(line.split(': '))
+                    lst.append(line.split(u': '))
             if len(hold):
                 lst.append(hold)
             return lst
-        return [['No info available']]
+        return [u'Aborted: No info available']
 
     def install(self, query):
         self.shell('install', query)
