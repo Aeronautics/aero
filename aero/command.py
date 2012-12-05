@@ -118,7 +118,7 @@ class CommandProcessor():
             print out.getvalue()
 
     def seen(self, command, adapter, package, result=False):
-        cache_key = command + "+" + adapter + ":" + package
+        cache_key = command + '+' + adapter + ':' + package
         return self.cache.seen(cache_key, result)
 
     @coroutine
@@ -244,18 +244,18 @@ class SearchCommand(CommandProcessor):
                 res = sorted(res.items())
                 from StringIO import StringIO
                 pager = StringIO()
-                pager.write(u"\n{:>48}   {:<52}\n".format(u"PACKAGE NAME", u"DESCRIPTION"))
-                pager.write(u"{:>48}   {:<52}\n".format(u"_" * 40, u"_" * 50))
+                pager.write(u'\n{:>48}   {:<52}\n'.format(u'PACKAGE NAME', u'DESCRIPTION'))
+                pager.write(u'{:>48}   {:<52}\n'.format(u'_' * 40, u'_' * 50))
                 for key, value in res:
                     for line in value.splitlines():
                         if key:
                             key += u' :'
                         if len(line) > 50:
                             for wrap in textwrap.wrap(line, 50):
-                                pager.write(u"{:>50} {:<50}\n".format(key, wrap))
+                                pager.write(u'{:>50} {:<50}\n'.format(key, wrap))
                                 key = u''
                         else:
-                            pager.write(u"{:>50} {:<50}\n".format(key, line))
+                            pager.write(u'{:>50} {:<50}\n'.format(key, line))
                         key = ''
                 pager.write(u'\n')
                 from pygments import highlight
@@ -312,16 +312,16 @@ class InfoCommand(CommandProcessor):
                 print res[0]
                 continue
             key = u''
-            from cStringIO import StringIO
+            from StringIO import StringIO
             pager = StringIO()
-            pager.write(u"\n{:>48}   {:<52}\n".format(
+            pager.write(u'\n{:>48}   {:<52}\n'.format(
                 u'',
                 u'INFORMATION: ' + ', '.join(map(
                     lambda x: x if u':' not in x else x.split(u':')[1],
                     self.data.packages
                 ))
             ))
-            pager.write(u"{:>47}    {:<52}\n".format(u"_" * 40, u"_" * 50))
+            pager.write(u'{:>47}    {:<52}\n'.format(u'_' * 40, u'_' * 50))
             for line in res:
                 if isinstance(line, tuple) or isinstance(line, list):
                     if len(line) >= 2:
