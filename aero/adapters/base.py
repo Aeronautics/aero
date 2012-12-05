@@ -37,6 +37,13 @@ class BaseAdapter(object):
         args = pm_command.split(' ') + self.passthru + args + query.split(' ')
         return self._execute_command(self.adapter_command(), args, add_path)
 
+    def command_no_passthru(self, pm_command, query, args=[], add_path=True):
+        tmp = self.passthru
+        self.passthru = []
+        ret = self.command(pm_command, query, args, add_path)
+        self.passthru = tmp
+        return ret
+
     def _execute_shell(self, command, args=[], add_path=True):
         command = subprocess.list2cmdline(self._to_command(command, args, add_path))
         return subprocess.Popen(command, shell=True).wait()
