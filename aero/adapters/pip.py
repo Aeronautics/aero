@@ -34,3 +34,16 @@ class Pip(BaseAdapter):
             '--download-cache', '~/.aero/cache/pip',
         ] + self.passthru + [query])
         return {}
+
+    def info(self, query):
+        try:
+            import os
+            finder = import_module('pip.index').PackageFinder([] , ['http://pypi.python.org/simple/'])
+            m = import_module('pip.req')
+            pi = m.InstallRequirement(query, '' )
+            pr = m.RequirementSet(os.path.expanduser('~') + '/.aero/pkg_info/' , '' , None)
+            pr.add_requirement(pi)
+            pr.prepare_files(finder)
+            return pi.pkg_info().items()
+        except import_module('pip.exceptions').InstallationError:
+            return [u'Aborted: No info available']
