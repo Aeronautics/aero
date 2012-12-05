@@ -38,7 +38,7 @@ class Pyrus(BaseAdapter):
     def info(self, query):
         response = self.command('info', query)[0]
         if 'unknown channel' in response:
-            self.command(['channel-discover', query.split('/')[0]])
+            self.command_no_passthru('channel-discover', '/'.join(query.split('/')[:-1]))
         response = self.command('info', query)[0]
         if 'does not exist' not in response and 'No results found' not in response:
             response = response.replace(
