@@ -2,8 +2,8 @@
 __author__ = 'nickl-'
 
 from string import strip
-
 from aero.__version__ import __version__
+from importlib import import_module
 from .base import BaseAdapter
 
 
