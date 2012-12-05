@@ -133,7 +133,7 @@ class CommandProcessor():
                     if not manager or manager == adapter_name:
                         length = str(max([len(a[0]) for a in AVAILABLE_ADAPTERS]))
                         self.out.send(
-                            ('Doing an aero {} of package: {} using {:<' + length + '} ').format(
+                            (u'Doing an aero {} of package: {} using {:<' + length + '} ').format(
                                 self.cmd(), package, adapter_name
                             )
                         )
@@ -141,7 +141,7 @@ class CommandProcessor():
                         if self.data.invalidate or res is False:
                             target.send((adapter, package))
                         else:
-                            self.out.send('Found {:>4} options [CACHED]\n'.format(len(res)))
+                            self.out.send(u'Found {:>4} options [CACHED]\n'.format(len(res)))
                             self.ticker.send((1, res))
                     else:
                         self.ticker.send(1)
@@ -151,7 +151,7 @@ class CommandProcessor():
     @coroutine
     def progress(self, target):
         from progbar import ProgBar
-        bar = ProgBar('Progress: ', 30)
+        bar = ProgBar(u'Progress: ', 30)
         bar.start()
         while True:
             result = (yield)
@@ -176,10 +176,10 @@ class CommandProcessor():
             try:
                 adapter.passthruArgs(self.data.passthru)
                 aero = getattr(adapter, self.cmd())(package)
-                if self.cmd() == 'search':
-                    self.out.send('Found {:>4} options\n'.format(len(aero)))
+                if self.cmd() == u'search':
+                    self.out.send(u'Found {:>4} options\n'.format(len(aero)))
                 else:
-                    self.out.send('\n')
+                    self.out.send(u'\n')
                 target.send((1,
                     self.seen(
                         self.cmd(),
@@ -190,7 +190,7 @@ class CommandProcessor():
                 )
             except NotImplementedError:
                 target.send((1,
-                    ['Aborted: {} has no implementation for command: {}\n'.format(
+                    [u'Aborted: {} has no implementation for command: {}\n'.format(
                         adapter_name, self.cmd()
                     )]
                 ))
@@ -199,16 +199,16 @@ class DebugCommandProcessor(CommandProcessor):
 
     def seen(self, command, adapter, package, result=False):
         if not isinstance(result, bool):
-            print '\n{:=^100}'.format('')
-            print '{:=^100}'.format(' '+command+' '+adapter+' '+package+' ')
-            print '{:=^100}'.format('')
-            print 'Result type: ', type(result).__name__
+            print u'\n{:=^100}'.format('')
+            print u'{:=^100}'.format(' '+command+' '+adapter+' '+package+' ')
+            print u'{:=^100}'.format('')
+            print u'Result type: ', type(result).__name__
             itr = result
             if isinstance(result, dict):
                 itr = result.items()
             for r in itr:
-                print '{} | {:^5} | {}'.format(type(r).__name__, len(r), r)
-            print '\n'
+                print u'{} | {:^5} | {}'.format(type(r).__name__, len(r), r)
+            print u'\n'
         return result
 
     @coroutine
@@ -239,40 +239,25 @@ class SearchCommand(CommandProcessor):
             res = (yield)
             if res:
                 if isinstance(res, list):
-                    print '\n' + res[0]
+                    print u'\n' + res[0]
                     continue
                 res = sorted(res.items())
                 from StringIO import StringIO
                 pager = StringIO()
-                pager.write(u"\n{:>48}   {:<52}\n".format("PACKAGE NAME", "DESCRIPTION"))
-                pager.write(u"{:>48}   {:<52}\n".format("_" * 40, "_" * 50))
+                pager.write(u"\n{:>48}   {:<52}\n".format(u"PACKAGE NAME", u"DESCRIPTION"))
+                pager.write(u"{:>48}   {:<52}\n".format(u"_" * 40, u"_" * 50))
                 for key, value in res:
-                    try:
-                        value = value.decode('utf-8')
-                        if value.startswith(u'\ufeff'):
-                            value = value[len(u'\ufeff'):]
-                    except UnicodeDecodeError:
-                        value = value.decode('latin1')
-                    try:
-                        key = key.decode('utf-8')
-                        if key.startswith(u'\ufeff'):
-                            key = key[len(u'\ufeff'):]
-                    except UnicodeDecodeError:
-                        key = key.decode('latin1')
-
-                    key = key.encode('utf')
                     for line in value.splitlines():
-                        line = line.encode('utf')
                         if key:
-                            key += ' :'
+                            key += u' :'
                         if len(line) > 50:
                             for wrap in textwrap.wrap(line, 50):
-                                pager.write("{:>50} {:<50}\n".format(key, wrap))
-                                key = ''
+                                pager.write(u"{:>50} {:<50}\n".format(key, wrap))
+                                key = u''
                         else:
-                            pager.write("{:>50} {:<50}\n".format(key, line))
+                            pager.write(u"{:>50} {:<50}\n".format(key, line))
                         key = ''
-                pager.write('\n')
+                pager.write(u'\n')
                 from pygments import highlight
                 from pygments.lexers import CppLexer
                 from pygments.formatters import Terminal256Formatter
@@ -308,7 +293,7 @@ class InstallCommand(CommandProcessor):
     def spacing(self, target):
         while True:
             payload = (yield)
-            print '\n'
+            print u'\n'
             target.send(payload)
 
     @coroutine
@@ -322,24 +307,24 @@ class InfoCommand(CommandProcessor):
     def res(self):
         while True:
             res = (yield)
-            if 'Aborted:' in res[0]:
+            if u'Aborted:' in res[0]:
                 print res[0]
                 continue
-            key = ''
+            key = u''
             from cStringIO import StringIO
             pager = StringIO()
-            pager.write("\n{:>48}   {:<52}\n".format(
-                '',
-                'INFORMATION: ' + ', '.join(map(
-                    lambda x: x if ':' not in x else x.split(':')[1],
+            pager.write(u"\n{:>48}   {:<52}\n".format(
+                u'',
+                u'INFORMATION: ' + ', '.join(map(
+                    lambda x: x if u':' not in x else x.split(u':')[1],
                     self.data.packages
                 ))
             ))
-            pager.write("{:>47}    {:<52}\n".format("_" * 40, "_" * 50))
+            pager.write(u"{:>47}    {:<52}\n".format(u"_" * 40, u"_" * 50))
             for line in res:
                 if isinstance(line, tuple) or isinstance(line, list):
                     if len(line) >= 2:
-                        key = line[0] + ': : ' if line[0] else '   '
+                        key = line[0] + u': : ' if line[0] else u'   '
                         line = line[1]
                     else:
                         line = line[0]
@@ -347,11 +332,11 @@ class InfoCommand(CommandProcessor):
                     for l in line.splitlines():
                         if len(l) > 50:
                             for wrap in textwrap.wrap(l, 50):
-                                pager.write("{:>50} {:50}\n".format(key, wrap))
-                                key = ''
+                                pager.write(u"{:>50} {:50}\n".format(key, wrap))
+                                key = u''
                         else:
-                            pager.write("{:>50} {:50}\n".format(key, l))
-                            key = ''
+                            pager.write(u"{:>50} {:50}\n".format(key, l))
+                            key = u''
             from pygments import highlight
             from pygments.lexers import CppLexer
             from pygments.formatters import Terminal256Formatter
