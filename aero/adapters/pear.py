@@ -36,7 +36,7 @@ class Pear(BaseAdapter):
                        and 'PACKAGE' not in line
                        and '====' not in line
                        and match('(\w*)(.*$)',line)]
-        return [u'Aborctd: No info available']
+        return [u'Aborted: No info available']
 
     def install(self, query):
         self.shell('install', query)
