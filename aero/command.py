@@ -333,15 +333,22 @@ class InfoCommand(CommandProcessor):
                     for l in line.splitlines():
                         if len(l) > 50:
                             for wrap in textwrap.wrap(l, 50):
-                                pager.write(u'{:>50} {:50}\n'.format(key, wrap.lstrip()))
+                                pager.write(u'{:>50} {:50}\n'.format(
+                                    key.decode('utf'),
+                                    wrap.lstrip().decode('utf'))
+                                )
                                 key = u''
                         else:
-                            pager.write(u'{:>50} {:50}\n'.format(key, l.lstrip()))
+                            pager.write(u'{:>50} {:50}\n'.format(
+                                key.decode('utf'),
+                                l.lstrip().decode('utf'))
+                            )
                             key = u''
             from pygments import highlight
             from pygments.lexers import CppLexer
             from pygments.formatters import Terminal256Formatter
             out = pager.getvalue()
+            out = out.encode('utf')
             pager.close()
             print highlight(out, CppLexer(), Terminal256Formatter())
 
