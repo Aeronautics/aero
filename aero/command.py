@@ -110,7 +110,7 @@ class CommandProcessor():
 
     @coroutine
     def write(self):
-        from cStringIO import StringIO
+        from StringIO import StringIO
         out = StringIO()
         while True:
             text = (yield)
@@ -242,7 +242,7 @@ class SearchCommand(CommandProcessor):
                     print '\n' + res[0]
                     continue
                 res = sorted(res.items())
-                from cStringIO import StringIO
+                from StringIO import StringIO
                 pager = StringIO()
                 pager.write(u"\n{:>48}   {:<52}\n".format("PACKAGE NAME", "DESCRIPTION"))
                 pager.write(u"{:>48}   {:<52}\n".format("_" * 40, "_" * 50))
