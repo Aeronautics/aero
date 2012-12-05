@@ -2,7 +2,7 @@
 aero
 ====
 
-The **aero** command line package recycler. It uses package managers you already have.
+The aero command line package recycler. It uses package managers you already have.
 
 Instead of having to consult several package managers when you are looking for something you can now search through all of them using the same commands and find similar results using the same tool.
 
@@ -11,23 +11,24 @@ When you type ``aero search php``, **aero** already knows which package managers
 Even though **aero** is some serious machining it will only focus on the task its set out to do, to recycle your existing package managers and you can rest assured/or continue to worry whichever might be the case, as **aero** will leave the heavy lifting upto the software partners already tasked with the use case requirements and instead only focuses on the end user requirements through consistent interfaces, intuitive interactions and all the information you require at your fingertips enabling you to make the decisions you need to accomplish the tasks at hand.::
 
   
-     \
-      \
-       \ \    .           _____    ___________  ____
-        \_\__/            \__  \ _/ __ \_  __ \/  _ \
-       O__| \ \            / __ \\  ___/|  | \(  <_> )
-          \ o\/           (____  /\___  >__|   \____/
-           \_/\                \/     \/
-           / \ \
-           O  \                                          aero v0.0.1 alpha 0
-      _________\_____________________________________________________
-                \
+	   \
+	    \
+	     \ \    .           _____    ___________  ____
+	      \_\__/            \__  \ _/ __ \_  __ \/  _ \
+	     O__| \ \            / __ \\  ___/|  | \(  <_> )
+	        \ o\/           (____  /\___  >__|   \____/
+	         \_/\                \/     \/
+	         / \ \
+	         O  \                                          aero v0.0.1 alpha 1
+	    _________\_____________________________________________________
+	              \
+	               \
                 
               
 Platform
 --------
 
-Written in python using v 2.7, this may or may not be the entry requirement for now, on Mac OS X currently but the *nixes will likely be included, there exists no bias to the MS platforms only less accessible as a product of choice and opportunity I guess. Feel free to suggest other usages or specific requirements you might have. 
+Written in python using v 2.7, this may or may not be the entry requirement for now, on Mac OS X currently and the excellent IDE [PyCharm by JetBrains](http://www.jetbrains.com/pycharm/) which you may consider highly reccommended do give it a try. The *nixes will likely be included soon, there exists no bias to the MS platforms only less accessible as a product of choice and opportunity I guess. Feel free to suggest other usages or specific requirements you might have. 
 
 After some serious deliberations even though the majority of the team has zero to no python experience at all it will never the less prevent us, like the good professional programmers we are, from using the best hammer for hitting the particular nails or fingers. This has been an interesting learning curve so far and I have to agree python is a pleasure and does suite the requirements like a glove and now that we are empowered with some new lingo like "pythonic" and "tupels" not to mention "generators" and the other "PEP" "recipes" of convenience we make no claim that this is an exemplary python implementation but we sure as the indents are important will try. Feel free to pin-point any obvious mistakes by raising an issue so we may appologise or be damned to continue in err without permission as we continue under assumption that this is the pythonic way. Now I guess I should go read the book perhaps =)
 
@@ -43,27 +44,53 @@ Even though using **aero** can cause you or your system no harm, by design and w
 Installation
 ------------
 
-Ideally it would be installable you would imagine and some lengths have been taken to wrap it as a package and provide the setup.py stubs et al but alas at the time of this writing this does not succeed as yet.
++ aero install with pip (egg and chicken)
 
-Success! We can install and it appears dependencies are also being discovered correctly, the question now is does it work for you too.
+Aero installation if you already have aero - from version 0.0.1a1 pip will always reinstall
 
-Clone the repo from github or fork it first and then clone your copy if you want to help out with pull requests. Then just run the setup.py with install::
+    $ aero install pip:https://github.com/Aeronautics/aero/tarball/develop
+
++ aero install with pip --upgrade - upgrade aero and dependencies  - from version 0.0.1a1
+
+    $ aero install pip:https://github.com/Aeronautics/aero/tarball/develop --- "--upgrade https://github.com/Aeronautics/aero/tarball/develop"
+
++ pip installation
+
+aero can be installed directly from github via pip with the following command:
+
+    $ pip install --upgrade https://github.com/Aeronautics/aero/tarball/develop
+
++ through easy_install
+
+if you prefer using easy_install the following command will download and install aero from github
+
+    $ easy_install https://github.com/Aeronautics/aero/tarball/develop
+
++ From git repository:
+
+Clone the repo from github or fork it first and then clone your copy if you want to help out with pull requests. Then just run the setup.py with install:
 
     $ ./setup.py install
 
 Don't forget to enable autocompletion support, aero will generate the appropriate script to add to you .profile for either bash or zsh support.
 
-For bash::
+For bash
 
+```
     $ aero --completion bash >> ~/.profile
+```
 
-For zsh::
+For zsh
 
+```
     $ aero --completion zsh >> ~/.profile
+```
 
-Alternatively you can use eval on the script to have the shell activated on execution::
+Alternatively you can use eval on the script to have the shell activated on execution:
 
+```
     $ eval "$(aero -c bash)"
+```
 
 Running the aero.py executable from the root package folder also works and may be simlinked in your path if you need another approach while we iron out the kinks.
 
@@ -82,84 +109,94 @@ On execution of **aero** with no requirements a short usage instruction will be 
 
 Providing **aero** with the customary ``--help`` argument will give more detailed information::
 
-    $ aero
+    $ aero --help
     
-        ____________________
-     __/ Usage Instructions \___________________________________________________
-    |___________________________________________________________________________|
-    
-     myaero [-h] [-v] [-p PAGER] [-d [{Brew,Port,Pip,Npm,Gem,Colour}]] [-i]
-                  [-c {bash,zsh}]
-                  command [mngr:]package ...
-        ____________________
-     __/  Argument Options  \___________________________________________________
-    |___________________________________________________________________________|
-    
-    optional arguments:
-      -h, --help            show this help message and exit
-      -v, --version         Show program's version number and exit
-      -p, --pager PAGER     The pager to use for long paged displays. The default
-                            is based on the environment variable $PAGER, if it is
-                            not set, some common pagers like "less", "more",
-                            "most" and finally "cat" are tried, in this order. 
-                            
-                            default: /usr/bin/less
-                            
-      -d, --disable [{Brew,Port,Pip,Npm,Gem,Colour}]
-    
-                            Add the items you wish to disable to the list.
-                            Multiple disable arguments may be supplied. 
-                            
-                            default: []
-                            
-      -i, --invalidate-cache 
-                            Clear the search cache and enquire anew from the
-                            package managers. 
-                            
-                            default: False
-                            
-      -c, --completion {bash,zsh}
-                            Command outo completion is supported for both bash and
-                            zsh. The result from the completion option can be
-                            appended to your .profile or simply using eval. ex. `
-                            aero --completion zsh >> ~/.profile` Remember to
-                            source the changes. To use eval you might try
-                            something like: ex. ` eval "$(aero --completion
-                            bash)"` 
-                            
-                            default: None
-                            
-        __________________
-     __/  Commands Usage  \_____________________________________________________
-    |___________________________________________________________________________|
-    
-    Command arguments:
-      
-      The aero commands are based on the typical package manager
-      commands followed by the package name to perform the task on.
-      Use "aero cammand --help" to get further details for specific
-      commands.
-    
-      command [mngr:]package
-                            Optionally provide the specific manager to use
-                            prepended to the package name with a colon ":" or
-                            alternatively aero will execute the command against
-                            all enabled package managers. 
-    
-        choose one of the following valid aero commands:
-    
-        info                Do an aero info for a package
-        search              Do an aero search for a package
-        install             Do an aero install package
-    
-    Configuration argument:
-    
-      It is possible to load aero configuration from an input file.
-    
-      @filename             Append "key, value" (where applicable) to a file one
-                            argument, value pair per line. To tell aero which
-                            file to use for configuration specify the path and
-                            file name prefixed with an "@".
+	    ____________________
+	 __/ Usage Instructions \___________________________________________________
+	|___________________________________________________________________________|
+
+	 aero [-h] [-v] [-p PAGER] [-d [{npm,pyrus,pear,pip,brew,pecl,gem}]]
+	            [-i] [--- PASSTHRU] [-c {bash,zsh}]
+	            command [mngr:]package ...
+
+	    ____________________
+	 __/  Argument Options  \___________________________________________________
+	|___________________________________________________________________________|
+
+	optional arguments:
+	  -h, --help            show this help message and exit
+	  -v, --version         Show program's version number and exit
+	  -p, --pager PAGER     The pager to use for long paged displays. The default
+	                        is based on the environment variable $PAGER, if it is
+	                        not set, some common pagers like "less", "more",
+	                        "most" and finally "cat" are tried, in this order.
+
+	                        default: /usr/bin/less
+
+	  -d, --disable [{npm,pyrus,pear,pip,brew,pecl,gem}]
+
+	                        Add the items you wish to disable to the list.
+	                        Multiple disable arguments may be supplied.
+
+	                        default: []
+
+	  -i, --invalidate-cache                         Clear the search cache and enquire anew from the
+	                        package managers.
+
+	                        default: False
+
+	  ---, --pass-through PASSTHRU
+	                        Passthru arguments to be added as argumennts to the
+	                        package manager's command execution. Enclose the
+	                        arguments in quotes to distinguish them from others.
+
+	                        default: None
+
+	  -c, --completion {bash,zsh}
+	                        Command outo completion is supported for both bash and
+	                        zsh. The result from the completion option can be
+	                        appended to your .profile or simply using eval. ex. `
+	                        aero --completion zsh >> ~/.profile` Remember to
+	                        source the changes. To use eval you might try
+	                        something like: ex. ` eval "$(aero --completion
+	                        bash)"`
+
+	                        default: None
+
+
+	    __________________
+	 __/  Commands Usage  \_____________________________________________________
+	|___________________________________________________________________________|
+
+	Command arguments:
+
+	  The aero commands are based on the typical package manager
+	  commands followed by the package name(s) to perform the task on.
+	  At least one command is required but several packages can be
+	  processed simultaneously.
+	  Use "aero cammand --help" to get further details for specific
+	  commands.
+
+	  command [mngr:]package
+	                        Optionally provide the specific manager to use
+	                        prepended to the package name(s) with a colon ":" or
+	                        alternatively aero will execute the command against
+	                        all enabled package managers.
+
+	    choose one of the following valid aero commands:
+
+	    info                Do an aero info for a package
+	    search              Do an aero search for a package
+	    install             Do an aero install package
+
+	Configuration argument:
+
+	  It is possible to load aero configuration from an input file.
+
+	  @filename             Append "key, value" (where applicable) to a file one
+	                        argument, value pair per line. To tell aero which
+	                        file to use for configuration specify the path and
+	                        file name prefixed with an "@".
 
 Commands
 --------
@@ -184,87 +221,93 @@ Supported commands:
 
 * search
 * install
-* info::
+* info
 
-    $ aero search brew:cowsay
+```
+    $ aero search brew:ncurses
     
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
-                                         brew:cowsay : version: stable 3.03
-                                                       http://www.nog.net/~tony/warez/cowsay.shtml
-                                                       /usr/local/Cellar/cowsay/3.03 (53 files, 228K) *
+                                        brew:ncurses : version: stable 5.9
+                                                       http://www.gnu.org/s/ncurses/
+                                                       /usr/local/Cellar/ncurses/5.9 (1777 files, 18M) *
 
+    $ aero info brew:ncurses
 
-    $ aero info brew:cowsay
+                                                       INFORMATION: ncurses
+           ________________________________________    __________________________________________________
+                                           version: :  stable 5.9
+                                                       http://www.gnu.org/s/ncurses/
+                                                       /usr/local/Cellar/ncurses/5.9 (1777 files, 18M) *
+                                                       ==> Options
+                                                       --universal
+                                                            Build a universal binary
 
-                                                       INFORMATION: cowsay
-            ________________________________________   __________________________________________________
-                                             version : stable 3.03
-                                                       http://www.nog.net/~tony/warez/cowsay.shtml
-                                                       /usr/local/Cellar/cowsay/3.03 (53 files, 228K) *
-
+```
 
 Special notes:
 
-Brew has the inlination to only return the package names on search, in addition to retrieval of the packoge names aero continues to further query info on each package from where it is able to parse and present slightly  more information.        
+Brew has the inclination to only return the package names on search, in addition to retrieval of the packoge names aero continues to further query info on each package from where it is able to parse and present slightly more usable information. Instead of just calling the info command on the package manager we execute `aero info` instead which means that all the information for every package listed in the search results is already cached and retrievable instantaneously.
 
 Gem
 ---
 Supported commands:
 
 * search
-* install::
+* install
+* info
 
+```
     $ aero search gem:fibonacci
     
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
-                               gem:closest-fibonacci : version: (0.1.2)
-                                                       Author: Kevin J. Dickerson
-                                                       Homepage: http://github.com/kevindickerson
-                                                       /closest-fibonacci
-                           gem:closest-fibonacci-gem : version: (1.1.0)
-                                                       Author: Ramprasad Ramachandran
-                                                       Homepage: http://github.com/beckram23/closest-
-                                                       fibonacci-gem
-                               gem:closest_fibonacci : version: (1.2.13)
-                                                       Author: Boris Polania
-                                                       Homepage:
+                              gem:closest-fibonacci  : Version: 0.1.2
+                                                       http://github.com/kevindickerson/closest-fibonacci
+                                                       Provides some methods to find a Fibonacci number
+                                                       less than a given N.
+                          gem:closest-fibonacci-gem  : Version: 1.1.0
+                                                       http://github.com/beckram23/closest-fibonacci-gem
+                                                       Find the largest fibonacci that is smaller than
+                                                       the given integer
+                              gem:closest_fibonacci  : Version: 1.2.13
                                                        http://github.com/bpolania/closest_fibonacci
-                                       gem:fibonacci : version: (0.1.6)
-                                                       Author: Chaitanya Vellanki
-                                                       Rubyforge: http://rubyforge.org/projects/fibonacci
-                                                       Homepage: http://github.com/chaitanyav/fibonacci
-                                   gem:fibonacci-evs : version: (0.1.2)
-                                                       Author: Edward Simpson
-                                                       Homepage: http://github.com/edsimpson/fibonacci-
-                                                       evs
-                                gem:simple_fibonacci : version: (0.1.2)
-                                                       Author: Anjali Shenoy
-                                                       Homepage:
+                                                       Fibonacci gem for ModCloth
+                                      gem:fibonacci  : Version: 0.1.7
+                                                       http://github.com/chaitanyav/fibonacci
+                                                       Fibonacci
+                                  gem:fibonacci-evs  : Version: 0.1.2
+                                                       http://github.com/edsimpson/fibonacci-evs
+                                                       Test gem with a Fibonacci-related method for
+                                                       Fixnum and Bignum.
+                               gem:simple_fibonacci  : Version: 0.1.2
                                                        http://github.com/anjshenoy/simple_fibonacci
+                                                       Gem that calculates fibonacci numbers upto a a
+                                                       provided number
 
     $ aero info gem:fibonacci
 
                                                        INFORMATION: fibonacci
-            ________________________________________   __________________________________________________
-                                             authors : Chaitanya Vellanki
-                                              bindir : bin
-                                                date : 2011-12-17
-                                         description : A Ruby gem for exploring Fibonacci series
-                                               email : me@chaitanyavellanki.com
-                                            homepage : http://github.com/chaitanyav/fibonacci
-                                                name : fibonacci
-                                            platform : ruby
-                                       require_paths : lib
-                               required_ruby_version : >= 0
-                           required_rubygems_version : >= 0
-                                   rubyforge_project : fibonacci
-                                    rubygems_version : 1.8.23
-                               specification_version : 3
-                                             summary : Fibonacci
-                                             version : 0.1.6
+           ________________________________________    __________________________________________________
+                                           authors: :  Chaitanya Vellanki
+                                            bindir: :  bin
+                                              date: :  2012-11-09
+                                       description: :  A Ruby gem for exploring Fibonacci series
+                                             email: :  me@chaitanyavellanki.com
+                                          has_rdoc: :  True
+                                          homepage: :  http://github.com/chaitanyav/fibonacci
+                                              name: :  fibonacci
+                                          platform: :  ruby
+                                     require_paths: :  lib
+                             required_ruby_version: :  >= 0
+                         required_rubygems_version: :  >= 0
+                                 rubyforge_project: :  fibonacci
+                                  rubygems_version: :  1.3.6
+                             specification_version: :  3
+                                           summary: :  Fibonacci
+                                           version: :  0.1.7
 
+```
 
 Special notes:
 
@@ -277,56 +320,147 @@ Supported commands:
 
 * search
 * install
-* info::
+* info
 
-    $ aero search npm:'fibonacci async'
+```
+    $ aero search npm:fibonacci-async
     
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
-                                 npm:fibonacci-async : Author: Gottox 2012-05-26
+                                 npm:fibonacci-async : 2012-10-29 22:03
                                                        So, you want to benchmark node.js with fibonacci
                                                        once again? - Here's the library for that. You're
                                                        welcome.
-                                                       Tags: 11:25
 
     $ aero info npm:fibonacci-async
         
                                                        INFORMATION: fibonacci-async
-            ________________________________________   __________________________________________________
-                                              author : Enno Boland <eb@s01.de>
-                                         description : So, you want to benchmark node.js with fibonacci
+           ________________________________________    __________________________________________________
+                                            author: :  Enno Boland <eb@s01.de>
+                                       description: :  So, you want to benchmark node.js with fibonacci
                                                        once again? - Here"s the library for that. You"re
                                                        welcome.
-                                                dist : tarball: http://registry.npmjs.org/fibonacci-async
+                                              dist: :  tarball: http://registry.npmjs.org/fibonacci-async
                                                        /-/fibonacci-async-0.0.2.tgz
                                                        shasum: 173d4d28b038723f41bacc660edc331b1e526047
-                                           dist-tags : latest: 0.0.2
-                                             engines : node: *
-                                                main : lib/binding.js
-                                         maintainers : Gottox <g@s01.de>
-                                                name : fibonacci-async
-                                          repository : url: git://github.com/Gottox/fibonacci-async.git
-                                          repository : type: git
-                                             scripts : preinstall: node-waf clean || (exit 0); node-waf
+                                         dist-tags: :  latest: 0.0.2
+                                           engines: :  node: *
+                                              main: :  lib/binding.js
+                                       maintainers: :  Gottox <g@s01.de>
+                                              name: :  fibonacci-async
+                                        repository: :  url: git://github.com/Gottox/fibonacci-async.git
+                                                       type: git
+                                           scripts: :  preinstall: node-waf clean || (exit 0); node-waf
                                                        configure build
-                                                time : 0.0.1: 2012-05-26T11:24:06.960Z
-                                                time : 0.0.2: 2012-05-26T11:25:45.254Z
-                                             version : 0.0.2
-                                            versions : 0.0.1, 0.0.2
+                                              time: :  0.0.1: 2012-05-26T11:24:06.960Z
+                                                       0.0.2: 2012-05-26T11:25:45.254Z
+                                           version: :  0.0.2
+                                          versions: :  0.0.1, 0.0.2
 
+```
 
 Special notes:
 
 Info uses the ``npm view`` command which return a JavaScript object of the registry which we then nudge closer to resembling JSON format so that we may proceed to parce it with **:mod:json**
                                                                                          
+Pear
+----
+Supperted commanhds:
+
+* search
+* install
+* info
+
+```
+    $ aero search pear:fibonacci
+
+                                        PACKAGE NAME   DESCRIPTION
+            ________________________________________   __________________________________________________
+                                 pear:Math_Fibonacci : Version:0.8 (stable)
+                                                       http://pear.php.net/Math_Fibonacci
+                                                       Package to calculate and manipulate Fibonacci
+                                                       numbers
+
+    $ aero info pear:Math_Fibonacci
+
+                                                       INFORMATION:
+           ________________________________________    __________________________________________________
+                                            Latest: :  0.8
+                                         Installed: :  - no -
+                                           Package: :  Math_Fibonacci
+                                           License: :  PHP
+                                          Category: :  Math
+                                           Summary: :  Package to calculate and manipulate Fibonacci
+                                                       numbers
+                                       Description: :  The Fibonacci series is constructed using the
+                                                       formula:
+                                                       F(n) = F(n - 1) + F (n - 2),
+                                                       By convention F(0) = 0, and F(1) = 1.
+                                                       An alternative formula that uses the Golden
+                                                       Ratio can also be used:
+                                                       F(n) = (PHI^n - phi^n)/sqrt(5) [Lucas'
+                                                       formula],
+                                                       where PHI = (1 + sqrt(5))/2 is the Golden Ratio,
+                                                       and
+                                                       phi = (1 - sqrt(5))/2 is its reciprocal
+                                                       Requires Math_Integer, and can be used with big
+                                                       integers if the GMP or
+                                                       the BCMATH libraries are present.
+
+```
+
+Pear
+----
+Supperted commanhds:
+
+* search
+* install
+* info
+
+```
+    $ aero search pecl:ncurses
+
+                                        PACKAGE NAME   DESCRIPTION
+            ________________________________________   __________________________________________________
+                                        pecl:ncurses : Version:1.0.2 (stable)
+                                                       http://pecl.php.net/ncurses
+                                                       Terminal screen handling and optimization package
+
+    $ aero info pecl:ncurses
+
+                                                       INFORMATION: ncurses
+           ________________________________________    __________________________________________________
+                                            Latest: :  1.0.2
+                                         Installed: :  - no -
+                                           Package: :  ncurses
+                                           License: :  PHP
+                                          Category: :  Console
+                                           Summary: :  Terminal screen handling and optimization
+                                                       package
+                                       Description: :  ncurses (new curses) is a free software
+                                                       emulation of curses in
+                                                       System V Rel 4.0 (and above). It uses terminfo
+                                                       format, supports
+                                                       pads, colors, multiple highlights, form
+                                                       characters and function
+                                                       key mapping. Because of the interactive nature
+                                                       of this library,
+                                                       it will be of little use for writing Web
+                                                       applications, but may
+                                                       be useful when writing scripts meant using PHP
+                                                       from the command
+                                                       line.
+                                                       See also
+                                                       http://www.gnu.org/software/ncurses/ncurses.html
 
 Pip
 ---
 Supported commands:
 
 * search
-* install::
+* install
 
+```
     $ aero search pip:fibonacci
     
                                         PACKAGE NAME   DESCRIPTION
@@ -338,6 +472,49 @@ Supported commands:
                                         pip:myfib.py : A simple printer of fibonacci series
                                         pip:myfibbha : A simple printer of fibonacci series
 
+```
+
+
+```
+Pyrus
+----
+Supperted commanhds:
+
+* search
+* install
+* info
+
+```
+    $ aero search pyrus:ncurses
+
+
+                                        PACKAGE NAME   DESCRIPTION
+            ________________________________________   __________________________________________________
+                          pyrus:pecl.php.net/ncurses : Version: 1.0.2 (API 1.0.0)
+                                                       http://pecl.php.net/ncurses
+                                                       Terminal screen handling and optimization package
+
+    $ aero info pyrus:pecl.php.net/ncurses
+
+                                                       INFORMATION: pecl.php.net/ncurses
+           ________________________________________    __________________________________________________
+                                           Version: :  1.0.2 (API 1.0.0)
+                                         Stability: :  stable (API stable)
+                                      Release Date: :  2012-06-16 17:05:19
+                                           Summary: :  Terminal screen handling and optimization package
+                                       Description: :  ncurses (new curses) is a free software emulation
+                                                       of curses in System V Rel 4.0 (and above). It uses
+                                                       terminfo format, supports pads, colors, multiple
+                                                       highlights, form ch...
+                                     Release Notes: :  - Fixed build on PHP 5.3+ - Fixed bug #60853
+                                                       (Missing NCURSES_KEY_HOME constant)...
+
+
+```
+Special notes:
+
+Similar to brew, with pyrus you are alse required to call info should you require more details about a particular package. Luckily aero is more considerate and will call info on your behalf to provide you with more information in the search results.
+
 
 Macports
 --------
@@ -345,8 +522,9 @@ Supported commands:
 
 * search
 * install
-* info::
+* info
 
+```
     $ aero search port:cowsay
     
                                         PACKAGE NAME   DESCRIPTION
@@ -358,15 +536,16 @@ Supported commands:
     $ aero info port:insub
     
                                                        INFORMATION: insub
-            ________________________________________   __________________________________________________
-                                             Version : @13.0 (irc)
-                                         Description : Handy tools for being obnoxious on IRC. Warning:
+           ________________________________________    __________________________________________________
+                                           Version: :  @13.0 (irc)
+                                       Description: :  Handy tools for being obnoxious on IRC. Warning:
                                                        some of the cows are potentially offensive.
-                                            Homepage : http://gruntle.org/projects/irssi/insub/
-                                           Platforms : darwin
-                                             License : unknown
-                                         Maintainers : nomaintainer@macports.org
+                                          Homepage: :  http://gruntle.org/projects/irssi/insub/
+                                         Platforms: :  darwin
+                                           License: :  unknown
+                                       Maintainers: :  nomaintainer@macports.org
 
+```
 
 Going forward
 -------------
@@ -376,18 +555,35 @@ As well as extending the current functionality we also plan to support:
 * fink
 * apt-get
 * composer local
-* PEAR
-* pip
 
 Known issues
 ------------
 
-Besides the installation being broken the following items also need attention:
+Items that require some attention: (Let us know if you want to tackle any of these)
 
-* Cache uses the package key only this is not suitaby redundant but instead o a quickfix a proper cache dataset design is required to also satisfy the next item;
+* The pass through is dodgy, some issues with argparse, passing --long-name-args in quotes work but -l short name fails.
 * Autocomplete should complete known packages obtained through searching.
 * No unit tests as yet
 * Limited to no codedocs
+
+Changelog
+---------
+* v0.0.1 alpha 1
+** Fixed installation issues and dependency installation
+** Increased cache granularity command:adapter:package
+** Support for multiple packages simultaneously
+** Support for pass through arguments
+** Progress indication
+** Major BaseCommand refactor and Piped Coroutine workflow
+** BaseAdapter refactor to simplify adapter implementations
+** Colorized output goodness
+** Tap brew extended repositories
+** Optimize screen real estate utilization - display Version, url (where available) and Short description only in search results
+** In process piped output - pager without a tmp file
+** DebugCommand support to simplify adapter creation
+** Added support for pear, pecl, pyrus
+** Gracefully accept abnormal program termination
+** Search commands that require more info now uses aero which caches the info details for each package
 
 License
 -------
