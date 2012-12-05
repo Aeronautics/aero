@@ -17,7 +17,7 @@ class Pip(BaseAdapter):
         for r in m.transform_hits(m.SearchCommand().search(query, 'http://pypi.python.org/pypi')):
             summary = u' '.join(map(strip, r['summary'].split(u'\n'))).replace(u'  ', u' ')
             lst[self.package_name(r['name'])] = u'Version: {:<14} Score:{:>4}\n{}'.format(
-                max(r['versions']),
+                m.highest_version(r['versions']),
                 r['score'],
                 (summary if len(summary) < 200 else summary[:190] + u'...').replace(u'  ', u' ')
             )
