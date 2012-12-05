@@ -17,5 +17,6 @@ setup(
     ][1],
     long_description=open('README.txt').read(),
     install_requires=["beaker", "PyYAML", "pygments", "progbar"],
+    platforms=['Linux', 'Mac OSX'],
     scripts=["aero/aero"],
 )
