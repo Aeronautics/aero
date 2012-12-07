@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
+'''
 Package manager recycler, aero
 
 For support please visit Aeronautics on github.
 Project page: https://github.com/Aeronautics/aero
-"""
+'''
 import sys
 from distutils import version
 
@@ -31,8 +31,8 @@ __authors__ = ('Nick Lombard - nickl-', 'Jayson Reis')
 __email__ = ("github@jigsoft.co.za", '')
 __title__ = 'aero'
 __license__ = 'BSD 3-Clause'
-__url__ = "https://github.com/Aeronautics/aero",
-__download_url__ = "https://github.com/Aeronautics/aero/tarball/master",
+__url__ = 'https://github.com/Aeronautics/aero',
+__download_url__ = 'https://github.com/Aeronautics/aero/tarball/master',
 __copyright__ = ('Copyright (c) 2012, Nick Lombard et al.', 'Copyright (c) 2012, Jayson Rei')
 __docformat__ = 'restructuredtext'
 __ascii_by__ = ['Si Deane', 'Chad Vice', 'Scott Davey', 'Wil Dixon', 'Brad Leftwich',
