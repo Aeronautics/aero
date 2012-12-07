@@ -19,6 +19,7 @@ class Gem(BaseAdapter):
         desc = False
         blank = False
         for line in [l for l in response.splitlines() if not match('\*\*\*',l)]:
+            line = line.decode('utf')
             if not desc and match('(.*)\((.*)\)', line):
                 key, val = match('(.*)\((.*)\)', line).groups()
                 lst[self.package_name(key)] = u'Version: ' + val + u'\n'
