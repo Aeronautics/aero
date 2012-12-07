@@ -27,8 +27,8 @@ class V(v):
 __version_info__ = V(0, 0, 1, 'alpha', 1)
 __version__ = '{}.{}.{}{:1.1}{}'.format(*tuple(__version_info__))
 __build__ = __version_info__.serial
-__authors__ = ('Nick Lombard - nickl-', 'Jayson Reis')
-__email__ = ("github@jigsoft.co.za", '')
+__authors__ = ('Nick Lombard - nickl-', 'Jayson Reis', 'Alexandre Gomes Gaigalas')
+__email__ = ('github@jigsoft.co.za', '', 'alexandre@gaigalas.net')
 __title__ = 'aero'
 __license__ = 'BSD 3-Clause'
 __url__ = 'https://github.com/Aeronautics/aero',
