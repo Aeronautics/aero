@@ -99,7 +99,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
         self.add_argument(
             default_prefix + '--', default_prefix * 2 + 'pass-through',
             dest='passthru',
-            help='''Passthru arguments to be added as argumennts to the
+            help='''Passthru arguments to be added as arguments to the
                 package manager's command execution. Enclose the arguments
                 in quotes to distinguish them from others.''',
         )
@@ -107,7 +107,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
         self.add_argument(
             default_prefix + 'c', default_prefix * 2 + 'completion',
             action=CompletionResponse,
-            help='''Command outo completion is supported for both bash and zsh.
+            help='''Command auto completion is supported for both bash and zsh.
                 The result from the completion option can be appended to your
                 .profile or simply using eval.
                 ex.
@@ -154,7 +154,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
                 commands followed by the package name(s) to perform the task on.
                 At least one command is required but several packages can be
                 processed simultaneously.
-                Use "aero cammand --help" to get further details for specific
+                Use "aero command --help" to get further details for specific
                 commands.''',
             help='''Optionally provide the specific manager to use prepended to
                 the package name(s) with a colon ":" or alternatively aero will
