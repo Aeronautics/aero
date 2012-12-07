@@ -2,13 +2,13 @@
 aero
 ====
 
-The aero command line package recycler. It uses package managers you already have.
+The **aero** command line package recycler. It uses package managers you already have.
 
 Instead of having to consult several package managers when you are looking for something you can now search through all of them using the same commands and find similar results using the same tool.
 
-When you type ``aero search php``, **aero** already knows which package managers are installed and starts collecting information from each package manager while caching the results for when you havent found exactly what you're looking for yet. Other advanced features besides caching includes intutive help and command line arguments parsing, loading configurations from file, bash and zsh autocompletion, results paging so that you don't have to always scroll up when the information you nood is right at the top of the results that just came flying by but you also wont get dumped into a pager, of your choice I should add, if the results would fit on a single page and doesn't require paging. These are just some of the features already incorporated to enhance your user experience setting new standards for enjoyable software management.
+When you type ``aero search php``, **aero** already knows which package managers are installed and starts collecting information from each package manager while caching the results for when you haven't found exactly what you're looking for yet. Other advanced features besides caching includes intuitive help and command line arguments parsing, loading configurations from file, bash and zsh autocompletion, results paging so that you don't have to always scroll up when the information you need is right at the top of the results that just came flying by but you also wont get dumped into a pager, of your choice I should add, if the results would fit on a single page and doesn't require paging. These are just some of the features already incorporated to enhance your user experience setting new standards for enjoyable software management.
 
-Even though **aero** is some serious machining it will only focus on the task its set out to do, to recycle your existing package managers and you can rest assured/or continue to worry whichever might be the case, as **aero** will leave the heavy lifting upto the software partners already tasked with the use case requirements and instead only focuses on the end user requirements through consistent interfaces, intuitive interactions and all the information you require at your fingertips enabling you to make the decisions you need to accomplish the tasks at hand.::
+Even though **aero** is some serious machining it will only focus on the task its set out to do, to recycle your existing package managers and you can rest assured/or continue to worry whichever might be the case, as **aero** will leave the heavy lifting up to the software partners already tasked with the use case requirements and instead only focuses on the end user requirements through consistent interfaces, intuitive interactions and all the information you require at your fingertips enabling you to make the decisions you need to accomplish the tasks at hand.::
 
   
 	   \
@@ -19,7 +19,7 @@ Even though **aero** is some serious machining it will only focus on the task it
 	        \ o\/           (____  /\___  >__|   \____/
 	         \_/\                \/     \/
 	         / \ \
-	         O  \                                          aero v0.0.1 alpha 1
+	         O  \                                          aero v0.0.1 alpha 2
 	    _________\_____________________________________________________
 	              \
 	               \
@@ -28,9 +28,9 @@ Even though **aero** is some serious machining it will only focus on the task it
 Platform
 --------
 
-Written in python using v 2.7, this may or may not be the entry requirement for now, on Mac OS X currently and the excellent IDE [PyCharm by JetBrains](http://www.jetbrains.com/pycharm/) which you may consider highly reccommended do give it a try. The *nixes will likely be included soon, there exists no bias to the MS platforms only less accessible as a product of choice and opportunity I guess. Feel free to suggest other usages or specific requirements you might have. 
+Written in python using v 2.7, this may or may not be the entry requirement for now, on Mac OS X currently and the excellent IDE [PyCharm by JetBrains](http://www.jetbrains.com/pycharm/) which you may consider highly recommended do give it a try. The *nixes will likely be included soon, there exists no bias to the MS platforms only less accessible as a product of choice and opportunity I guess. Feel free to suggest other usages or specific requirements you might have.
 
-After some serious deliberations even though the majority of the team has zero to no python experience at all it will never the less prevent us, like the good professional programmers we are, from using the best hammer for hitting the particular nails or fingers. This has been an interesting learning curve so far and I have to agree python is a pleasure and does suite the requirements like a glove and now that we are empowered with some new lingo like "pythonic" and "tupels" not to mention "generators" and the other "PEP" "recipes" of convenience we make no claim that this is an exemplary python implementation but we sure as the indents are important will try. Feel free to pin-point any obvious mistakes by raising an issue so we may appologise or be damned to continue in err without permission as we continue under assumption that this is the pythonic way. Now I guess I should go read the book perhaps =)
+After some serious deliberations even though the majority of the team has zero to no python experience at all it will never the less prevent us, like the good professional programmers we are, from using the best hammer for hitting the particular nails or fingers. This has been an interesting learning curve so far and I have to agree python is a pleasure and does suite the requirements like a glove and now that we are empowered with some new lingo like "pythonic" and "tupels" not to mention "generators" and the other "PEP" "recipes" of convenience we make no claim that this is an exemplary python implementation but we sure as the indents are important will try. Feel free to pin-point any obvious mistakes by raising an issue so we may apologise or be damned to continue in err without permission as we continue under assumption that this is the pythonic way. Now I guess I should go read the book perhaps =)
 
 
 Disclaimer
@@ -38,8 +38,8 @@ Disclaimer
 
 Even though using **aero** can cause you or your system no harm, by design and while we are using it everyday for a one stop interface to finding the software we need to install we need to warn you about two things:
 
-1. This is still a work in progress and you are welcome to pitch in, lend a hand, test, report bugs, request features but keep in mind that you will find unfinished and more than likely some broken things.
-2. May lead to some serious impulse package installation addictions, use at your own risk.
+1. This is still a work in progress and you are welcome to pitch in, lend a hand, test, report bugs, request features or make a donation but keep in mind that you will find unfinished and more than likely some broken things.
+2. May lead to compulsive package installation disorders can cause dependency and some serious addictions, use at your own risk.
 
 Installation
 ------------
@@ -92,7 +92,7 @@ Alternatively you can use eval on the script to have the shell activated on exec
     $ eval "$(aero -c bash)"
 ```
 
-Running the aero.py executable from the root package folder also works and may be simlinked in your path if you need another approach while we iron out the kinks.
+Running the aero.py executable from the root package folder also works and may be symlinked in your path if you need another approach while we iron out the kinks.
 
 Running aero:
 ------------
@@ -102,10 +102,10 @@ On execution of **aero** with no requirements a short usage instruction will be 
     
     aero v0.0.1 alpha 0
     
-    usage: myaero [-h] [-v] [-p PAGER] [-d [{Brew,Port,Pip,Npm,Gem,Colour}]] [-i]
+    usage: aero [-h] [-v] [-p PAGER] [-d [{Brew,Port,Pip,Npm,Gem,Colour}]] [-i]
                   [-c {bash,zsh}]
                   command [mngr:] package ...
-    myaero: error: too few arguments
+    aero: error: too few arguments
 
 Providing **aero** with the customary ``--help`` argument will give more detailed information::
 
@@ -140,20 +140,21 @@ Providing **aero** with the customary ``--help`` argument will give more detaile
 
 	                        default: []
 
-	  -i, --invalidate-cache                         Clear the search cache and enquire anew from the
+	  -i, --invalidate-cache
+	                        Clear the search cache and enquire anew from the
 	                        package managers.
 
 	                        default: False
 
 	  ---, --pass-through PASSTHRU
-	                        Passthru arguments to be added as argumennts to the
+	                        Passthru arguments to be added as arguments to the
 	                        package manager's command execution. Enclose the
 	                        arguments in quotes to distinguish them from others.
 
 	                        default: None
 
 	  -c, --completion {bash,zsh}
-	                        Command outo completion is supported for both bash and
+	                        Command auto completion is supported for both bash and
 	                        zsh. The result from the completion option can be
 	                        appended to your .profile or simply using eval. ex. `
 	                        aero --completion zsh >> ~/.profile` Remember to
@@ -174,7 +175,7 @@ Providing **aero** with the customary ``--help`` argument will give more detaile
 	  commands followed by the package name(s) to perform the task on.
 	  At least one command is required but several packages can be
 	  processed simultaneously.
-	  Use "aero cammand --help" to get further details for specific
+	  Use "aero command --help" to get further details for specific
 	  commands.
 
 	  command [mngr:]package
@@ -201,14 +202,22 @@ Providing **aero** with the customary ``--help`` argument will give more detaile
 Commands
 --------
 
-With **aero** you can expect to use the common commands and we will translate them to the package manager specific instructions where they may have chosen to deviate from the norm. Currently the following commands are implimented:
+With **aero** you can expect to use the common commands and we will translate them to the package manager specific instructions where they may have chosen to deviate from the norm. Currently the following commands are implemented:
 
-* search  
-To seach for a packoge which will produce a list with the package manager prefixed the package name by ":" and a short description of the packoge.
+Usage:
+
+```
+    $ aero <command> <packages...>
+```
+
+Where packages are one or more package names optionally prefixed with the specific package manager, colon separated. The ``mngr:package`` format produced in search is used to instruct a specific package manager with any commands. Omitting the prefix instruction will result in all active package managers being instructed to complete the task. This may or may not necessarily have the desired effect. Multiple packages from different package managers can all be processed with one aero command.
+
+* search
+To search for a package which will produce a list with the package manager prefixed the package name by ":" and a short description of the package.
 * install  
-To instruct the installation of a given package. The ``mngr:package`` format produced in search is used to instruct a specific package manager with any commands. Omitting the instruction will result in all active package managers being instructed. This may or may not necessarily have the desired effect.
+To instruct the installation of a given package.
 * info  
-To obtain more detailed information regarding a given packoge where available.
+To obtain more detailed information regarding a given package now also available for pip.
 
 Package managers
 ================
@@ -247,7 +256,7 @@ Supported commands:
 
 Special notes:
 
-Brew has the inclination to only return the package names on search, in addition to retrieval of the packoge names aero continues to further query info on each package from where it is able to parse and present slightly more usable information. Instead of just calling the info command on the package manager we execute `aero info` instead which means that all the information for every package listed in the search results is already cached and retrievable instantaneously.
+Brew has the inclination to only return the package names on search, in addition to retrieval of the package names aero continues to further query info on each package from where it is able to parse and present slightly more usable information. Instead of just calling the info command on the package manager we execute `aero info` instead which means that all the information for every package listed in the search results is already cached and retrievable instantaneously.
 
 Gem
 ---
@@ -361,11 +370,11 @@ Supported commands:
 
 Special notes:
 
-Info uses the ``npm view`` command which return a JavaScript object of the registry which we then nudge closer to resembling JSON format so that we may proceed to parce it with **:mod:json**
+Info uses the ``npm view`` command which return a JavaScript object of the registry which we then nudge closer to resembling JSON format so that we may proceed to parse it with **:mod:json**
                                                                                          
 Pear
 ----
-Supperted commanhds:
+Supported commands:
 
 * search
 * install
@@ -411,7 +420,7 @@ Supperted commanhds:
 
 Pear
 ----
-Supperted commanhds:
+Supported commands:
 
 * search
 * install
@@ -459,26 +468,46 @@ Supported commands:
 
 * search
 * install
+* info
 
 ```
-    $ aero search pip:fibonacci
+    $ aero search pip:ncurses
     
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
-                                        pip:anot_fib : A simple program to return nth fibonacci number
-                                       pip:fibonacci : a function of fibonacci number
-                                        pip:multifib : Multiple Fibonacci Number Implementations, in
-                                                       Python and C
-                                        pip:myfib.py : A simple printer of fibonacci series
-                                        pip:myfibbha : A simple printer of fibonacci series
+                                           pip:Canto : Version: 0.7.10         Score: 110
+                                                       An ncurses RSS aggregator.
+                                         pip:chronos : Version: 0.2            Score:  13
+                                                       An ncurses stopwatch/timer.
+                                    pip:gocept.httop : Version: 1.0            Score:   1
+                                                       An ncurses-based tool to monitor website
+                                                       responsiveness in real-time.
+
+    $ aero info pip:Canto
+
+                                                       INFORMATION: Canto
+           ________________________________________    __________________________________________________
+                                  Metadata-Version: :  1.0
+                                              Name: :  Canto
+                                           Version: :  0.7.10
+                                           Summary: :  An ncurses RSS aggregator.
+                                         Home-page: :  http://codezen.org/canto
+                                            Author: :  Jack Miller
+                                      Author-email: :  jack@codezen.org
+                                           License: :  GPLv2
+                                      Download-URL: :  http://codezen.org/static/canto-0.7.10.tar.gz
+                                       Description: :  UNKNOWN
+                                          Platform: :  linux
 
 ```
+Special notes:
 
+The Pip adaptor does not use subprocess to execute pip command line interface but instead we use the pip library directly. This strategy now enables us to get pip info, functionality that is not exposed on the CLI but very much available as you can see, marking a huge advance for aero.
 
 ```
 Pyrus
 ----
-Supperted commanhds:
+Supported commands:
 
 * search
 * install
@@ -513,7 +542,7 @@ Supperted commanhds:
 ```
 Special notes:
 
-Similar to brew, with pyrus you are alse required to call info should you require more details about a particular package. Luckily aero is more considerate and will call info on your behalf to provide you with more information in the search results.
+Similar to brew, with pyrus you are also required to call info should you require more details about a particular package. Luckily aero is more considerate and will call info on your behalf to provide you with more information in the search results.
 
 
 Macports
@@ -568,7 +597,17 @@ Items that require some attention: (Let us know if you want to tackle any of the
 
 Changelog
 ---------
-* v0.0.1 alpha 1
+* v0.0.1 alpha 2
+** Pip info capable now - whoop whoop!
+** Fixed unicode issues
+** Pip via pip library instead of sub-process
+** Improved adapter implementation
+** Improved resources free on exit
+** Improved pass through implementation
+** Improved output display and fix typos
+** Updated documentation
+
+* v0.0.1 alpha 1 - 2012-12-02
 ** Fixed installation issues and dependency installation
 ** Increased cache granularity command:adapter:package
 ** Support for multiple packages simultaneously
