@@ -10,7 +10,7 @@ When you type ``aero search php``, **aero** already knows which package managers
 
 Even though **aero** is some serious machining it will only focus on the task its set out to do, to recycle your existing package managers and you can rest assured/or continue to worry whichever might be the case, as **aero** will leave the heavy lifting up to the software partners already tasked with the use case requirements and instead only focuses on the end user requirements through consistent interfaces, intuitive interactions and all the information you require at your fingertips enabling you to make the decisions you need to accomplish the tasks at hand.::
 
-  
+
 	   \
 	    \
 	     \ \    .           _____    ___________  ____
@@ -23,8 +23,8 @@ Even though **aero** is some serious machining it will only focus on the task it
 	    _________\_____________________________________________________
 	              \
 	               \
-                
-              
+
+
 Platform
 --------
 
@@ -99,9 +99,9 @@ Running aero:
 On execution of **aero** with no requirements a short usage instruction will be presented::
 
     $ aero
-    
+
     aero v0.0.1 alpha 0
-    
+
     usage: aero [-h] [-v] [-p PAGER] [-d [{Brew,Port,Pip,Npm,Gem,Colour}]] [-i]
                   [-c {bash,zsh}]
                   command [mngr:] package ...
@@ -110,7 +110,7 @@ On execution of **aero** with no requirements a short usage instruction will be 
 Providing **aero** with the customary ``--help`` argument will give more detailed information::
 
     $ aero --help
-    
+
 	    ____________________
 	 __/ Usage Instructions \___________________________________________________
 	|___________________________________________________________________________|
@@ -214,9 +214,9 @@ Where packages are one or more package names optionally prefixed with the specif
 
 * search
 To search for a package which will produce a list with the package manager prefixed the package name by ":" and a short description of the package.
-* install  
+* install
 To instruct the installation of a given package.
-* info  
+* info
 To obtain more detailed information regarding a given package now also available for pip.
 
 Package managers
@@ -224,8 +224,8 @@ Package managers
 
 The following package managers has been enabled, more will follow:
 
-Hombrew
--------
+Homebrew
+--------
 Supported commands:
 
 * search
@@ -234,7 +234,7 @@ Supported commands:
 
 ```
     $ aero search brew:ncurses
-    
+
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
                                         brew:ncurses : version: stable 5.9
@@ -268,7 +268,7 @@ Supported commands:
 
 ```
     $ aero search gem:fibonacci
-    
+
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
                               gem:closest-fibonacci  : Version: 0.1.2
@@ -333,7 +333,7 @@ Supported commands:
 
 ```
     $ aero search npm:fibonacci-async
-    
+
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
                                  npm:fibonacci-async : 2012-10-29 22:03
@@ -342,7 +342,7 @@ Supported commands:
                                                        welcome.
 
     $ aero info npm:fibonacci-async
-        
+
                                                        INFORMATION: fibonacci-async
            ________________________________________    __________________________________________________
                                             author: :  Enno Boland <eb@s01.de>
@@ -371,7 +371,7 @@ Supported commands:
 Special notes:
 
 Info uses the ``npm view`` command which return a JavaScript object of the registry which we then nudge closer to resembling JSON format so that we may proceed to parse it with **:mod:json**
-                                                                                         
+
 Pear
 ----
 Supported commands:
@@ -472,7 +472,7 @@ Supported commands:
 
 ```
     $ aero search pip:ncurses
-    
+
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
                                            pip:Canto : Version: 0.7.10         Score: 110
@@ -555,7 +555,7 @@ Supported commands:
 
 ```
     $ aero search port:cowsay
-    
+
                                         PACKAGE NAME   DESCRIPTION
             ________________________________________   __________________________________________________
                                          port:cowsay : @3.03 (textproc, amusements, games) Configurable
@@ -563,7 +563,7 @@ Supported commands:
                                           port:insub : @13.0 (irc) extra cowsay cows and irssi script
 
     $ aero info port:insub
-    
+
                                                        INFORMATION: insub
            ________________________________________    __________________________________________________
                                            Version: :  @13.0 (irc)
@@ -642,7 +642,7 @@ Original Ascii art done by:
 * Thor Aage Eldby
 * Ennis Trimble
 * Joan Stark
-* Jochem Berends  
+* Jochem Berends
 
 
                                            __/\__
@@ -655,4 +655,4 @@ Original Ascii art done by:
         |                                                                          |
         |                    Brought to you by the Respect team.                   |
         |__________________________________________________________________________|
-        
+
