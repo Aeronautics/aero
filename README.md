@@ -233,25 +233,30 @@ Supported commands:
 * info
 
 ```
-    $ aero search brew:ncurses
+$ aero search brew:ncurses
 
-                                        PACKAGE NAME   DESCRIPTION
-            ________________________________________   __________________________________________________
-                                        brew:ncurses : version: stable 5.9
-                                                       http://www.gnu.org/s/ncurses/
-                                                       /usr/local/Cellar/ncurses/5.9 (1777 files, 18M) *
+────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+                 brew:ncurses │ version:stable 5.9
+                              │ http://www.gnu.org/s/ncurses/
+                              │ /usr/local/Cellar/ncurses/5.9 (1777 files,
+                              │ 18M) *
+──────────────────────────────┴─────────────────────────────────────────────────
 
-    $ aero info brew:ncurses
+$ aero info brew:ncurses
 
-                                                       INFORMATION: ncurses
-           ________________________________________    __________________________________________________
-                                           version: :  stable 5.9
-                                                       http://www.gnu.org/s/ncurses/
-                                                       /usr/local/Cellar/ncurses/5.9 (1777 files, 18M) *
-                                                       ==> Options
-                                                       --universal
-                                                            Build a universal binary
-
+────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   ncurses
+──────────────────────────────┬─────────────────────────────────────────────────
+                     version: │ stable 5.9
+                              │ http://www.gnu.org/s/ncurses/
+                              │ /usr/local/Cellar/ncurses/5.9 (1777 files,
+                              │ 18M) *
+                              │ ==> Options
+                              │ --universal
+                              │ Build a universal binary
+──────────────────────────────┴─────────────────────────────────────────────────
 ```
 
 Special notes:
