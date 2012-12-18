@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from aero.__version__ import __version_info__
 __author__ = 'nickl-'
 
-import sys
-import textwrap
 
-from .__version__ import __version_info__
-
-from .cache import CacheProviderFactory
-from .adapters import AVAILABLE_ADAPTERS
+from aero.adapters import AVAILABLE_ADAPTERS
 
 def coroutine(func):
     def start(*args,**kwargs):
@@ -18,6 +14,8 @@ def coroutine(func):
     return start
 
 class ProgressTicker():
+
+    from aero.adapters import AVAILABLE_ADAPTERS
 
     ref = None
     result = None
@@ -54,11 +52,18 @@ class ProgressTicker():
                 self.result.extend(args[1])
         self.ref.send(self.result)
 
-class CommandProcessor():
+
+
+
+class CommandProcessor(object):
+
+    from aero.cache import CacheProviderFactory
+
 
     cache = CacheProviderFactory().whichProvider()
     data = None
     out = None
+
     ticker = ProgressTicker()
     clear = '\x1b[2J\x1b[0;0H'
 
@@ -195,6 +200,26 @@ class CommandProcessor():
                     )]
                 ))
 
+    def render(self, pager):
+        from pygments import highlight
+        from pygments.lexers import CppLexer
+        from pygments.formatters import Terminal256Formatter
+        from importlib import import_module
+        height = import_module('aero.commands').getTerminalSize()[1]
+        out = pager.getvalue()
+        pager.close()
+        out = highlight(out, CppLexer(), Terminal256Formatter())
+        out = out.encode('utf')
+        if len(out.splitlines()) > height:
+            from subprocess import Popen, PIPE
+            Popen(self.data.pager, shell=True, stdin=PIPE).communicate(input=out)
+        else:
+            if 'DebugCommandProcessor' not in self.__class__.__bases__[0].__name__:
+                print self.clear
+            print out
+
+
+
 class DebugCommandProcessor(CommandProcessor):
 
     def seen(self, command, adapter, package, result=False):
@@ -229,126 +254,3 @@ class DebugCommandProcessor(CommandProcessor):
     def execute(self):
         next = self.wiring()
         self.do(self.data.packages, next)
-
-
-class SearchCommand(CommandProcessor):
-
-    @coroutine
-    def res(self):
-        while True:
-            res = (yield)
-            if res:
-                if isinstance(res, list):
-                    print u'\n' + res[0]
-                    continue
-                res = sorted(res.items())
-                from StringIO import StringIO
-                pager = StringIO()
-                pager.write(u'\n{:>48}   {:<52}\n'.format(u'PACKAGE NAME', u'DESCRIPTION'))
-                pager.write(u'{:>48}   {:<52}\n'.format(u'_' * 40, u'_' * 50))
-                for key, value in res:
-                    for line in value.splitlines():
-                        if key:
-                            key += u' :'
-                        if len(line) > 50:
-                            for wrap in textwrap.wrap(line, 50):
-                                pager.write(u'{:>50} {:<50}\n'.format(key, wrap))
-                                key = u''
-                        else:
-                            pager.write(u'{:>50} {:<50}\n'.format(key, line))
-                        key = ''
-                pager.write(u'\n')
-                from pygments import highlight
-                from pygments.lexers import CppLexer
-                from pygments.formatters import Terminal256Formatter
-                out = pager.getvalue()
-                pager.close()
-                out = highlight(out, CppLexer(), Terminal256Formatter())
-                out = out.encode('utf')
-                if len(out.splitlines()) > 30:
-                    from subprocess import Popen, PIPE
-                    Popen(self.data.pager, shell=True, stdin=PIPE).communicate(input=out)
-                else:
-                    print out
-
-
-class InstallCommand(CommandProcessor):
-
-    def wiring(self):
-        self.out = self.write()
-        self.ticker.routine(self.progress(None))
-        return self.each(self.spacing(self.call(self.res())))
-
-    def seen(self, command, adapter, package, result=False):
-        return result
-
-    @coroutine
-    def write(self):
-        import sys
-        out = sys.stdout
-        while True:
-            text = (yield)
-            out.write(text)
-
-    @coroutine
-    def spacing(self, target):
-        while True:
-            payload = (yield)
-            print u'\n'
-            target.send(payload)
-
-    @coroutine
-    def progress(self, responder):
-        while True: (yield)
-
-
-class InfoCommand(CommandProcessor):
-
-    @coroutine
-    def res(self):
-        while True:
-            res = (yield)
-            if u'Aborted:' in res[0]:
-                print res[0]
-                continue
-            key = u''
-            from StringIO import StringIO
-            pager = StringIO()
-            pager.write(u'\n{:>48}   {:<52}\n'.format(
-                u'',
-                u'INFORMATION: ' + ', '.join(map(
-                    lambda x: x if u':' not in x else x.split(u':')[1],
-                    self.data.packages
-                ))
-            ))
-            pager.write(u'{:>47}    {:<52}\n'.format(u'_' * 40, u'_' * 50))
-            for line in res:
-                if isinstance(line, tuple) or isinstance(line, list):
-                    if len(line) >= 2:
-                        key = line[0] + u': : ' if line[0] else u'   '
-                        line = line[1]
-                    else:
-                        line = line[0]
-                if line:
-                    for l in line.splitlines():
-                        if len(l) > 50:
-                            for wrap in textwrap.wrap(l, 50):
-                                pager.write(u'{:>50} {:50}\n'.format(
-                                    key.decode('utf'),
-                                    wrap.lstrip().decode('utf'))
-                                )
-                                key = u''
-                        else:
-                            pager.write(u'{:>50} {:50}\n'.format(
-                                key.decode('utf'),
-                                l.lstrip().decode('utf'))
-                            )
-                            key = u''
-            from pygments import highlight
-            from pygments.lexers import CppLexer
-            from pygments.formatters import Terminal256Formatter
-            out = pager.getvalue()
-            out = out.encode('utf')
-            pager.close()
-            print highlight(out, CppLexer(), Terminal256Formatter())
-
