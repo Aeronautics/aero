@@ -344,39 +344,46 @@ Supported commands:
 * info
 
 ```
-    $ aero search npm:fibonacci-async
 
-                                        PACKAGE NAME   DESCRIPTION
-            ________________________________________   __________________________________________________
-                                 npm:fibonacci-async : 2012-10-29 22:03
-                                                       So, you want to benchmark node.js with fibonacci
-                                                       once again? - Here's the library for that. You're
-                                                       welcome.
+$ aero search npm:fibonacci-async
 
-    $ aero info npm:fibonacci-async
+────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+          npm:fibonacci-async │ 2012-10-29 22:03
+                              │ So, you want to benchmark node.js with
+                              │ fibonacci once again? - Here's the library
+                              │ for that. You're welcome.
+──────────────────────────────┴─────────────────────────────────────────────────
 
-                                                       INFORMATION: fibonacci-async
-           ________________________________________    __________________________________________________
-                                            author: :  Enno Boland <eb@s01.de>
-                                       description: :  So, you want to benchmark node.js with fibonacci
-                                                       once again? - Here"s the library for that. You"re
-                                                       welcome.
-                                              dist: :  tarball: http://registry.npmjs.org/fibonacci-async
-                                                       /-/fibonacci-async-0.0.2.tgz
-                                                       shasum: 173d4d28b038723f41bacc660edc331b1e526047
-                                         dist-tags: :  latest: 0.0.2
-                                           engines: :  node: *
-                                              main: :  lib/binding.js
-                                       maintainers: :  Gottox <g@s01.de>
-                                              name: :  fibonacci-async
-                                        repository: :  url: git://github.com/Gottox/fibonacci-async.git
-                                                       type: git
-                                           scripts: :  preinstall: node-waf clean || (exit 0); node-waf
-                                                       configure build
-                                              time: :  0.0.1: 2012-05-26T11:24:06.960Z
-                                                       0.0.2: 2012-05-26T11:25:45.254Z
-                                           version: :  0.0.2
-                                          versions: :  0.0.1, 0.0.2
+$ aero info npm:fibonacci-async
+
+────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   fibonacci-async
+──────────────────────────────┬─────────────────────────────────────────────────
+                      author: │ Enno Boland <eb@s01.de>
+                 description: │ So, you want to benchmark node.js with
+                              │ fibonacci once again? - Here"s the library
+                              │ for that. You"re welcome.
+                        dist: │ tarball: http://registry.npmjs.org
+                              │ /fibonacci-async/-/fibonacci-async-0.0.2.tgz
+                              │ shasum:
+                              │ 173d4d28b038723f41bacc660edc331b1e526047
+                   dist-tags: │ latest: 0.0.2
+                     engines: │ node: *
+                        main: │ lib/binding.js
+                 maintainers: │ Gottox <g@s01.de>
+                        name: │ fibonacci-async
+                  repository: │ url: git://github.com/Gottox/fibonacci-
+                              │ async.git
+                              │ type: git
+                     scripts: │ preinstall: node-waf clean || (exit 0);
+                              │ node-waf configure build
+                        time: │ 0.0.1: 2012-05-26T11:24:06.960Z
+                              │ 0.0.2: 2012-05-26T11:25:45.254Z
+                     version: │ 0.0.2
+                    versions: │ 0.0.1, 0.0.2
+──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
 
