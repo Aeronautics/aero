@@ -10,20 +10,20 @@ When you type ``aero search php``, **aero** already knows which package managers
 
 Even though **aero** is some serious machining it will only focus on the task its set out to do, to recycle your existing package managers and you can rest assured/or continue to worry whichever might be the case, as **aero** will leave the heavy lifting up to the software partners already tasked with the use case requirements and instead only focuses on the end user requirements through consistent interfaces, intuitive interactions and all the information you require at your fingertips enabling you to make the decisions you need to accomplish the tasks at hand.::
 
-
-	   \
-	    \
-	     \ \    .           _____    ___________  ____
-	      \_\__/            \__  \ _/ __ \_  __ \/  _ \
-	     O__| \ \            / __ \\  ___/|  | \(  <_> )
-	        \ o\/           (____  /\___  >__|   \____/
-	         \_/\                \/     \/
-	         / \ \
-	         O  \                                          aero v0.0.1 alpha 2
-	    _________\_____________________________________________________
-	              \
-	               \
-
+```
+   \
+    \
+     \ \    .           _____    ___________  ____
+      \_\__/            \__  \ _/ __ \_  __ \/  _ \
+     O__| \ \            / __ \\  ___/|  | \(  <_> )
+        \ o\/           (____  /\___  >__|   \____/
+         \_/\                \/     \/
+         / \ \
+         O  \                                 aero v0.0.1 alpha 2
+    ─────────\────────────────────────────────────────────────────────
+              \
+               \
+```
 
 Platform
 --------
@@ -109,95 +109,101 @@ On execution of **aero** with no requirements a short usage instruction will be 
 
 Providing **aero** with the customary ``--help`` argument will give more detailed information::
 
-    $ aero --help
+```
 
-	    ____________________
-	 __/ Usage Instructions \___________________________________________________
-	|___________________________________________________________________________|
+$ aero --help
 
-	 aero [-h] [-v] [-p PAGER] [-d [{npm,pyrus,pear,pip,brew,pecl,gem}]]
-	            [-i] [--- PASSTHRU] [-c {bash,zsh}]
-	            command [mngr:]package ...
+   ┌────────────────────┐
+┌──┘ Usage Instructions └───────────────────────────────────────────────────┐
+└───────────────────────────────────────────────────────────────────────────┘
 
-	    ____________________
-	 __/  Argument Options  \___________________________________________________
-	|___________________________________________________________________________|
+ aero.py [-h] [-v] [-p PAGER] [-d [{npm,pyrus,pear,pip,brew,pecl,gem}]]
+               [-i] [--- PASSTHRU]
+               command [mngr:]package ...
 
-	optional arguments:
-	  -h, --help            show this help message and exit
-	  -v, --version         Show program's version number and exit
-	  -p, --pager PAGER     The pager to use for long paged displays. The default
-	                        is based on the environment variable $PAGER, if it is
-	                        not set, some common pagers like "less", "more",
-	                        "most" and finally "cat" are tried, in this order.
+   ┌──────────────────┐
+┌──┘ Argument Options └─────────────────────────────────────────────────────┐
+└───────────────────────────────────────────────────────────────────────────┘
 
-	                        default: /usr/bin/less
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         Show program's version number and exit
+  -p, --pager PAGER     The pager to use for long paged displays. The default
+                        is based on the environment variable $PAGER, if it is
+                        not set, some common pagers like 'less', 'more',
+                        'most' and finally 'cat' are tried, in this order.
 
-	  -d, --disable [{npm,pyrus,pear,pip,brew,pecl,gem}]
+                        default: None
 
-	                        Add the items you wish to disable to the list.
-	                        Multiple disable arguments may be supplied.
+  -d, --disable [{npm,pyrus,pear,pip,brew,pecl,gem}]
 
-	                        default: []
+                        Add the items you wish to disable to the list.
+                        Multiple disable arguments may be supplied.
 
-	  -i, --invalidate-cache
-	                        Clear the search cache and enquire anew from the
-	                        package managers.
+                        default: []
 
-	                        default: False
+  -i, --invalidate-cache
+                        Clear the search cache and enquire anew from the
+                        package managers.
 
-	  ---, --pass-through PASSTHRU
-	                        Passthru arguments to be added as arguments to the
-	                        package manager's command execution. Enclose the
-	                        arguments in quotes to distinguish them from others.
+                        default: False
 
-	                        default: None
+  ---, --pass-through PASSTHRU
+                        Passthru arguments to be added as arguments to the
+                        package manager's command execution. Enclose the
+                        arguments in quotes to distinguish them from others.
 
-	  -c, --completion {bash,zsh}
-	                        Command auto completion is supported for both bash and
-	                        zsh. The result from the completion option can be
-	                        appended to your .profile or simply using eval. ex. `
-	                        aero --completion zsh >> ~/.profile` Remember to
-	                        source the changes. To use eval you might try
-	                        something like: ex. ` eval "$(aero --completion
-	                        bash)"`
-
-	                        default: None
+                        default: None
 
 
-	    __________________
-	 __/  Commands Usage  \_____________________________________________________
-	|___________________________________________________________________________|
+   ┌────────────────┐
+┌──┘ Commands Usage └───────────────────────────────────────────────────────┐
+└───────────────────────────────────────────────────────────────────────────┘
 
-	Command arguments:
+Command arguments:
 
-	  The aero commands are based on the typical package manager
-	  commands followed by the package name(s) to perform the task on.
-	  At least one command is required but several packages can be
-	  processed simultaneously.
-	  Use "aero command --help" to get further details for specific
-	  commands.
+  The aero commands are based on the typical package manager
+  commands followed by the package name(s) to perform the task on.
+  At least one command is required but several packages can be
+  processed simultaneously.
+  Use 'aero command --help' to get further details for specific
+  commands.
 
-	  command [mngr:]package
-	                        Optionally provide the specific manager to use
-	                        prepended to the package name(s) with a colon ":" or
-	                        alternatively aero will execute the command against
-	                        all enabled package managers.
+  command [mngr:]package
+                        Optionally provide the specific manager to use
+                        prepended to the package name(s) with a colon ':' or
+                        alternatively aero will execute the command against
+                        all enabled package managers.
 
-	    choose one of the following valid aero commands:
+    choose one of the following valid aero commands:
 
-	    info                Do an aero info for a package
-	    search              Do an aero search for a package
-	    install             Do an aero install package
+    search              Do an aero search for packages
+    install             Do an aero install package(s)
+    info                Do an aero info for packages
 
-	Configuration argument:
+Configuration argument:
+  command [mngr:]package
+                        Optionally provide the specific manager to use
+                        prepended to the package name(s) with a colon ':' or
+                        alternatively aero will execute the command against
+                        all enabled package managers.
 
-	  It is possible to load aero configuration from an input file.
+    choose one of the following valid aero commands:
 
-	  @filename             Append "key, value" (where applicable) to a file one
-	                        argument, value pair per line. To tell aero which
-	                        file to use for configuration specify the path and
-	                        file name prefixed with an "@".
+    search              Do an aero search for packages
+    install             Do an aero install package(s)
+    info                Do an aero info for packages
+
+Configuration argument:
+
+  It is possible to load aero configuration from an input file.
+
+  @filename             Append "key, value" (where applicable) to a file one
+                        argument, value pair per line. To tell aero which
+                        file to use for configuration specify the path and
+                        file name prefixed with an "@".
+
+```
 
 Commands
 --------
@@ -694,14 +700,15 @@ Original Ascii art done by:
 * Jochem Berends
 
 
-                                           __/\__
-                                          `==/\==´
-         _         _____        ____________/__\____________        _____         _
-        (__\______o=/ /=_ |    /____________________________\    | _=\ \=o______/__)
-        >---\\\\ _/_/_^^]:>      __||__||__/.--.\__||__||__      <:[^^_\_\_ ////---<
-        __       _/_/|´´  |     /__|___|___( >< )___|___|__\     |  ``|\_\_       __
-        | \_________<0)____________________0`--´0____________________(0>_________/ |
-        |                                                                          |
-        |                    Brought to you by the Respect team.                   |
-        |__________________________________________________________________________|
-
+```
+                                   __/\__
+                                  `==/\==´
+ _         _____        ____________/__\____________        _____         _
+(__\______o=/ /=_ |    /____________________________\    | _=\ \=o______/__)
+>---\\\\ _/_/_^^]:>      __||__||__/.--.\__||__||__      <:[^^_\_\_ ////---<
+__       _/_/|´´  |     /__|___|___( >< )___|___|__\     |  ``|\_\_       __
+│ \_________<0)____________________0`--´0____________________(0>_________/ │
+│                                                                          │
+│                    Brought to you by the Respect team.                   │
+└──────────────────────────────────────────────────────────────────────────┘
+```
