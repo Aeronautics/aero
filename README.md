@@ -509,33 +509,39 @@ Supported commands:
 * info
 
 ```
-    $ aero search pip:ncurses
 
-                                        PACKAGE NAME   DESCRIPTION
-            ________________________________________   __________________________________________________
-                                           pip:Canto : Version: 0.7.10         Score: 110
-                                                       An ncurses RSS aggregator.
-                                         pip:chronos : Version: 0.2            Score:  13
-                                                       An ncurses stopwatch/timer.
-                                    pip:gocept.httop : Version: 1.0            Score:   1
-                                                       An ncurses-based tool to monitor website
-                                                       responsiveness in real-time.
+$ aero search pip:ncurses
 
-    $ aero info pip:Canto
+────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+                    pip:Canto │ Version: 0.7.10       Score: 110
+                              │ An ncurses RSS aggregator.
+                  pip:chronos │ Version: 0.2          Score:  13
+                              │ An ncurses stopwatch/timer.
+             pip:gocept.httop │ Version: 1.0          Score:   1
+                              │ An ncurses-based tool to monitor website
+                              │ responsiveness in real-time.
+──────────────────────────────┴─────────────────────────────────────────────────
 
-                                                       INFORMATION: Canto
-           ________________________________________    __________________________________________________
-                                  Metadata-Version: :  1.0
-                                              Name: :  Canto
-                                           Version: :  0.7.10
-                                           Summary: :  An ncurses RSS aggregator.
-                                         Home-page: :  http://codezen.org/canto
-                                            Author: :  Jack Miller
-                                      Author-email: :  jack@codezen.org
-                                           License: :  GPLv2
-                                      Download-URL: :  http://codezen.org/static/canto-0.7.10.tar.gz
-                                       Description: :  UNKNOWN
-                                          Platform: :  linux
+$ aero info pip:Canto
+
+────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   Canto
+──────────────────────────────┬─────────────────────────────────────────────────
+            Metadata-Version: │ 1.0
+                        Name: │ Canto
+                     Version: │ 0.7.10
+                     Summary: │ An ncurses RSS aggregator.
+                   Home-page: │ http://codezen.org/canto
+                      Author: │ Jack Miller
+                Author-email: │ jack@codezen.org
+                     License: │ GPLv2
+                Download-URL: │ http://codezen.org/static/canto-0.7.10.tar.g
+                              │ z
+                 Description: │ UNKNOWN
+                    Platform: │ linux
+──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
 Special notes:
