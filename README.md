@@ -247,7 +247,6 @@ $ aero search brew:ncurses
                  brew:ncurses │ version:stable 5.9
                               │ http://www.gnu.org/s/ncurses/
                               │ /usr/local/Cellar/ncurses/5.9 (1777 files,
-                              │ 18M) *
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 $ aero info brew:ncurses
@@ -255,7 +254,7 @@ $ aero info brew:ncurses
 ────────────────────────────────────────────────────────────────────────────────
                  INFORMATION:   ncurses
 ──────────────────────────────┬─────────────────────────────────────────────────
-                     version: │ stable 5.9
+                     Version: │ stable 5.9
                               │ http://www.gnu.org/s/ncurses/
                               │ /usr/local/Cellar/ncurses/5.9 (1777 files,
                               │ 18M) *
@@ -315,23 +314,23 @@ $ aero info gem:fibonacci
 ────────────────────────────────────────────────────────────────────────────────
                  INFORMATION:   fibonacci
 ──────────────────────────────┬─────────────────────────────────────────────────
-                     authors: │ Chaitanya Vellanki
-                      bindir: │ bin
-                        date: │ 2012-11-09
-                 description: │ A Ruby gem for exploring Fibonacci series
-                       email: │ me@chaitanyavellanki.com
-                    has_rdoc: │ True
-                    homepage: │ http://github.com/chaitanyav/fibonacci
-                        name: │ fibonacci
-                    platform: │ ruby
-               require_paths: │ lib
-       required_ruby_version: │ >= 0
-   required_rubygems_version: │ >= 0
-           rubyforge_project: │ fibonacci
-            rubygems_version: │ 1.3.6
-       specification_version: │ 3
-                     summary: │ Fibonacci
-                     version: │ 0.1.7
+                     Authors: │ Chaitanya Vellanki
+                      Bindir: │ bin
+                        Date: │ 2012-11-09
+                 Description: │ A Ruby gem for exploring Fibonacci series
+                       Email: │ me@chaitanyavellanki.com
+                    Has_Rdoc: │ True
+                    Homepage: │ http://github.com/chaitanyav/fibonacci
+                        Name: │ fibonacci
+                    Platform: │ ruby
+               Require_Paths: │ lib
+       Required_Ruby_Version: │ >= 0
+   Required_Rubygems_Version: │ >= 0
+           Rubyforge_Project: │ fibonacci
+            Rubygems_Version: │ 1.3.6
+       Specification_Version: │ 3
+                     Summary: │ Fibonacci
+                     Version: │ 0.1.7
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
@@ -367,28 +366,28 @@ $ aero info npm:fibonacci-async
 ────────────────────────────────────────────────────────────────────────────────
                  INFORMATION:   fibonacci-async
 ──────────────────────────────┬─────────────────────────────────────────────────
-                      author: │ Enno Boland <eb@s01.de>
-                 description: │ So, you want to benchmark node.js with
+                      Author: │ Enno Boland <eb@s01.de>
+                 Description: │ So, you want to benchmark node.js with
                               │ fibonacci once again? - Here"s the library
                               │ for that. You"re welcome.
-                        dist: │ tarball: http://registry.npmjs.org
+                        Dist: │ tarball: http://registry.npmjs.org
                               │ /fibonacci-async/-/fibonacci-async-0.0.2.tgz
                               │ shasum:
                               │ 173d4d28b038723f41bacc660edc331b1e526047
-                   dist-tags: │ latest: 0.0.2
-                     engines: │ node: *
-                        main: │ lib/binding.js
-                 maintainers: │ Gottox <g@s01.de>
-                        name: │ fibonacci-async
-                  repository: │ url: git://github.com/Gottox/fibonacci-
+                   Dist-Tags: │ latest: 0.0.2
+                     Engines: │ node: *
+                        Main: │ lib/binding.js
+                 Maintainers: │ Gottox <g@s01.de>
+                        Name: │ fibonacci-async
+                  Repository: │ url: git://github.com/Gottox/fibonacci-
                               │ async.git
                               │ type: git
-                     scripts: │ preinstall: node-waf clean || (exit 0);
+                     Scripts: │ preinstall: node-waf clean || (exit 0);
                               │ node-waf configure build
-                        time: │ 0.0.1: 2012-05-26T11:24:06.960Z
+                        Time: │ 0.0.1: 2012-05-26T11:24:06.960Z
                               │ 0.0.2: 2012-05-26T11:25:45.254Z
-                     version: │ 0.0.2
-                    versions: │ 0.0.1, 0.0.2
+                     Version: │ 0.0.2
+                    Versions: │ 0.0.1, 0.0.2
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
