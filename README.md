@@ -454,40 +454,51 @@ Supported commands:
 * info
 
 ```
-    $ aero search pecl:ncurses
+$ aero search pecl:ncurses
 
-                                        PACKAGE NAME   DESCRIPTION
-            ________________________________________   __________________________________________________
-                                        pecl:ncurses : Version:1.0.2 (stable)
-                                                       http://pecl.php.net/ncurses
-                                                       Terminal screen handling and optimization package
+────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+                 pecl:ncurses │ Version:1.0.2 (stable)
+                              │ http://pecl.php.net/ncurses
+                              │ Terminal screen handling and optimization
+                              │ package
+──────────────────────────────┴─────────────────────────────────────────────────
 
-    $ aero info pecl:ncurses
+$ aero info pecl:ncurses
 
-                                                       INFORMATION: ncurses
-           ________________________________________    __________________________________________________
-                                            Latest: :  1.0.2
-                                         Installed: :  - no -
-                                           Package: :  ncurses
-                                           License: :  PHP
-                                          Category: :  Console
-                                           Summary: :  Terminal screen handling and optimization
-                                                       package
-                                       Description: :  ncurses (new curses) is a free software
-                                                       emulation of curses in
-                                                       System V Rel 4.0 (and above). It uses terminfo
-                                                       format, supports
-                                                       pads, colors, multiple highlights, form
-                                                       characters and function
-                                                       key mapping. Because of the interactive nature
-                                                       of this library,
-                                                       it will be of little use for writing Web
-                                                       applications, but may
-                                                       be useful when writing scripts meant using PHP
-                                                       from the command
-                                                       line.
-                                                       See also
-                                                       http://www.gnu.org/software/ncurses/ncurses.html
+────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   ncurses
+──────────────────────────────┬─────────────────────────────────────────────────
+                      Latest: │ 1.0.2
+                   Installed: │ - no -
+                     Package: │ ncurses
+                     License: │ PHP
+                    Category: │ Console
+                     Summary: │ Terminal screen handling and optimization
+                              │ package
+                 Description: │ ncurses (new curses) is a free software
+                              │ emulation of curses in
+                              │ System V Rel 4.0 (and above). It uses
+                              │ terminfo
+                              │ format, supports
+                              │ pads, colors, multiple highlights, form
+                              │ characters and function
+                              │ key mapping. Because of the interactive
+                              │ nature
+                              │ of this library,
+                              │ it will be of little use for writing Web
+                              │ applications, but may
+                              │ be useful when writing scripts meant using
+                              │ PHP
+                              │ from the command
+                              │ line.
+                              │ See also
+                              │ http://www.gnu.org/software/ncurses/ncurses.
+                              │ html
+──────────────────────────────┴─────────────────────────────────────────────────
+
+```
 
 Pip
 ---
