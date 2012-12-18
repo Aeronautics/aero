@@ -257,6 +257,7 @@ $ aero info brew:ncurses
                               │ --universal
                               │ Build a universal binary
 ──────────────────────────────┴─────────────────────────────────────────────────
+
 ```
 
 Special notes:
@@ -272,54 +273,60 @@ Supported commands:
 * info
 
 ```
-    $ aero search gem:fibonacci
+$ aero search gem:fibonacci
 
-                                        PACKAGE NAME   DESCRIPTION
-            ________________________________________   __________________________________________________
-                              gem:closest-fibonacci  : Version: 0.1.2
-                                                       http://github.com/kevindickerson/closest-fibonacci
-                                                       Provides some methods to find a Fibonacci number
-                                                       less than a given N.
-                          gem:closest-fibonacci-gem  : Version: 1.1.0
-                                                       http://github.com/beckram23/closest-fibonacci-gem
-                                                       Find the largest fibonacci that is smaller than
-                                                       the given integer
-                              gem:closest_fibonacci  : Version: 1.2.13
-                                                       http://github.com/bpolania/closest_fibonacci
-                                                       Fibonacci gem for ModCloth
-                                      gem:fibonacci  : Version: 0.1.7
-                                                       http://github.com/chaitanyav/fibonacci
-                                                       Fibonacci
-                                  gem:fibonacci-evs  : Version: 0.1.2
-                                                       http://github.com/edsimpson/fibonacci-evs
-                                                       Test gem with a Fibonacci-related method for
-                                                       Fixnum and Bignum.
-                               gem:simple_fibonacci  : Version: 0.1.2
-                                                       http://github.com/anjshenoy/simple_fibonacci
-                                                       Gem that calculates fibonacci numbers upto a a
-                                                       provided number
+────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+        gem:closest-fibonacci │ Version: 0.1.2
+                              │ http://github.com/kevindickerson/closest-
+                              │ fibonacci
+                              │ Provides some methods to find a Fibonacci
+                              │ number less than a given N.
+    gem:closest-fibonacci-gem │ Version: 1.1.0
+                              │ http://github.com/beckram23/closest-
+                              │ fibonacci-gem
+                              │ Find the largest fibonacci that is smaller
+                              │ than the given integer
+        gem:closest_fibonacci │ Version: 1.2.13
+                              │ http://github.com/bpolania/closest_fibonacci
+                              │ Fibonacci gem for ModCloth
+                gem:fibonacci │ Version: 0.1.7
+                              │ http://github.com/chaitanyav/fibonacci
+                              │ Fibonacci
+            gem:fibonacci-evs │ Version: 0.1.2
+                              │ http://github.com/edsimpson/fibonacci-evs
+                              │ Test gem with a Fibonacci-related method for
+                              │ Fixnum and Bignum.
+         gem:simple_fibonacci │ Version: 0.1.2
+                              │ http://github.com/anjshenoy/simple_fibonacci
+                              │ Gem that calculates fibonacci numbers upto a
+                              │ a provided number
+──────────────────────────────┴─────────────────────────────────────────────────
 
-    $ aero info gem:fibonacci
+$ aero info gem:fibonacci
 
-                                                       INFORMATION: fibonacci
-           ________________________________________    __________________________________________________
-                                           authors: :  Chaitanya Vellanki
-                                            bindir: :  bin
-                                              date: :  2012-11-09
-                                       description: :  A Ruby gem for exploring Fibonacci series
-                                             email: :  me@chaitanyavellanki.com
-                                          has_rdoc: :  True
-                                          homepage: :  http://github.com/chaitanyav/fibonacci
-                                              name: :  fibonacci
-                                          platform: :  ruby
-                                     require_paths: :  lib
-                             required_ruby_version: :  >= 0
-                         required_rubygems_version: :  >= 0
-                                 rubyforge_project: :  fibonacci
-                                  rubygems_version: :  1.3.6
-                             specification_version: :  3
-                                           summary: :  Fibonacci
-                                           version: :  0.1.7
+────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   fibonacci
+──────────────────────────────┬─────────────────────────────────────────────────
+                     authors: │ Chaitanya Vellanki
+                      bindir: │ bin
+                        date: │ 2012-11-09
+                 description: │ A Ruby gem for exploring Fibonacci series
+                       email: │ me@chaitanyavellanki.com
+                    has_rdoc: │ True
+                    homepage: │ http://github.com/chaitanyav/fibonacci
+                        name: │ fibonacci
+                    platform: │ ruby
+               require_paths: │ lib
+       required_ruby_version: │ >= 0
+   required_rubygems_version: │ >= 0
+           rubyforge_project: │ fibonacci
+            rubygems_version: │ 1.3.6
+       specification_version: │ 3
+                     summary: │ Fibonacci
+                     version: │ 0.1.7
+──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
 
