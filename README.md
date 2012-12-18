@@ -598,25 +598,30 @@ Supported commands:
 * info
 
 ```
-    $ aero search port:cowsay
+$ aero search port:cowsay
 
-                                        PACKAGE NAME   DESCRIPTION
-            ________________________________________   __________________________________________________
-                                         port:cowsay : @3.03 (textproc, amusements, games) Configurable
-                                                       talking characters in ASCII art
-                                          port:insub : @13.0 (irc) extra cowsay cows and irssi script
+────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+                  port:cowsay │ @3.03 (textproc, amusements, games) Configurable
+                              │ talking characters in ASCII art
+                  port:insub  │ @13.0 (irc) extra cowsay cows and irssi script
+──────────────────────────────┴─────────────────────────────────────────────────
 
-    $ aero info port:insub
+$ aero info port:insub
 
-                                                       INFORMATION: insub
-           ________________________________________    __________________________________________________
-                                           Version: :  @13.0 (irc)
-                                       Description: :  Handy tools for being obnoxious on IRC. Warning:
-                                                       some of the cows are potentially offensive.
-                                          Homepage: :  http://gruntle.org/projects/irssi/insub/
-                                         Platforms: :  darwin
-                                           License: :  unknown
-                                       Maintainers: :  nomaintainer@macports.org
+────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   insub
+──────────────────────────────┬─────────────────────────────────────────────────
+            Metadata-Version: │ 1.0
+                     Version: │ @13.0 (irc)
+                 Description: │ Handy tools for being obnoxious on IRC. Warning:
+                              │ some of the cows are potentially offensive.
+                    Homepage: │ http://gruntle.org/projects/irssi/insub/
+                   Platforms: │ darwin
+                     License: │ unknown
+                 Maintainers: │ nomaintainer@macports.org
+──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
 
