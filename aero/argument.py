@@ -137,6 +137,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
 
                 if p.wait() == 0:
                     ArgumentDelegate.pager = p.stdout.read().strip()
+                    break
 
 
         return ArgumentDelegate.pager
