@@ -230,25 +230,19 @@ class ArgumentDelegate(ArgumentParser):
 
     def _print_message(self, message, file=None):
         if message:
-            if len(message.splitlines()) > 30:  # TODO find real screen height
-                arg = self.prefix_chars[0] + 'p'
-                args = [arg, self.prefix_chars[0] + arg + 'ager']
-                pg = None
-                for arg in args:
-                    if arg in sys.argv and sys.argv.index(arg) + 1 <= len(sys.argv) - 1:
-                        pg = sys.argv[sys.argv.index(arg) + 1]
-                        ArgumentDelegate.pager = None
-                        break
-                pager = open('/tmp/aero.help.out', 'w')
-                pager.write(message)
-                pager.close()
-                subprocess.Popen(self.discover_pager(pg) + ' /tmp/aero.help.out', shell=True).wait()
+            from pygments import highlight
+            from pygments.lexers import guess_lexer
+            from pygments.formatters import Terminal256Formatter
+            message = highlight(message, guess_lexer(message), Terminal256Formatter())
+            from commands import getTerminalSize
+            height = getTerminalSize()[1]
+            if len(message.splitlines()) > height:
+                from subprocess import Popen, PIPE
+                Popen(
+                    self.data.pager, shell=True, stdin=PIPE
+                ).communicate(input=message.encode('utf'))
             else:
-                if file is None:
-                    file = sys.stderr
-                file.write(message)
-
-
+                print message
 
 from argparse import _SubParsersAction
 
