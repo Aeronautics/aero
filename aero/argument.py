@@ -232,32 +232,6 @@ class ArgumentDelegate(ArgumentParser):
                 file.write(message)
 
 
-class CompletionResponse(argparse.Action):
-
-    def __call__(self, parser, namespace, values, option_string=None):
-        completion_script = {
-            'bash': """
-_aero_completion()
-{
-    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \\
-                   COMP_CWORD=$COMP_CWORD \\
-                   AERO_AUTO_COMPLETE=1 $1 ) )
-}
-complete -o default -F _aero_completion aero
-""", 'zsh': """
-function _aero_completion {
-  local words cword
-  read -Ac words
-  read -cn cword
-  reply=( $( COMP_WORDS="$words[*]" \\
-             COMP_CWORD=$(( cword-1 )) \\
-             AERO_AUTO_COMPLETE=1 $words[1] ) )
-}
-compctl -K _aero_completion aero
-"""}
-        print completion_script[values]
-        parser.exit()
-
 
 from argparse import _SubParsersAction
 
