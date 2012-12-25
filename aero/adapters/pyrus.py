@@ -11,10 +11,7 @@ class Pyrus(BaseAdapter):
     """
     def search(self, query):
         response = self.command('search', query)[0].decode(*enc)
-        if 'No formula found' not in response \
-            and 'Error:' not in response\
-            and 'No info available' not in response\
-            and 'No results found' not in response:
+        if 'No results found' not in response:
             return dict([
                 self.search_info(self.package_name(line))
                 for line in response.splitlines()[4:-2] if line and 'pearhub.org' not in line
@@ -23,7 +20,7 @@ class Pyrus(BaseAdapter):
 
     def search_info(self, query):
         response = self._execute_command('aero', ['info', query], False)[0].decode(*enc)
-        if 'No info available' not in response:
+        if 'Aborted:' not in response:
             from re import split
             info = [
                 ''.join(split('\x1b.*?m', l)).replace('Summary:','').replace(u' │ ', '').strip()
@@ -50,10 +47,16 @@ class Pyrus(BaseAdapter):
             ).replace(
                 ' Excerpt', ''
             )
+            lines = [l for l in response.splitlines()
+                     if l
+                        and not l.startswith('PHP ')
+                        and 'Notice:' not in l
+                        and 'Call Stack:' not in l
+            and 'pyrus.phar:' not in l]
             lst = []
             hold = []
             from string import strip
-            for line in [l for l in response.splitlines()[4:] if l.strip() and not l.startswith('(`')]:
+            for line in [l for l in lines if l.strip() and not l.startswith('(`')]:
                 if 'Version:' in line:
                     lst.extend(map(lambda x: map(strip, x.split(':')), line.split(',')))
                 elif line.endswith(':'):
