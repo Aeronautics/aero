@@ -77,16 +77,24 @@ class ArgumentDelegate(ArgumentParser):
                 dedent(text), width, indent
             )
 
-        with open(os.path.join(AERO_PATH, "assets", "descrip.ascii"), "r") as file:
-            content = ''.join(file.readlines())
-        with open(os.path.join(AERO_PATH, "assets", "epilog.ascii"), "r") as file:
-            epilog = ''.join(file.readlines())
     def parse_args(self, args=None, namespace=None):
         '''
         pass the data collection so that we may also
         know what has been parsed.
         '''
         super(self.__class__, self).parse_args(args, self.data)
+
+        import codecs
+        content = codecs.open(
+            path.join(AERO_PATH, 'assets', 'descrip.ascii'),
+            mode='r', 
+            encoding='utf'
+        ).read()
+        epilog = codecs.open(
+            path.join(AERO_PATH, 'assets', 'epilog.ascii'),
+            mode='r', 
+            encoding='utf'
+        ).read()
 
         super(self.__class__, self).__init__(
             description=content,
@@ -192,16 +200,25 @@ class ArgumentDelegate(ArgumentParser):
         return self.version + '\n\n' + super(self.__class__, self).format_usage()
 
     def format_help(self):
-        with open(os.path.join(AERO_PATH,  "assets", "title.ascii"), "r") as file:
-            content = ''.join(file.readlines()).replace('{{version}}', self.version)
+        import codecs
+        content = codecs.open(
+            path.join(AERO_PATH,  'assets', 'title.ascii'),
+            mode='r', 
+            encoding='utf'
+        ).read().replace('{{version}}', self.version)
 
         aerotip = choice(('aero1', 'aero2', 'aero3', 'aero4', 'aero5', 'aero6', 'aero7', 'aero8'))
-        with open(os.path.join(AERO_PATH, "assets/", aerotip + ".ascii"), "r") as file:
-            aerotip = ''.join(file.readlines())
+        aerotip = codecs.open(
+            path.join(AERO_PATH, 'assets/', aerotip + '.ascii'),
+            mode='r',
+            encoding='utf'
+        ).read()
 
-#        commhead = None
-        with open(os.path.join(AERO_PATH, "assets", "command.ascii"), "r") as file:
-            commhead = ''.join(file.readlines())
+        commhead = codecs.open(
+            path.join(AERO_PATH, 'assets', 'command.ascii'),
+            mode='r',
+            encoding='utf'
+        ).read()
 
         content += super(self.__class__, self).format_help()\
             .replace('usage:', '\n')\
