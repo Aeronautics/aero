@@ -265,4 +265,8 @@ class CommandParser(_SubParsersAction):
 
     def __call__(self, parser, data, values, option_string=None):
         super(self.__class__, self).__call__(parser, data, values, option_string)
-        globals()[values[0].capitalize() + 'Command'](data).execute()
+        from importlib import import_module
+        getattr(
+            import_module('aero.commands.' + values[0]),
+            values[0].capitalize() + 'Command'
+        )(data).execute()
