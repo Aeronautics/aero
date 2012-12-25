@@ -2,7 +2,7 @@
 __author__ = 'nickl-'
 
 from string import strip
-from aero.__version__ import __version__
+from aero.__version__ import __version__, enc
 from importlib import import_module
 from .base import BaseAdapter
 
@@ -19,7 +19,7 @@ class Pip(BaseAdapter):
             lst[self.package_name(r['name'])] = 'Version: {:<12} Score:{:>4}\n{}'.format(
                 m.highest_version(r['versions']),
                 r['score'],
-                (summary if len(summary) < 200 else summary[:190] + '...').replace('  ', ' ')
+                (summary.encode(*enc) if len(summary) < 200 else summary[:190] + '...').replace('  ', ' ')
             )
         return lst
 
