@@ -30,13 +30,23 @@ class Pecl(BaseAdapter):
         if response and 'Unknown package' not in response:
             from re import match
             from string import strip
-            return [(map(strip, match('(\w*)(.*$)',line).groups()))
+            res = []
+            lbl = None
+            for l in [(map(strip, match('(\w*)(.*$)',line.replace('\n','')).groups()))
                     for line in response.splitlines()
                     if line
                        and 'PACKAGE' not in line
                        and '====' not in line
-                       and match('(\w*)(.*$)',line)]
-        return [u'Aborted: No info available']
+                       and match('(\w*)(.*$)',line)]:
+                if l[0]:
+                    if lbl:
+                        res.append(lbl)
+                    lbl = l
+                else:
+                    lbl[1] += ' ' + l[1]
+            res.append(lbl)
+            return res
+        return ['Aborted: No info available']
 
     def install(self, query):
         self.shell('install', query)
