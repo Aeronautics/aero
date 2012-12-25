@@ -7,7 +7,7 @@ from .base import BaseAdapter
 
 class Pyrus(BaseAdapter):
     """
-    Homebrew adapter.
+    Pyrus adapter.
     """
     def search(self, query):
         response = self.command('search', query)[0].decode(*enc)
