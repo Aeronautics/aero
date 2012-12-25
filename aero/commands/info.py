@@ -20,7 +20,7 @@ class InfoCommand(CommandProcessor):
             from importlib import import_module
             (width, height) = import_module('aero.commands').getTerminalSize()
             factor = width / 100
-            size = map(str, map(int , [(40 * factor)-3, 55 * factor, 60 * factor]))
+            size = map(str, map(int , [(40 * factor)-3, 58 * factor, 60 * factor]))
             key = ''
             from StringIO import StringIO
             pager = StringIO()
@@ -35,6 +35,7 @@ class InfoCommand(CommandProcessor):
             pager.write(('{:>' + size[0] + u'}─┬─{:<' + size[2] + '}\n').format(
                 u'─' * int(size[0]), u'─' * int(size[2])
             ))
+            import textwrap
             for line in res:
                 if isinstance(line, tuple) or isinstance(line, list):
                     if len(line) >= 2:
@@ -42,10 +43,16 @@ class InfoCommand(CommandProcessor):
                         line = line[1]
                     else:
                         line = line[0]
+                    if len(key) > int(size[0]):
+                        wrap = textwrap.wrap(key, int(size[0]))
+                        key = wrap.pop()
+                        for w in wrap:
+                            pager.write(
+                                ('{:>' + size[0] + u'} │\n').format(w)
+                            )
                 if line:
                     for l in line.splitlines():
                         if len(l) > int(size[1]):
-                            import textwrap
                             for wrap in textwrap.wrap(l, int(size[1])):
                                 pager.write(
                                     ('{:>' + size[0] + u'} │ {:' + size[1] + '}\n').format(
