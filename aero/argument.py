@@ -67,6 +67,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
                 help="Show program's version number and exit",
             )
 
+        from argcomplete.completers import ChoicesCompleter
         self.add_argument(
             default_prefix + 'p', default_prefix * 2 + 'pager',
             help='''The pager to use for long paged displays. The default
@@ -74,9 +75,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
             not set, some common pagers like "less", "more", "most"
              and finally "cat" are tried, in this order.''',
             default=self.discover_pager(),
-        )
-
-        choices = list(x for x, y in AVAILABLE_ADAPTERS)
+        ).completer=ChoicesCompleter(self.data.choices)
 
         self.add_argument(
             default_prefix + 'd', default_prefix * 2 + 'disable',
@@ -85,7 +84,6 @@ class ArgumentDelegate(argparse.ArgumentParser):
             help='''Add the items you wish to disable to the list.
                 Multiple disable arguments may be supplied.
                 ''',
-            default=[], choices=choices, nargs='?',
         )
 
         self.add_argument(

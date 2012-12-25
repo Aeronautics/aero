@@ -3,3 +3,4 @@ PyYAML==3.10
 argparse==1.2.1
 progbar==0.3
 
+argcomplete>=0.2.9
