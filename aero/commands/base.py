@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from aero.__version__ import __version_info__
+from aero.__version__ import __version_info__, enc
 __author__ = 'nickl-'
 
 
@@ -138,7 +138,7 @@ class CommandProcessor(object):
                     if not manager or manager == adapter_name:
                         length = str(max([len(a[0]) for a in AVAILABLE_ADAPTERS]))
                         self.out.send(
-                            (u'Doing an aero {} of package: {} using {:<' + length + '} ').format(
+                            ('Doing an aero {} of package: {} using {:<' + length + '} ').format(
                                 self.cmd(), package, adapter_name
                             )
                         )
@@ -146,7 +146,7 @@ class CommandProcessor(object):
                         if self.data.invalidate or res is False:
                             target.send((adapter, package))
                         else:
-                            self.out.send(u'Found {:>4} options [CACHED]\n'.format(len(res)))
+                            self.out.send('Found {:>4} options [CACHED]\n'.format(len(res)))
                             self.ticker.send((1, res))
                     else:
                         self.ticker.send(1)
@@ -156,7 +156,7 @@ class CommandProcessor(object):
     @coroutine
     def progress(self, target):
         from progbar import ProgBar
-        bar = ProgBar(u'Progress: ', 30)
+        bar = ProgBar('Progress: ', 30)
         bar.start()
         while True:
             result = (yield)
@@ -181,10 +181,10 @@ class CommandProcessor(object):
             try:
                 adapter.passthruArgs(self.data.passthru)
                 aero = getattr(adapter, self.cmd())(package)
-                if self.cmd() == u'search':
-                    self.out.send(u'Found {:>4} options\n'.format(len(aero)))
+                if self.cmd() == 'search':
+                    self.out.send('Found {:>4} options\n'.format(len(aero)))
                 else:
-                    self.out.send(u'\n')
+                    self.out.send('\n')
                 target.send((1,
                     self.seen(
                         self.cmd(),
@@ -195,7 +195,7 @@ class CommandProcessor(object):
                 )
             except NotImplementedError:
                 target.send((1,
-                    [u'Aborted: {} has no implementation for command: {}\n'.format(
+                    ['Aborted: {} has no implementation for command: {}\n'.format(
                         adapter_name, self.cmd()
                     )]
                 ))
@@ -209,7 +209,7 @@ class CommandProcessor(object):
         out = pager.getvalue()
         pager.close()
         out = highlight(out, CppLexer(), Terminal256Formatter())
-        out = out.encode('utf')
+        out = out.encode(*enc)
         if len(out.splitlines()) > height:
             from subprocess import Popen, PIPE
             Popen(self.data.pager, shell=True, stdin=PIPE).communicate(input=out)
@@ -224,16 +224,16 @@ class DebugCommandProcessor(CommandProcessor):
 
     def seen(self, command, adapter, package, result=False):
         if not isinstance(result, bool):
-            print u'\n{:=^100}'.format('')
-            print u'{:=^100}'.format(' '+command+' '+adapter+' '+package+' ')
-            print u'{:=^100}'.format('')
-            print u'Result type: ', type(result).__name__
+            print '\n{:=^100}'.format('')
+            print '{:=^100}'.format(' '+command+' '+adapter+' '+package+' ')
+            print '{:=^100}'.format('')
+            print 'Result type: ', type(result).__name__
             itr = result
             if isinstance(result, dict):
                 itr = result.items()
             for r in itr:
-                print u'{} | {:^5} | {}'.format(type(r).__name__, len(r), r)
-            print u'\n'
+                print '{} | {:^5} | {}'.format(type(r).__name__, len(r) if r else 0, r)
+            print '\n'
         return result
 
     @coroutine

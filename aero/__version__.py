@@ -10,7 +10,7 @@ from distutils import version
 
 from collections import namedtuple
 v = namedtuple('version_info', 'major minor micro releaselevel serial')
-
+enc = ('utf-8', 'ignore')
 
 class V(v):
     def __init__(self, *args, **kwargs):

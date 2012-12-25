@@ -16,7 +16,7 @@ class SearchCommand(CommandProcessor):
             res = (yield)
             if res:
                 if isinstance(res, list):
-                    print u'\n' + res[0]
+                    print '\n' + res[0]
                     continue
                 from importlib import import_module
                 (width, height) = import_module('aero.commands').getTerminalSize()
@@ -26,10 +26,10 @@ class SearchCommand(CommandProcessor):
                 from StringIO import StringIO
                 pager = StringIO()
                 pager.write(u'─' * width)
-                pager.write((u'\n{:>' + size[0] + u'}   {:<' + size[2] + u'}\n').format(
-                    u'PACKAGE NAME', u'DESCRIPTION'
+                pager.write(('\n{:>' + size[0] + '}   {:<' + size[2] + '}\n').format(
+                    'PACKAGE NAME', 'DESCRIPTION'
                 ))
-                pager.write((u'{:>' + size[0] + u'}─┬─{:<' + size[2] + u'}\n').format(
+                pager.write(('{:>' + size[0] + u'}─┬─{:<' + size[2] + '}\n').format(
                     u'─' * int(size[0]), u'─' * int(size[2])
                 ))
                 for key, value in res:
@@ -38,19 +38,19 @@ class SearchCommand(CommandProcessor):
                         if len(line) > int(size[1]):
                             for wrap in import_module('textwrap').wrap(line, int(size[1])):
                                 pager.write(
-                                    (u'{:>' + size[0] + u'} │ {:<' + size[1] + u'}\n').format(
+                                    ('{:>' + size[0] + u'} │ {:<' + size[1] + '}\n').format(
                                         key.strip(), wrap.lstrip()
                                     )
                                 )
-                                key = u''
+                                key = ''
                         else:
                             pager.write(
-                                (u'{:>' + size[0] + u'} │ {:<' + size[1] + u'}\n').format(
+                                ('{:>' + size[0] + u'} │ {:<' + size[1] + '}\n').format(
                                     key.strip(), line.lstrip()
                                 )
                             )
-                        key = u''
-                pager.write((u'{:>' + size[0] + u'}─┴─{:<' + size[2] + u'}\n').format(
+                        key = ''
+                pager.write(('{:>' + size[0] + u'}─┴─{:<' + size[2] + '}\n').format(
                     u'─' * int(size[0]), u'─' * int(size[2])
                 ))
                 self.render(pager)

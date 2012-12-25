@@ -15,11 +15,11 @@ class Pip(BaseAdapter):
         m = import_module('pip.commands.search')
         lst = {}
         for r in m.transform_hits(m.SearchCommand().search(query, 'http://pypi.python.org/pypi')):
-            summary = u' '.join(map(strip, r['summary'].split(u'\n'))).replace(u'  ', u' ')
-            lst[self.package_name(r['name'])] = u'Version: {:<14} Score:{:>4}\n{}'.format(
+            summary = u' '.join(map(strip, r['summary'].split('\n') if r['summary'] else [''])).replace('  ', ' ')
+            lst[self.package_name(r['name'])] = 'Version: {:<12} Score:{:>4}\n{}'.format(
                 m.highest_version(r['versions']),
                 r['score'],
-                (summary if len(summary) < 200 else summary[:190] + u'...').replace(u'  ', u' ')
+                (summary if len(summary) < 200 else summary[:190] + '...').replace('  ', ' ')
             )
         return lst
 
@@ -46,4 +46,4 @@ class Pip(BaseAdapter):
             pr.prepare_files(finder)
             return pi.pkg_info().items()
         except import_module('pip.exceptions').InstallationError:
-            return [u'Aborted: No info available']
+            return ['Aborted: No info available']

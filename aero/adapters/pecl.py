@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
 
-from aero.__version__ import __version__
+from aero.__version__ import __version__, enc
 from .base import BaseAdapter
 
 
@@ -10,12 +10,12 @@ class Pecl(BaseAdapter):
     Pecl adapter.
     """
     def search(self, query):
-        response = self.command('-q search', query)[0]
+        response = self.command('-q search', query)[0].decode(*enc)
         if 'MATCHED PACKAGES' in response:
             from re import match
             from string import strip
             return dict([
-                self.package_name(u'{0}|Version:{1}\nhttp://pecl.php.net/{0}\n{2}'.format(
+                self.package_name('{0}|Version:{1}\nhttp://pecl.php.net/{0}\n{2}'.format(
                     *map(strip, match('(.* (?=\d))(.*\) +)(.*$)', line).groups())
                 )).split('|')
                          for line in response.splitlines()
@@ -26,7 +26,7 @@ class Pecl(BaseAdapter):
         return {}
 
     def info(self, query):
-        response = self.command('remote-info', query)[0]
+        response = self.command('remote-info', query)[0].decode(*enc)
         if 'Unknown package' not in response:
             from re import match
             from string import strip

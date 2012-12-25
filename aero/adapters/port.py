@@ -4,7 +4,7 @@ __all__ = ('Port', )
 
 from string import strip
 
-from aero.__version__ import __version__
+from aero.__version__ import __version__, enc
 from .base import BaseAdapter
 
 
@@ -13,7 +13,7 @@ class Port(BaseAdapter):
     Macports adapter.
     """
     def search(self, query):
-        response = self._execute_command('search', query)[0]
+        response = self._execute_command('search', query)[0].decode(*enc)
         lst = list(line for line in response.splitlines() if line)
         if lst:
             return dict(map(
@@ -25,7 +25,7 @@ class Port(BaseAdapter):
         key = result[0].split(' ', 1)
         return [
             self.package_name(key.pop(0)),
-            key.pop() + u' ' + result[1]
+            key.pop() + ' ' + result[1]
         ]
 
     def install(self, query):
@@ -33,8 +33,8 @@ class Port(BaseAdapter):
         return {}
 
     def info(self, query):
-        result = self.command('info', query)[0]
-        result = result.replace(u'{} '.format(query), u'Version: ')
+        result = self.command('info', query)[0].decode(*enc)
+        result = result.replace('{} '.format(query), 'Version: ')
         return [map(
-            strip, line.split(u': ', 1)
+            strip, line.split(': ', 1)
         ) for line in result.splitlines()]
