@@ -228,7 +228,7 @@ To obtain more detailed information regarding a given package now also available
 Package managers
 ================
 
-The following package managers has been enabled, more will follow:
+The following package managers have been recycled, more will follow. Let us know if your favourite packaging tool is missing or submit a pull request with  new adapter you'd like added.
 
 ﻿Advanced Package Tool
 ---------------------
