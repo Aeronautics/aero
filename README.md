@@ -230,6 +230,64 @@ Package managers
 
 The following package managers has been enabled, more will follow:
 
+﻿Advanced Package Tool
+---------------------
+Supported commands:
+
+* search
+* install
+* info
+
+```
+$ aero search apt:fibonacci
+
+﻿────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+   apt:libmath-fibonacci-perl │ Fibonacci numbers calculations Perl module
+            apt:python-pqueue │ a priority queue extension for Python
+                apt:qtstalker │ commodity and stock market charting and
+                              │ technical analysis
+──────────────────────────────┴─────────────────────────────────────────────────
+
+$ aero info apt:libmath-fibonacci-perl
+
+﻿────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   libmath-fibonacci-perl
+──────────────────────────────┬─────────────────────────────────────────────────
+                     Package: │ libmath-fibonacci-perl
+                    Priority: │ optional
+                     Section: │ universe/perl
+              Installed-Size: │ 64
+                  Maintainer: │ Ubuntu MOTU Developers <ubuntu-
+                              │ motu@lists.ubuntu.com>
+         Original-Maintainer: │ Debian Perl Group <pkg-perl-
+                              │ maintainers@lists.alioth.debian.org>
+                Architecture: │ all
+                     Version: │ 1.5-4
+                     Depends: │ perl (>= 5.6.0-16)
+                    Filename: │ pool/universe/libm/libmath-fibonacci-perl
+                              │ /libmath-fibonacci-perl_1.5-4_all.deb
+                        Size: │ 6902
+                      Md5Sum: │ 7be8cecc5fcd6c44d02a19dce5930396
+                        Sha1: │ d6936f3710cf7d995cd9f2e925ee6f6e912a3327
+                      Sha256: │ 194a2f8c11dd492074745633c52f07392b537580f015a8
+                              │ 1bd20e9ca31c99cabd
+﻿              Description-En: │ Fibonacci numbers calculations Perl module
+                              │ This module provides a few functions related
+                              │ to Fibonacci numbers,  such as getting the n
+                              │ term of a Fibonacci sequence, compute and
+                              │ return the first n Fibonacci numbers,
+                              │ decompose an integer into the  sum of
+                              │ Fibonacci numbers, etc.
+                    Homepage: │ http://search.cpan.org/dist/Math-Fibonacci/
+             Description-Md5: │ 11f9aaf15742de4ebb30a58b77eabee3
+                        Bugs: │ https://bugs.launchpad.net/ubuntu/+filebug
+                      Origin: │ Ubuntu
+──────────────────────────────┴─────────────────────────────────────────────────
+
+```
+
 Homebrew
 --------
 Supported commands:
