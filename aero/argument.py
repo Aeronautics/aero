@@ -70,8 +70,6 @@ class ArgumentDelegate(ArgumentParser):
             return '{} {}'.format(', '.join(action.option_strings), args_string)
 
         def _fill_text(self, text, width, indent):
-
-    def __init__(self, prog='', version=''):
             from textwrap import dedent
             return super(self.__class__, self)._fill_text(
                 dedent(text), width, indent
@@ -83,6 +81,8 @@ class ArgumentDelegate(ArgumentParser):
         know what has been parsed.
         '''
         super(self.__class__, self).parse_args(args, self.data)
+
+    def __init__(self, **kwargs):
 
         import codecs
         content = codecs.open(
@@ -103,11 +103,14 @@ class ArgumentDelegate(ArgumentParser):
             fromfile_prefix_chars='@',
         )
 
-        self.version = prog + ' ' + version
+        # if there is no version then this instance is a subparser
         if '-' in self.prefix_chars:
             default_prefix = '-'
         else:
             default_prefix = self.prefix_chars[0]
+
+        if kwargs.has_key('version'):
+            self.version = kwargs['prog'] + ' ' + kwargs['version']
 
         if self.version:
             from argparse import SUPPRESS
