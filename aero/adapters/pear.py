@@ -30,22 +30,13 @@ class Pear(BaseAdapter):
         if response and 'Unknown package' not in response:
             from re import match
             from string import strip
-            res = []
-            lbl = None
-            for l in [(map(strip, match('(\w*)(.*$)',line).groups()))
+            res = [(map(strip, match('(\w*)(.*$)',line).groups()))
                     for line in response.splitlines()
                     if line
                        and 'PACKAGE' not in line
                        and '====' not in line
-                       and match('(\w*)(.*$)',line)]:
-                if l[0]:
-                    if lbl:
-                        res.append(lbl)
-                    lbl = l
-                else:
-                    lbl[1] += ' ' + l[1]
-            res.append(lbl)
-            return res
+                       and match('(\w*)(.*$)',line)]
+            return self.munge_lines(res)
         return ['Aborted: No info available']
 
     def install(self, query):

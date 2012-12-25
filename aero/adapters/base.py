@@ -58,6 +58,19 @@ class BaseAdapter(object):
     def passthruArgs(self, args):
         self.passthru = [] if not isinstance(args, str) else args.split(' ')
 
+    def munge_lines(self, list):
+        res = []
+        lbl = None
+        for l in list:
+            if l[0]:
+                if lbl:
+                    res.append(lbl)
+                lbl = l
+            else:
+                lbl[1] += ' ' + l[1]
+        res.append(lbl)
+        return res
+
     @abstractmethod
     def search(self, query):
         raise NotImplementedError
