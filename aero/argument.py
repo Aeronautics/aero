@@ -155,34 +155,54 @@ class ArgumentDelegate(ArgumentParser):
                 package manager's command execution. Enclose the arguments
                 in quotes to distinguish them from others.''',
         )
+        if kwargs.has_key('version'):
 
+            commands = super(self.__class__, self).add_subparsers(
+                metavar='command [mngr:] package',
+                title='Command arguments', action=CommandParser,
+                description='''
+                    The aero commands are based on the typical package manager
+                    commands followed by the package name(s) to perform the task on.
+                    At least one command is required but several packages can be
+                    processed simultaneously.
+                    Use 'aero command --help' to get further details for specific
+                    commands.''',
+                help='''Optionally provide the specific manager to use prepended to
+                    the package name(s) with a colon ':' or alternatively aero will
+                    execute the command against all enabled package managers.
+                    ##choose one of the following valid aero commands:##''',
+            )
 
+            commands.add_parser(
+                'search',
+                help='Do an aero search for packages'
+            ).add_argument(
+                'packages',
+                nargs='+',
+                help='The package names to aero search',
+            )
 
+            commands.add_parser(
+                'install',
+                help='Do an aero install package(s)',
+            ).add_argument(
+                'packages',
+                nargs='+',
+                help='The package names to aero install',
+            )
+
+            commands.add_parser(
+                'info',
+                help='Do an aero info for packages',
+            ).add_argument(
+                'packages',
+                nargs='+',
+                help='The package names to aero info on',
+            )
 
     def convert_arg_line_to_args(self, conf):
         for arg in conf.split(','):
             yield arg
-
-    def add_package_commands(self, cmds):
-        commargs = self.add_subparsers(
-            metavar='command [mngr:] package',
-            title="Command arguments", action=CommandParser,
-            description='''
-                The aero commands are based on the typical package manager
-                commands followed by the package name(s) to perform the task on.
-                At least one command is required but several packages can be
-                processed simultaneously.
-                Use "aero command --help" to get further details for specific
-                commands.''',
-            help='''Optionally provide the specific manager to use prepended to
-                the package name(s) with a colon ":" or alternatively aero will
-                execute the command against all enabled package managers.
-                ##choose one of the following valid aero commands:##''',
-        )
-        procs = {}
-        for k in cmds.keys():
-            procs[k] = commargs.add_parser(k, help=cmds[k][0])
-            procs[k].add_argument('packages', help=cmds[k][1], nargs='+')
 
     def format_usage(self):
         return self.version + '\n\n' + super(self.__class__, self).format_usage()
