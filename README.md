@@ -244,7 +244,7 @@ $ aero search brew:ncurses
 ────────────────────────────────────────────────────────────────────────────────
                  PACKAGE NAME   DESCRIPTION
 ──────────────────────────────┬─────────────────────────────────────────────────
-                 brew:ncurses │ version:stable 5.9
+                 brew:ncurses │ Version:stable 5.9
                               │ http://www.gnu.org/s/ncurses/
                               │ /usr/local/Cellar/ncurses/5.9 (1777 files,
 ──────────────────────────────┴─────────────────────────────────────────────────
@@ -289,8 +289,8 @@ $ aero search gem:fibonacci
                               │ Provides some methods to find a Fibonacci
                               │ number less than a given N.
     gem:closest-fibonacci-gem │ Version: 1.1.0
-                              │ http://github.com/beckram23/closest-
-                              │ fibonacci-gem
+                              │ http://github.com/beckram23/closest-fibonacci-
+                              │ gem
                               │ Find the largest fibonacci that is smaller
                               │ than the given integer
         gem:closest_fibonacci │ Version: 1.2.13
@@ -305,8 +305,8 @@ $ aero search gem:fibonacci
                               │ Fixnum and Bignum.
          gem:simple_fibonacci │ Version: 0.1.2
                               │ http://github.com/anjshenoy/simple_fibonacci
-                              │ Gem that calculates fibonacci numbers upto a
-                              │ a provided number
+                              │ Gem that calculates fibonacci numbers upto a a
+                              │ provided number
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 $ aero info gem:fibonacci
@@ -357,8 +357,8 @@ $ aero search npm:fibonacci-async
 ──────────────────────────────┬─────────────────────────────────────────────────
           npm:fibonacci-async │ 2012-10-29 22:03
                               │ So, you want to benchmark node.js with
-                              │ fibonacci once again? - Here's the library
-                              │ for that. You're welcome.
+                              │ fibonacci once again? - Here's the library for
+                              │ that. You're welcome.
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 $ aero info npm:fibonacci-async
@@ -368,10 +368,10 @@ $ aero info npm:fibonacci-async
 ──────────────────────────────┬─────────────────────────────────────────────────
                       Author: │ Enno Boland <eb@s01.de>
                  Description: │ So, you want to benchmark node.js with
-                              │ fibonacci once again? - Here"s the library
-                              │ for that. You"re welcome.
-                        Dist: │ tarball: http://registry.npmjs.org
-                              │ /fibonacci-async/-/fibonacci-async-0.0.2.tgz
+                              │ fibonacci once again? - Here"s the library for
+                              │ that. You"re welcome.
+                        Dist: │ tarball: http://registry.npmjs.org/fibonacci-
+                              │ async/-/fibonacci-async-0.0.2.tgz
                               │ shasum:
                               │ 173d4d28b038723f41bacc660edc331b1e526047
                    Dist-Tags: │ latest: 0.0.2
@@ -382,8 +382,8 @@ $ aero info npm:fibonacci-async
                   Repository: │ url: git://github.com/Gottox/fibonacci-
                               │ async.git
                               │ type: git
-                     Scripts: │ preinstall: node-waf clean || (exit 0);
-                              │ node-waf configure build
+                     Scripts: │ preinstall: node-waf clean || (exit 0); node-
+                              │ waf configure build
                         Time: │ 0.0.1: 2012-05-26T11:24:06.960Z
                               │ 0.0.2: 2012-05-26T11:25:45.254Z
                      Version: │ 0.0.2
@@ -412,8 +412,8 @@ $ aero search pear:fibonacci
 ──────────────────────────────┬─────────────────────────────────────────────────
           pear:Math_Fibonacci │ Version:0.8 (stable)
                               │ http://pear.php.net/Math_Fibonacci
-                              │ Package to calculate and manipulate
-                              │ Fibonacci numbers
+                              │ Package to calculate and manipulate Fibonacci
+                              │ numbers
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 $ aero info pear:Math_Fibonacci
@@ -426,26 +426,19 @@ $ aero info pear:Math_Fibonacci
                      Package: │ Math_Fibonacci
                      License: │ PHP
                     Category: │ Math
-                     Summary: │ Package to calculate and manipulate
-                              │ Fibonacci
+                     Summary: │ Package to calculate and manipulate Fibonacci
                               │ numbers
-                 Description: │ The Fibonacci series is constructed using
-                              │ the
-                              │ formula:
-                              │ F(n) = F(n - 1) + F (n - 2),
-                              │ By convention F(0) = 0, and F(1) = 1.
-                              │ An alternative formula that uses the Golden
-                              │ Ratio can also be used:
-                              │ F(n) = (PHI^n - phi^n)/sqrt(5) [Lucas'
-                              │ formula],
-                              │ where PHI = (1 + sqrt(5))/2 is the Golden
-                              │ Ratio,
-                              │ and
-                              │ phi = (1 - sqrt(5))/2 is its reciprocal
-                              │ Requires Math_Integer, and can be used with
-                              │ big
-                              │ integers if the GMP or
-                              │ the BCMATH libraries are present.
+                 Description: │ The Fibonacci series is constructed using the
+                              │ formula: F(n) = F(n - 1) + F (n - 2), By
+                              │ convention F(0) = 0, and F(1) = 1. An
+                              │ alternative formula that uses the Golden Ratio
+                              │ can also be used: F(n) = (PHI^n -
+                              │ phi^n)/sqrt(5) [Lucas' formula], where PHI =
+                              │ (1 + sqrt(5))/2 is the Golden Ratio, and phi =
+                              │ (1 - sqrt(5))/2 is its reciprocal Requires
+                              │ Math_Integer, and can be used with big
+                              │ integers if the GMP or the BCMATH libraries
+                              │ are present.
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
@@ -483,24 +476,16 @@ $ aero info pecl:ncurses
                      Summary: │ Terminal screen handling and optimization
                               │ package
                  Description: │ ncurses (new curses) is a free software
-                              │ emulation of curses in
-                              │ System V Rel 4.0 (and above). It uses
-                              │ terminfo
-                              │ format, supports
+                              │ emulation of curses in System V Rel 4.0 (and
+                              │ above). It uses terminfo format, supports
                               │ pads, colors, multiple highlights, form
-                              │ characters and function
-                              │ key mapping. Because of the interactive
-                              │ nature
-                              │ of this library,
-                              │ it will be of little use for writing Web
-                              │ applications, but may
-                              │ be useful when writing scripts meant using
-                              │ PHP
-                              │ from the command
-                              │ line.
-                              │ See also
-                              │ http://www.gnu.org/software/ncurses/ncurses.
-                              │ html
+                              │ characters and function key mapping. Because
+                              │ of the interactive nature of this library, it
+                              │ will be of little use for writing Web
+                              │ applications, but may be useful when writing
+                              │ scripts meant using PHP from the command line.
+                              │ See also http://www.gnu.org/software/ncurses/n
+                              │ curses.html
 ──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
@@ -538,12 +523,11 @@ $ aero info pip:Canto
                         Name: │ Canto
                      Version: │ 0.7.10
                      Summary: │ An ncurses RSS aggregator.
-                   Home-page: │ http://codezen.org/canto
+                   Home-Page: │ http://codezen.org/canto
                       Author: │ Jack Miller
-                Author-email: │ jack@codezen.org
+                Author-Email: │ jack@codezen.org
                      License: │ GPLv2
-                Download-URL: │ http://codezen.org/static/canto-0.7.10.tar.g
-                              │ z
+                Download-Url: │ http://codezen.org/static/canto-0.7.10.tar.gz
                  Description: │ UNKNOWN
                     Platform: │ linux
 ──────────────────────────────┴─────────────────────────────────────────────────
@@ -563,30 +547,34 @@ Supported commands:
 * info
 
 ```
-    $ aero search pyrus:ncurses
+$ aero search pyrus:ncurses
 
+────────────────────────────────────────────────────────────────────────────────
+                 PACKAGE NAME   DESCRIPTION
+──────────────────────────────┬─────────────────────────────────────────────────
+   pyrus:pecl.php.net/ncurses │ Version:1.0.2 (API 1.0.0)
+                              │ http://pecl.php.net/ncurses
+                              │ Terminal screen handling and optimization
+                              │ package
+──────────────────────────────┴─────────────────────────────────────────────────
 
-                                        PACKAGE NAME   DESCRIPTION
-            ________________________________________   __________________________________________________
-                          pyrus:pecl.php.net/ncurses : Version: 1.0.2 (API 1.0.0)
-                                                       http://pecl.php.net/ncurses
-                                                       Terminal screen handling and optimization package
+$ aero info pyrus:pecl.php.net/ncurses
 
-    $ aero info pyrus:pecl.php.net/ncurses
-
-                                                       INFORMATION: pecl.php.net/ncurses
-           ________________________________________    __________________________________________________
-                                           Version: :  1.0.2 (API 1.0.0)
-                                         Stability: :  stable (API stable)
-                                      Release Date: :  2012-06-16 17:05:19
-                                           Summary: :  Terminal screen handling and optimization package
-                                       Description: :  ncurses (new curses) is a free software emulation
-                                                       of curses in System V Rel 4.0 (and above). It uses
-                                                       terminfo format, supports pads, colors, multiple
-                                                       highlights, form ch...
-                                     Release Notes: :  - Fixed build on PHP 5.3+ - Fixed bug #60853
-                                                       (Missing NCURSES_KEY_HOME constant)...
-
+────────────────────────────────────────────────────────────────────────────────
+                 INFORMATION:   pecl.php.net/ncurses
+──────────────────────────────┬─────────────────────────────────────────────────
+                     Version: │ 1.0.2 (API 1.0.0)
+                   Stability: │ stable (API stable)
+                Release Date: │ 2012-06-16 17:05:19
+                     Summary: │ Terminal screen handling and optimization
+                              │ package
+                 Description: │ ncurses (new curses) is a free software
+                              │ emulation of curses in System V Rel 4.0 (and
+                              │ above). It uses terminfo format, supports
+                              │ pads, colors, multiple highlights, form ch...
+               Release Notes: │ - Fixed build on PHP 5.3+ - Fixed bug #60853
+                              │ (Missing NCURSES_KEY_HOME constant)...
+──────────────────────────────┴─────────────────────────────────────────────────
 
 ```
 Special notes:
