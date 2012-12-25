@@ -699,13 +699,32 @@ Changelog
 ---------
  * v0.0.1 alpha 2
    * Pip info capable now - whoop whoop!
-   * Fixed unicode issues
    * Pip via pip library instead of sub-process
+   * Unicode done right
+   * Use unicode box drawing chars in output
+   * Normalized info output title case
+   * Refactored commands as package
+   * Refactored arguments
+   * Improved command line argument exposure
+   * RF CommandProcessor render method extraction
+   * Improved pager detection (lazy)
+   * Replaced autocompletion with argcomplete
+   * Improved imports (lazy)
    * Improved adapter implementation
    * Improved resources free on exit
    * Improved pass through implementation
    * Improved output display and fix typos
+   * Improved output for pecl and pear
+   * Repaired pyrus adapter
+   * Added support for Advanced Package Manage (apt)
+   * Tested on Linux (ubuntu)
+   * Terminal window actual size consideration, works with 80 cols or more
+   * Get dependencies from requirements.txt
+   * Pygmentized help output
+   * Using codecs.open instead of file.open for assets
+   * Documentation as Restructured Text (rst)
    * Updated documentation
+
 
  * v0.0.1 alpha 1 - 2012-12-02
   * Fixed installation issues and dependency installation
