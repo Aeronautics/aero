@@ -111,7 +111,11 @@ class CommandProcessor(object):
             else:
                 mngr = None
                 pkg = package
-            adapters.send((pkg, mngr))
+            if not mngr or mngr in [a[0] for a in AVAILABLE_ADAPTERS]:
+                adapters.send((pkg, mngr))
+            else:
+                self.ticker.send((len(AVAILABLE_ADAPTERS),
+                    ['Aborted: No package manager named "{}" is available.'.format(mngr)]))
 
     @coroutine
     def write(self):
