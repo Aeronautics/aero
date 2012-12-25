@@ -3,7 +3,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
 
-from aero import main
+def run():
+    from aero import main
+    return main()
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__": run()
