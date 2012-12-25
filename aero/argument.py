@@ -13,10 +13,42 @@ import textwrap
 
 from .command import SearchCommand, InstallCommand, InfoCommand
 from .adapters import AVAILABLE_ADAPTERS
+    class ArgumentData(Namespace):
+        choices = ['less', 'more', 'most', 'cat']
+        _pager = None
+
+        @property
+        def pager(self):
+            if not self._pager:
+                self._pager = self.discover_pager()
+            return self._pager
+
+        @pager.setter
+        def pager(self, val):
+            self._pager = self.discover_pager([val])
+
+        def discover_pager(self, pagers=[]):
+            try:
+                from os import environ
+                pagers += [environ['PAGER']]
+            except KeyError:
+                pass
+            pagers += self.choices
+            from subprocess import Popen, PIPE
+            for pager in pagers:
+                p = Popen(
+                    ['which', pager],
+                    stdout=PIPE,
+                    stderr=PIPE
+                )
+                if p.wait() == 0:
+                    out = p.stdout.read().strip()
+                    return out if pager != 'less' else out + ' -r'
 
 
 AERO_PATH = os.path.dirname(os.path.realpath(__file__))
 
+    data = ArgumentData()
 
 class ArgumentDelegate(argparse.ArgumentParser):
 
@@ -45,6 +77,12 @@ class ArgumentDelegate(argparse.ArgumentParser):
             content = ''.join(file.readlines())
         with open(os.path.join(AERO_PATH, "assets", "epilog.ascii"), "r") as file:
             epilog = ''.join(file.readlines())
+    def parse_args(self, args=None, namespace=None):
+        '''
+        pass the data collection so that we may also
+        know what has been parsed.
+        '''
+        super(self.__class__, self).parse_args(args, self.data)
 
         super(self.__class__, self).__init__(
             description=content,
@@ -118,26 +156,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
             choices=['bash', 'zsh']
         )
 
-    def discover_pager(self, pager=None):
-        if not ArgumentDelegate.pager:
-            try:
-                pagers = [os.environ['PAGER']]
-            except KeyError:
-                pagers = []
-            pagers += ['less', 'more', 'most', 'cat']
-            if pager is not None:
-                pagers = [pager] + pagers
-            for pager in pagers:
-                p = subprocess.Popen(
-                    ["which", pager],
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE)
 
-                if p.wait() == 0:
-                    ArgumentDelegate.pager = p.stdout.read().strip()
-
-
-        return ArgumentDelegate.pager
 
     def convert_arg_line_to_args(self, conf):
         for arg in conf.split(','):
