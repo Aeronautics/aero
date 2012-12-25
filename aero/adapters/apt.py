@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from aero.__version__ import __version__
+from aero.__version__ import __version__, enc
 from .base import BaseAdapter
 
 
@@ -13,9 +13,24 @@ class Apt(BaseAdapter):
         return 'apt-get'
 
     def search(self, query):
-        process = self._execute_command(self.search_command, ['search', query])
-        print '{:<40}{}'.format('Name', 'Description')
-        for line in process[0].splitlines():
-            if not line:
-                continue
-            print '{:<40}{}'.format(line.split()[0], ' '.join(line.split()[2:]))
+        response = self._execute_command(self.search_command, ['search', query])[0].decode(*enc)
+        lst = {}
+        from re import match
+        lst.update([
+            match('^([^ ]*) - (.*)', 'apt:'+line).groups()
+            for line in response.splitlines()
+            if match('^([^ ]*) - (.*)', line)
+        ])
+        return lst
+
+    def info(self, query):
+        response = self._execute_command(self.search_command, ['show', query])[0].decode(*enc)
+        lst = [
+            line.split(': ') if line.find(': ') > 0 else ('',line)
+            for line in response.splitlines()
+        ]
+        return self.munge_lines(lst)
+
+    def install(self, query):
+        self.shell('install', query)
+        return {}
