@@ -21,7 +21,7 @@ class SearchCommand(CommandProcessor):
                 from importlib import import_module
                 (width, height) = import_module('aero.commands').getTerminalSize()
                 factor = width / 100
-                size = map(str, map(int , [(40 * factor)-3, 55 * factor, 60 * factor]))
+                size = map(str, map(int , [(40 * factor)-3, 58 * factor, 60 * factor]))
                 res = sorted(res.items())
                 from StringIO import StringIO
                 pager = StringIO()
