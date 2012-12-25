@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 __author__ = 'nickl-'
 from __version__ import __version__
-
-import os
-import re
-import sys
-import subprocess
-from random import choice
-
-import argparse
-import textwrap
-
-from .command import SearchCommand, InstallCommand, InfoCommand
 from .adapters import AVAILABLE_ADAPTERS
+from os import path
+AERO_PATH = path.dirname(path.realpath(__file__))
+
+from argparse import Namespace, ArgumentParser
+
+class ArgumentDelegate(ArgumentParser):
+
     class ArgumentData(Namespace):
+
         choices = ['less', 'more', 'most', 'cat']
         _pager = None
 
@@ -46,19 +43,23 @@ from .adapters import AVAILABLE_ADAPTERS
                     return out if pager != 'less' else out + ' -r'
 
 
-AERO_PATH = os.path.dirname(os.path.realpath(__file__))
-
     data = ArgumentData()
 
-class ArgumentDelegate(argparse.ArgumentParser):
+    from argparse import RawTextHelpFormatter, ArgumentDefaultsHelpFormatter
 
-    pager = None
+    class UsageFormatter(RawTextHelpFormatter, ArgumentDefaultsHelpFormatter):
 
-    class UsageFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
         def _get_help_string(self, action):
-            action.help = textwrap.fill(re.sub('\n| +', ' ', action.help), 54).replace('Choose one', 'Choose one')
+            from re import sub
+            from textwrap import fill
+            action.help = fill(
+                sub('\n| +', ' ', action.help), 54
+            ).replace('Choose one', 'Choose one')
             help = super(self.__class__, self)._get_help_string(action)
-            return help.replace('(default: %(default)s)', '\n\ndefault: %(default)s\n\n')
+            return help.replace(
+                '(default: %(default)s)',
+                '\n\ndefault: %(default)s\n\n'
+            )
 
         def _format_action_invocation(self, action):
             if not action.option_strings:
@@ -69,9 +70,12 @@ class ArgumentDelegate(argparse.ArgumentParser):
             return '{} {}'.format(', '.join(action.option_strings), args_string)
 
         def _fill_text(self, text, width, indent):
-            return super(self.__class__, self)._fill_text(textwrap.dedent(text), width, indent)
 
     def __init__(self, prog='', version=''):
+            from textwrap import dedent
+            return super(self.__class__, self)._fill_text(
+                dedent(text), width, indent
+            )
 
         with open(os.path.join(AERO_PATH, "assets", "descrip.ascii"), "r") as file:
             content = ''.join(file.readlines())
@@ -98,6 +102,7 @@ class ArgumentDelegate(argparse.ArgumentParser):
             default_prefix = self.prefix_chars[0]
 
         if self.version:
+            from argparse import SUPPRESS
             self.add_argument(
                 default_prefix + 'v', default_prefix * 2 + 'version',
                 action='version', default=argparse.SUPPRESS,
@@ -203,8 +208,8 @@ class ArgumentDelegate(argparse.ArgumentParser):
             .replace('r:] pack', 'r:]pack')\
             .replace('{{aerotip}}', aerotip)\
             .replace('Command arguments:', ''.join([commhead, '\n', 'Command arguments:']))
-        content = re.sub(r'##(.+)\n\s*(.+)##', r'\n\n    \1 \2\n', content)
-        return  content
+        from re import sub
+        return sub(r'##(.+)\n\s*(.+)##', r'\n\n    \1 \2\n', content)
 
     def _print_message(self, message, file=None):
         if message:
@@ -254,7 +259,9 @@ compctl -K _aero_completion aero
         parser.exit()
 
 
-class CommandParser(argparse._SubParsersAction):
+from argparse import _SubParsersAction
+
+class CommandParser(_SubParsersAction):
 
     def __call__(self, parser, data, values, option_string=None):
         super(self.__class__, self).__call__(parser, data, values, option_string)
