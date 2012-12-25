@@ -21,8 +21,8 @@ setup(
         if descr and '===' not in descr
     ][1],
     long_description='\n'+open('README.txt').read(),
-    install_requires=["pip", "beaker", "PyYAML", "pygments", "progbar"],
     platforms=['Linux', 'Mac OSX'],
+    install_requires=open('requirements.txt').read().splitlines(),
     classifiers=[  # http://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 3 - Alpha',
         'Environment :: Console',

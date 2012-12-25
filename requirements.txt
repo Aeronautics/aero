@@ -1,6 +1,6 @@
-Beaker==1.6.4
-PyYAML==3.10
-argparse==1.2.1
-progbar==0.3
-
+Beaker>=1.6.4
+PyYAML>=3.10
+progbar>=0.3
+pygments>=1.5
+pip>=1.2.1
 argcomplete>=0.2.9
