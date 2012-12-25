@@ -156,21 +156,6 @@ class ArgumentDelegate(ArgumentParser):
                 in quotes to distinguish them from others.''',
         )
 
-        self.add_argument(
-            default_prefix + 'c', default_prefix * 2 + 'completion',
-            action=CompletionResponse,
-            help='''Command auto completion is supported for both bash and zsh.
-                The result from the completion option can be appended to your
-                .profile or simply using eval.
-                ex.
-                `       aero --completion zsh >> ~/.profile`
-                Remember to source the changes.
-                To use eval you might try something like:
-                ex.
-                `       eval "$(aero --completion bash)"`
-                ''',
-            choices=['bash', 'zsh']
-        )
 
 
 
