@@ -27,7 +27,7 @@ class Pear(BaseAdapter):
 
     def info(self, query):
         response = self.command('remote-info', query)[0].decode(*enc)
-        if 'Unknown package' not in response:
+        if response and 'Unknown package' not in response:
             from re import match
             from string import strip
             return [(map(strip, match('(\w*)(.*$)',line).groups()))
@@ -41,3 +41,9 @@ class Pear(BaseAdapter):
     def install(self, query):
         self.shell('install', query)
         return {}
+
+    @property
+    def is_present(self):
+        if super(self.__class__, self).is_present and self.command('-V','')[0]:
+            return True
+        return False
