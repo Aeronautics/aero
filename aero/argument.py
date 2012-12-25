@@ -66,7 +66,7 @@ class ArgumentDelegate(ArgumentParser):
                 return self._metavar_formatter(action, action.dest)(1)[0]
             args_string = self._format_args(action, action.dest.upper())
             if action.nargs > 1:
-                args_string = "{}\n".format(args_string)
+                args_string = '{}\n'.format(args_string)
             return '{} {}'.format(', '.join(action.option_strings), args_string)
 
         def _fill_text(self, text, width, indent):
@@ -115,33 +115,41 @@ class ArgumentDelegate(ArgumentParser):
         if self.version:
             from argparse import SUPPRESS
             self.add_argument(
-                default_prefix + 'v', default_prefix * 2 + 'version',
-                action='version', default=argparse.SUPPRESS,
+                default_prefix + 'v',
+                default_prefix * 2 + 'version',
+                default=SUPPRESS,
+                action='version',
                 version=self.version,
                 help="Show program's version number and exit",
             )
 
         from argcomplete.completers import ChoicesCompleter
         self.add_argument(
-            default_prefix + 'p', default_prefix * 2 + 'pager',
+            default_prefix + 'p',
+            default_prefix * 2 + 'pager',
+            dest='pager',
             help='''The pager to use for long paged displays. The default
-            is based on the environment variable $PAGER, if it is
-            not set, some common pagers like "less", "more", "most"
-             and finally "cat" are tried, in this order.''',
-            default=self.discover_pager(),
+                is based on the environment variable $PAGER, if it is
+                not set, some common pagers like 'less', 'more', 'most'
+                and finally 'cat' are tried, in this order.''',
         ).completer=ChoicesCompleter(self.data.choices)
 
         self.add_argument(
-            default_prefix + 'd', default_prefix * 2 + 'disable',
-            action='append', dest='disabled',
+            default_prefix + 'd',
+            default_prefix * 2 + 'disable',
+            default=[],
+            action='append',
+            dest='disabled',
             const='disabled',
+            choices=[x for x, y in AVAILABLE_ADAPTERS],
+            nargs='?',
             help='''Add the items you wish to disable to the list.
-                Multiple disable arguments may be supplied.
-                ''',
+                Multiple disable arguments may be supplied.''',
         )
 
         self.add_argument(
-            default_prefix + 'i', default_prefix * 2 + 'invalidate-cache',
+            default_prefix + 'i',
+            default_prefix * 2 + 'invalidate-cache',
             action='store_true',
             dest='invalidate',
             help='''Clear the search cache and enquire anew from the
@@ -149,7 +157,8 @@ class ArgumentDelegate(ArgumentParser):
         )
 
         self.add_argument(
-            default_prefix + '--', default_prefix * 2 + 'pass-through',
+            default_prefix + '--',
+            default_prefix * 2 + 'pass-through',
             dest='passthru',
             help='''Passthru arguments to be added as arguments to the
                 package manager's command execution. Enclose the arguments
@@ -201,12 +210,13 @@ class ArgumentDelegate(ArgumentParser):
             )
 
     def convert_arg_line_to_args(self, conf):
+        ''' Allows for comma separated arguments '''
         for arg in conf.split(','):
             yield arg
 
     def format_usage(self):
         return self.version + '\n\n' + super(self.__class__, self).format_usage()
-
+    
     def format_help(self):
         import codecs
         content = codecs.open(
@@ -215,7 +225,10 @@ class ArgumentDelegate(ArgumentParser):
             encoding='utf'
         ).read().replace('{{version}}', self.version)
 
-        aerotip = choice(('aero1', 'aero2', 'aero3', 'aero4', 'aero5', 'aero6', 'aero7', 'aero8'))
+        from random import choice
+        aerotip = choice(
+            ('aero1', 'aero2', 'aero3', 'aero4', 'aero5', 'aero6', 'aero7', 'aero8')
+        )
         aerotip = codecs.open(
             path.join(AERO_PATH, 'assets/', aerotip + '.ascii'),
             mode='r',
