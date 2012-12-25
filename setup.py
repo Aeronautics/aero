@@ -14,15 +14,15 @@ setup(
     license=__license__,
     url=__url__,
     download_url=__download_url__,
-    packages=['aero', 'aero.adapters'],
+    packages=['aero', 'aero.adapters', 'aero.commands'],
     package_data={'aero': ['assets/*.ascii']},
     description=[
         descr.strip() for descr in open('README.txt').read().splitlines()[:6]
         if descr and '===' not in descr
     ][1],
     long_description='\n'+open('README.txt').read(),
-    platforms=['Linux', 'Mac OSX'],
     install_requires=open('requirements.txt').read().splitlines(),
+    platforms=['MacOS X', 'POSIX'],
     classifiers=[  # http://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
@@ -33,6 +33,7 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Operating System :: MacOS',
+        'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX',
         'Programming Language :: Python :: 2.7',
         'Topic :: System :: Software Distribution',
