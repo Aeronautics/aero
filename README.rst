@@ -1,6 +1,9 @@
 ====
 aero
 ====
+------------------------
+pagkage manager recycler
+------------------------
 
 The **aero** command line package recycler. It uses package managers you already have.
 
@@ -24,7 +27,7 @@ Even though **aero** is some serious machining it will only focus on the task it
                \
 
 Platform
---------
+========
 
 Written in python using v 2.7, this may or may not be the entry requirement for now, on Mac OS X currently and the excellent IDE `PyCharm by JetBrains <http://www.jetbrains.com/pycharm/>`_ which you may consider highly recommended do give it a try. The \*nixes will likely be included soon, there exists no bias to the MS platforms only less accessible as a product of choice and opportunity I guess. Feel free to suggest other usages or specific requirements you might have.
 
@@ -32,7 +35,7 @@ After some serious deliberations even though the majority of the team has zero t
 
 
 Disclaimer
-----------
+==========
 
 Even though using **aero** can cause you or your system no harm, by design and while we are using it everyday for a one stop interface to finding the software we need to install we need to warn you about two things:
 
@@ -40,9 +43,10 @@ Even though using **aero** can cause you or your system no harm, by design and w
 2. May lead to compulsive package installation disorders can cause dependency and some serious addictions, use at your own risk.
 
 Installation
-------------
+============
 
-+ aero install with pip (egg and chicken)
+aero install with pip (egg and chicken)
+---------------------------------------
 
 aero installation if you already have aero - from version 0.0.1a1 pip will always reinstall::
 
@@ -50,21 +54,24 @@ aero installation if you already have aero - from version 0.0.1a1 pip will alway
 
 aero install with pip --upgrade - upgrade aero and dependencies  - from version 0.0.1a1::
 
-    $ aero install pip:https://github.com/Aeronautics/aero/tarball/develop --- "--upgrade"
+    $ aero install pip:https://github.com/Aeronautics/aero/tarball/develop === "--upgrade"
 
-+ pip installation
+pip installation
+----------------
 
 aero can be installed directly from github via pip with the following command::
 
     $ pip install --upgrade https://github.com/Aeronautics/aero/tarball/develop
 
-+ through easy_install
+through easy_install
+--------------------
 
 if you prefer using easy_install the following command will download and install aero from github::
 
     $ easy_install https://github.com/Aeronautics/aero/tarball/develop
 
-+ From git repository
+from git repository
+-------------------
 
 Clone the repo from github or fork it first and then clone your copy if you want to help out with pull requests. Then just run the setup.py with install::
 
@@ -72,7 +79,7 @@ Clone the repo from github or fork it first and then clone your copy if you want
 
 
 Running aero
-------------
+============
 On execution of **aero** with no requirements a short usage instruction will be presented::
 
     $ aero
@@ -93,7 +100,7 @@ Providing **aero** with the customary ``--help`` argument will give more detaile
     └───────────────────────────────────────────────────────────────────────────┘
 
      aero.py [-h] [-v] [-p PAGER] [-d [{npm,pyrus,pear,pip,brew,pecl,gem}]]
-                   [-i] [--- PASSTHRU]
+                   [-i] [=== PASSTHRU]
                    command [mngr:]package ...
 
        ┌──────────────────┐
@@ -123,7 +130,7 @@ Providing **aero** with the customary ``--help`` argument will give more detaile
 
                             default: False
 
-      ---, --pass-through PASSTHRU
+      ===, --pass-through PASSTHRU
                             Passthru arguments to be added as arguments to the
                             package manager's command execution. Enclose the
                             arguments in quotes to distinguish them from others.
@@ -180,7 +187,7 @@ Providing **aero** with the customary ``--help`` argument will give more detaile
 
 
 Commands
---------
+========
 
 With **aero** you can expect to use the common commands and we will translate them to the package manager specific instructions where they may have chosen to deviate from the norm. Currently the following commands are implemented:
 
@@ -190,17 +197,21 @@ Usage::
 
 Where packages are one or more package names optionally prefixed with the specific package manager, colon separated. The ``mngr:package`` format produced in search is used to instruct a specific package manager with any commands. Omitting the prefix instruction will result in all active package managers being instructed to complete the task. This may or may not necessarily have the desired effect. Multiple packages from different package managers can all be processed with one aero command.
 
-* search
+search
+------
 
 To search for a package which will produce a list with the package manager prefixed the package name by ``\:`` and a short description of the package.
 
-* install
+install
+-------
 
 To instruct the installation of a given package.
 
-* info
+info
+----
 
 To obtain more detailed information regarding a given package now also available for pip.
+
 
 
 Package managers
@@ -211,6 +222,7 @@ The following package managers have been recycled, more will follow. Let us know
 ﻿Advanced Package Tool
 ---------------------
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -269,6 +281,7 @@ Supported commands:
 Homebrew
 --------
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -308,6 +321,7 @@ Brew has the inclination to only return the package names on search, in addition
 Gem
 ---
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -377,8 +391,9 @@ Search is executed with the ``-qbd`` arguments which will return both locally in
 Info is obtained through the ``specification`` command which returns a gemspec class tagged YAML document, nuff said.
 
 Npm
----
+----
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -433,6 +448,7 @@ Info uses the ``npm view`` command which return a JavaScript object of the regis
 Pear
 ----
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -480,6 +496,7 @@ Supported commands:
 Pear
 ----
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -527,6 +544,7 @@ Supported commands:
 Pip
 ---
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -573,6 +591,7 @@ The Pip adaptor does not use subprocess to execute pip command line interface bu
 Pyrus
 -----
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -617,6 +636,7 @@ Similar to brew, with pyrus you are also required to call info should you requir
 Macports
 --------
 Supported commands:
+~~~~~~~~~~~~~~~~~~~
 
 * search
 * install
@@ -651,16 +671,16 @@ Supported commands:
 
 
 Going forward
--------------
+=============
 
 As well as extending the current functionality we also plan to support:
 
 * fink
-* apt-get
+* yum
 * composer local
 
 Known issues
-------------
+============
 
 Items that require some attention: (Let us know if you want to tackle any of these)
 
@@ -669,56 +689,64 @@ Items that require some attention: (Let us know if you want to tackle any of the
 * No unit tests as yet
 * Limited to no codedocs
 
+Releases
+========
+New releases are made available on a regular basis as time allows.
+
 Changelog
 ---------
-* v0.0.1 alpha 2
-    * Pip info capable now - whoop whoop!
-    * Pip via pip library instead of sub-process
-    * Unicode done right
-    * Use unicode box drawing chars in output
-    * Normalized info output title case
-    * Refactored commands as package
-    * Refactored arguments
-    * Improved command line argument exposure
-    * RF CommandProcessor render method extraction
-    * Improved pager detection (lazy)
-    * Replaced autocompletion with argcomplete
-    * Improved imports (lazy)
-    * Improved adapter implementation
-    * Improved resources free on exit
-    * Improved pass through implementation
-    * Improved output display and fix typos
-    * Improved output for pecl and pear
-    * Repaired pyrus adapter
-    * Added support for Advanced Package Manage (apt)
-    * Tested on Linux (ubuntu)
-    * Terminal window actual size consideration, works with 80 cols or more
-    * Get dependencies from requirements.txt
-    * Pygmentized help output
-    * Using codecs.open instead of file.open for assets
-    * Documentation as Restructured Text (rst)
-    * Updated documentation
+v0.0.1 alpha 2 - 2012-12-26
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Pip info capable now - whoop whoop!
+* Pip via pip library instead of sub-process
+* Unicode done right
+* Use unicode box drawing chars in output
+* Normalized info output title case
+* Refactored commands as package
+* Refactored arguments
+* Improved command line argument exposure
+* RF CommandProcessor render method extraction
+* Improved pager detection (lazy)
+* Replaced autocompletion with argcomplete
+* Improved imports (lazy)
+* Improved adapter implementation
+* Improved resources free on exit
+* Improved pass through implementation
+* Improved output display and fix typos
+* Improved output for pecl and pear
+* Repaired pyrus adapter
+* Added support for Advanced Package Manage (apt)
+* Tested on Linux (ubuntu)
+* Terminal window actual size consideration, works with 80 cols or more
+* Get dependencies from requirements.txt
+* Pygmentized help output
+* Using codecs.open instead of file.open for assets
+* Documentation as Restructured Text (rst)
+* Updated documentation
 
 
-* v0.0.1 alpha 1 - 2012-12-02
-    * Fixed installation issues and dependency installation
-    * Increased cache granularity command:adapter:package
-    * Support for multiple packages simultaneously
-    * Support for pass through arguments
-    * Progress indication
-    * Major BaseCommand refactor and Piped Coroutine workflow
-    * BaseAdapter refactor to simplify adapter implementations
-    * Colorized output goodness
-    * Tap brew extended repositories
-    * Optimize screen real estate utilization - display Version, url (where available) and Short description only in search results
-    * In process piped output - pager without a tmp file
-    * DebugCommand support to simplify adapter creation
-    * Added support for pear, pecl, pyrus
-    * Gracefully accept abnormal program termination
-    * Search commands that require more info now uses aero which caches the info details for each package
+v0.0.1 alpha 1 - 2012-12-02
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Fixed installation issues and dependency installation
+* Increased cache granularity command:adapter:package
+* Support for multiple packages simultaneously
+* Support for pass through arguments
+* Progress indication
+* Major BaseCommand refactor and Piped Coroutine workflow
+* BaseAdapter refactor to simplify adapter implementations
+* Colorized output goodness
+* Tap brew extended repositories
+* Optimize screen real estate utilization - display Version, url (where available) and Short description only in search results
+* In process piped output - pager without a tmp file
+* DebugCommand support to simplify adapter creation
+* Added support for pear, pecl, pyrus
+* Gracefully accept abnormal program termination
+* Search commands that require more info now uses aero which caches the info details for each package
 
 License
--------
+=======
 
 The New BSD License. see LICENSE.txt
 
