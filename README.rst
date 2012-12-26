@@ -315,7 +315,7 @@ Supported commands:
 
 
 Special notes:
-
+~~~~~~~~~~~~~~
 Brew has the inclination to only return the package names on search, in addition to retrieval of the package names aero continues to further query info on each package from where it is able to parse and present slightly more usable information. Instead of just calling the info command on the package manager we execute `aero info` instead which means that all the information for every package listed in the search results is already cached and retrievable instantaneously.
 
 Gem
@@ -386,7 +386,7 @@ Supported commands:
 
 
 Special notes:
-
+~~~~~~~~~~~~~~
 Search is executed with the ``-qbd`` arguments which will return both locally installed and remotely available packages.
 Info is obtained through the ``specification`` command which returns a gemspec class tagged YAML document, nuff said.
 
@@ -442,7 +442,7 @@ Supported commands:
     ──────────────────────────────┴─────────────────────────────────────────────────
 
 Special notes:
-
+~~~~~~~~~~~~~~
 Info uses the ``npm view`` command which return a JavaScript object of the registry which we then nudge closer to resembling JSON format so that we may proceed to parse it with **:mod:json**
 
 Pear
@@ -585,7 +585,7 @@ Supported commands:
     ──────────────────────────────┴─────────────────────────────────────────────────
 
 Special notes:
-
+~~~~~~~~~~~~~~
 The Pip adaptor does not use subprocess to execute pip command line interface but instead we use the pip library directly. This strategy now enables us to get pip info, functionality that is not exposed on the CLI but very much available as you can see, marking a huge advance for aero.
 
 Pyrus
@@ -629,7 +629,7 @@ Supported commands:
     ──────────────────────────────┴─────────────────────────────────────────────────
 
 Special notes:
-
+~~~~~~~~~~~~~~
 Similar to brew, with pyrus you are also required to call info should you require more details about a particular package. Luckily aero is more considerate and will call info on your behalf to provide you with more information in the search results.
 
 
