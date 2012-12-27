@@ -17,7 +17,7 @@ setup(
     packages=['aero', 'aero.adapters', 'aero.commands'],
     package_data={'aero': ['assets/*.ascii']},
     description=[
-        descr.strip() for descr in open('README.txt').read().splitlines()[:6]
+        descr.strip() for descr in open('README.rst').read().splitlines()[:6]
         if descr and '===' not in descr
     ][1],
     long_description='\n'+open('README.rst').read(),
