@@ -40,8 +40,7 @@ class Pear(BaseAdapter):
         return ['Aborted: No info available']
 
     def install(self, query):
-        self.shell('install', query)
-        return {}
+        return self.shell('install', query)
 
     @property
     def is_present(self):

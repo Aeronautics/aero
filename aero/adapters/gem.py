@@ -35,8 +35,7 @@ class Gem(BaseAdapter):
         return lst
 
     def install(self, query):
-        self.shell('install', query).wait()
-        return {}
+        return self.shell('install', query)
 
     def info(self, query):
 

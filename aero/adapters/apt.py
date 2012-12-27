@@ -32,5 +32,4 @@ class Apt(BaseAdapter):
         return self.munge_lines(lst)
 
     def install(self, query):
-        self.shell('install', query)
-        return {}
+        return self.shell('install', query)

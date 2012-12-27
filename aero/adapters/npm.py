@@ -37,8 +37,7 @@ class Npm(BaseAdapter):
         return 0, 0
 
     def install(self, query):
-        self.shell('install', query)
-        return {}
+        return self.shell('install', query)
 
     def info(self, query):
         response = self.command('view', query)[0].decode(*enc)

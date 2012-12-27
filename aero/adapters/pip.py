@@ -24,16 +24,19 @@ class Pip(BaseAdapter):
         return lst
 
     def install(self, query):
-        import_module('pip').main([
-            'install',
-            '--force-reinstall',
-            '--upgrade',
-            '--timeout', '30',
-            '--egg',
-            '--log', '~/.aero/log/pip.log',
-            '--download-cache', '~/.aero/cache/pip',
-        ] + self.passthru + [query])
-        return {}
+        try:
+            import_module('pip').main([
+                'install',
+                '--force-reinstall',
+                '--upgrade',
+                '--timeout', '30',
+                '--egg',
+                '--log', '~/.aero/log/pip.log',
+                '--download-cache', '~/.aero/cache/pip',
+            ] + self.passthru + [query])
+        except Exception:
+            return 1
+        return 0
 
     def info(self, query):
         try:

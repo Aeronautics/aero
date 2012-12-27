@@ -50,7 +50,7 @@ class BaseAdapter(object):
 
     def shell(self, pm_command, query, args=[], add_path=True):
         args = pm_command.split(' ') + self.passthru + args + query.split(' ')
-        self._execute_shell(self.adapter_command(), args, add_path)
+        return self._execute_shell(self.adapter_command(), args, add_path)
 
     def package_name(self, package):
         return self.adapter_command()+':'+package

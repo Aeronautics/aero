@@ -29,8 +29,7 @@ class Port(BaseAdapter):
         ]
 
     def install(self, query):
-        self.shell('install', query)
-        return {}
+        return self.shell('install', query)
 
     def info(self, query):
         result = self.command('info', query)[0].decode(*enc)

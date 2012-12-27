@@ -73,5 +73,4 @@ class Pyrus(BaseAdapter):
         return ['Aborted: No info available for ' + package]
 
     def install(self, query):
-        self.shell('install', query)
-        return {}
+        return self.shell('install', query)

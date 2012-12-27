@@ -8,6 +8,8 @@ from .base import CommandProcessor as CommandProcessor
 class InstallCommand(CommandProcessor):
 
     from .base import coroutine
+    package = ''
+    adapter = ''
 
     def wiring(self):
         self.out = self.write()
@@ -15,7 +17,20 @@ class InstallCommand(CommandProcessor):
         return self.each(self.spacing(self.call(self.res())))
 
     def seen(self, command, adapter, package, result=False):
+        self.package = package
+        self.adapter = adapter
         return result
+
+    @coroutine
+    def res(self):
+        while True:
+            res = (yield)
+            if res[1] == 0:
+                print 'Successfully installed package: {} with {}'.format(self.package, self.adapter)
+            else:
+                print 'Aborted: Error while installing package: {} {} returned exit code {}'.format(
+                    self.package, self.adapter, res[1]
+                )
 
     @coroutine
     def write(self):
