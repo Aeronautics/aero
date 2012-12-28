@@ -695,6 +695,12 @@ New releases are made available on a regular basis as time allows.
 
 Changelog
 ---------
+v0.0.1 alpha 3 - 2012-12-28
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Minor bug fixes
+* Improved command install response
+
 v0.0.1 alpha 2 - 2012-12-26
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
