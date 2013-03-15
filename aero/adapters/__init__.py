@@ -27,6 +27,7 @@ from .brew import Brew
 from .port import Port
 from .pip import Pip
 from .npm import Npm
+from .bower import Bower
 from .gem import Gem
 from .pear import Pear
 from .pecl import Pecl
