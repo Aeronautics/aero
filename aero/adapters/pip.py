@@ -16,10 +16,10 @@ class Pip(BaseAdapter):
         lst = {}
         for r in m.transform_hits(m.SearchCommand().search(query, 'http://pypi.python.org/pypi')):
             summary = u' '.join(map(strip, r['summary'].split('\n') if r['summary'] else [''])).replace('  ', ' ')
-            lst[self.package_name(r['name'])] = 'Version: {:<12} Score:{:>4}\n{}'.format(
+            lst[self.package_name(r['name'])] = u'Version: {:<12} Score:{:>4}\n{}'.format(
                 m.highest_version(r['versions']),
                 r['score'],
-                (summary.encode(*enc) if len(summary) < 200 else summary[:190] + '...').replace('  ', ' ')
+                (summary if len(summary) < 200 else summary[:190] + '...').replace('  ', ' ')
             )
         return lst
 

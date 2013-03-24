@@ -34,7 +34,6 @@ class SearchCommand(CommandProcessor):
                 ))
                 for key, value in res:
                     for line in value.splitlines():
-                        line = line.decode('utf')
                         if len(line) > int(size[1]):
                             for wrap in import_module('textwrap').wrap(line, int(size[1])):
                                 pager.write(
