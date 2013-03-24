@@ -25,4 +25,7 @@ class Bower(BaseAdapter):
 
     def info(self, query):
         response = self.command('info', query, ['--no-color'])[0].decode(*enc)
-        return response or ['Aborted: No info available']
+        lst = [['',line.lstrip(' -')] for line in response.splitlines() if line.startswith('    - ')]
+        if lst:
+            lst[0][0] = 'Versions'
+        return lst or ['Aborted: No info available']
