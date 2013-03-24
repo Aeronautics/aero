@@ -14,19 +14,14 @@ class Bower(BaseAdapter):
     """
     def search(self, query):
         lst = list(
-            self.__parse_search(line) for line in response.splitlines()
             if line.startswith('  - ')
         )
         if lst:
             return dict([(k, v) for k, v in lst if k != 0])
         return {}
 
-    def __parse_search(self, result):
-        result = split('\[\d\dm', result, 2)
-        if isinstance(result, (list, tuple)) and len(result) > 1:
-            return self.package_name(result[1][:-1]), '\n'
-        return 0, 0
         response = self.command('search', query, ['--no-color'])[0].decode(*enc)
+            line.lstrip(' -').split(' ') for line in response.splitlines()
 
     def install(self, query):
         return self.shell('install', query)
