@@ -77,8 +77,8 @@ class CacheProviderFactory():
 
         cache_opts = {
             'cache.type': 'file',
-            'cache.data_dir': '/tmp/cache/data',
-            'cache.lock_dir': '/tmp/cache/lock'
+            'cache.data_dir': '~/.aero/cache/data',
+            'cache.lock_dir': '~/.aero/cache/lock'
         }
 
         cache = CacheManager(**parse_cache_config_options(cache_opts))
