@@ -13,15 +13,12 @@ class Bower(BaseAdapter):
     Twitter Bower - Browser package manager - Adapter
     """
     def search(self, query):
-        return {}
-
         response = self.command('search', query, ['--no-color'])[0].decode(*enc)
         lst = dict([(self.package_name(k), v) for k, v in [
             line.lstrip(' -').split(' ') for line in response.splitlines()
             if line.startswith('  - ')]
         ])
-        if lst:
-            return lst
+        return lst or {}
 
     def install(self, query):
         return self.shell('install', query)
