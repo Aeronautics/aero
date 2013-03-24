@@ -36,7 +36,7 @@ class Brew(BaseAdapter):
         if 'Error:' not in response:
             response = response.replace(query + ': ', 'version: ')
             return [line.split(': ', 1) for line in response.splitlines() if 'homebrew' not in line]
-        return [['No info available']]
+        return ['Aborted: No info available']
 
     def install(self, query):
         return self.shell('install', query)
