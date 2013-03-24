@@ -27,5 +27,5 @@ class Bower(BaseAdapter):
         return self.shell('install', query)
 
     def info(self, query):
-        response = self.command('view', query, ['--no-color'])[0].decode(*enc)
+        response = self.command('info', query, ['--no-color'])[0].decode(*enc)
         return response or ['Aborted: No info available']
