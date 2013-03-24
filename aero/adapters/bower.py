@@ -13,7 +13,6 @@ class Bower(BaseAdapter):
     Twitter Bower - Browser package manager - Adapter
     """
     def search(self, query):
-        response = self.command('search', query)[0].decode(*enc)
         lst = list(
             self.__parse_search(line) for line in response.splitlines()
             if line.startswith('  - ')
@@ -27,10 +26,11 @@ class Bower(BaseAdapter):
         if isinstance(result, (list, tuple)) and len(result) > 1:
             return self.package_name(result[1][:-1]), '\n'
         return 0, 0
+        response = self.command('search', query, ['--no-color'])[0].decode(*enc)
 
     def install(self, query):
         return self.shell('install', query)
 
     def info(self, query):
-        response = self.command('view', query)[0].decode(*enc)
+        response = self.command('view', query, ['--no-color'])[0].decode(*enc)
         return response or ['Aborted: No info available']
