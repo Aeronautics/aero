@@ -40,11 +40,11 @@ class Pip(BaseAdapter):
 
     def info(self, query):
         try:
-            import os
+            from os import path
             finder = import_module('pip.index').PackageFinder([] , ['http://pypi.python.org/simple/'])
             m = import_module('pip.req')
             pi = m.InstallRequirement(query, '' )
-            pr = m.RequirementSet(os.path.expanduser('~') + '/.aero/pkg_info/' , '' , None)
+            pr = m.RequirementSet(path.expanduser('~') + '/.aero/pkg_info/' , '' , None)
             pr.add_requirement(pi)
             pr.prepare_files(finder)
             return pi.pkg_info().items()
