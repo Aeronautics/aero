@@ -21,6 +21,7 @@ setup(
         if descr and '===' not in descr
     ][1],
     long_description='\n'+open('README.rst').read(),
+    setup_requires=['github-distutils >= 0.1.0'],
     install_requires=open('requirements.txt').read().splitlines(),
     platforms=['MacOS X', 'POSIX'],
     classifiers=[  # http://pypi.python.org/pypi?%3Aaction=list_classifiers
